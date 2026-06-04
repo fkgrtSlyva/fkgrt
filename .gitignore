@@ -36,3 +36,6 @@ public/favicon-32x32.png
 public/images/
 public/upload/
 public/video/
+
+node_modules
+tina/__generated__
