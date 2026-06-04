@@ -1,0 +1,75 @@
+{
+  "header": {
+    "icon": {
+      "name": "BiBook",
+      "color": "blue",
+      "style": "float"
+    },
+    "name": "КГРТ КНУ",
+    "color": "default",
+    "nav": [
+      { "href": "/", "label": "Головна" },
+      { "href": "/about", "label": "Про коледж" },
+      { "href": "/posts", "label": "Новини" }
+    ]
+  },
+  "footer": {
+    "collegeName": "ФАХОВИЙ КОЛЕДЖ ГЕОЛОГОРОЗВІДУВАЛЬНИХ ТЕХНОЛОГІЙ",
+    "collegeSubtitle": "Київського національного університету імені Тараса Шевченка",
+    "contacts": {
+      "phones": "+38(044)528-53-55, +38(044)528-16-91, +38(044)529-04-94",
+      "address": "вул. Василя Тютюнника, 9 (колишня Анрі Барбюса), м. Київ, 03150",
+      "email": "fkgrt@knu.ua",
+      "mapsUrl": "https://goo.gl/maps/L3ZsN2dDtXbyokkH7"
+    },
+    "usefulLinks": [
+      {
+        "label": "Міністерство освіти та науки України",
+        "url": "http://mon.gov.ua/"
+      },
+      {
+        "label": "Державна служба якості освіти України",
+        "url": "https://sqe.gov.ua/"
+      },
+      {
+        "label": "Центр оцінювання якості освіти",
+        "url": "https://testportal.gov.ua/"
+      },
+      {
+        "label": "Київський національний університет ім. Тараса Шевченка",
+        "url": "http://univ.kiev.ua/"
+      },
+      {
+        "label": "Навчально-науковий інститут «Інститут геології»",
+        "url": "http://www.geol.univ.kiev.ua/ua/"
+      },
+      {
+        "label": "НАУКОВО-МЕТОДИЧНИЙ ЦЕНТР ВИЩОЇ ТА ФАХОВОЇ ПЕРЕДВИЩОЇ ОСВІТИ",
+        "url": "https://nmc-vfpo.com/"
+      }
+    ],
+    "social": [
+      {
+        "icon": { "name": "FaFacebookF", "color": "blue", "style": "float" },
+        "url": "https://m.facebook.com/kgrt.knu/"
+      },
+      {
+        "icon": {
+          "name": "AiFillInstagram",
+          "color": "pink",
+          "style": "float"
+        },
+        "url": "https://www.instagram.com/kgrt.college"
+      },
+      {
+        "icon": { "name": "FaYoutube", "color": "red", "style": "float" },
+        "url": "https://www.youtube.com/channel/UCDLPkMZbUoZvZuNVzcHTCXw/featured"
+      }
+    ]
+  },
+  "theme": {
+    "color": "blue",
+    "font": "sans",
+    "darkMode": "light"
+  }
+}
