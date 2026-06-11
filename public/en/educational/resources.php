@@ -1,0 +1,431 @@
+<?
+require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+require($_SERVER["DOCUMENT_ROOT"]."/templates/header-en.php");
+$APPLICATION->SetPageProperty("title", "Електронні ресурси");
+$APPLICATION->SetTitle("Електронні ресурси");
+?><section class="section-70 section-md-114">
+<div class="shell">
+ <br>
+	<p style="text-align: justify; line-height: 15.6px; color: #000000; font-family: Verdana, Tahoma, Arial;">
+ <b>Монографії</b>
+	</p>
+	<ul type="disc" style="padding-right: 25px; padding-left: 25px; color: #000000; font-family: Verdana, Tahoma, Arial; text-align: justify;">
+ <br>
+		<li style="padding-left: 2px;">Пономаренко O.M., Павлова O.O., Павлов Г.Г.&nbsp; <br>
+ <a id="bxid_479731" href="http://www.geol.univ.kiev.ua/lib/Structurogenesis-paleochronology_Volyn_megablock.pdf" style="color: #0050d0; text-decoration-line: none;">Структурогенез та палеохронологія палеопротерозойських гранітоїдів Волинського мегаблоку Українського щита</a></li>
+ <br>
+		<li style="padding-left: 2px;">Толстой М.І., Короновський В.М., Гасанов Ю.Л., Костенко Н.В., Шабатура О.В. <br>
+		 Петрохімія, петрофізика неовулканітів альпійської складчастої зони Східної Європи&nbsp;<i> <br>
+		 файл тимчасово недоступний</i> <br>
+ <a id="bxid_618517" href="http://www.geol.univ.kiev.ua/lib/" style="color: #0050d0; text-decoration-line: none;"></a></li>
+ <br>
+		<li style="padding-left: 2px;">Колектив авторів. Редакційна колегія: Зейкан О.Ю., Михайлов В.А., Куровець І.М., Чепіль П.М.&nbsp;</li>
+		<li style="padding-left: 2px;"> <a id="bxid_458728" href="http://www.geol.univ.kiev.ua/ua/lib/index.php?id=1" style="color: #0050d0; text-decoration-line: none;">Нетрадиційні джерела вуглеводнів</a></li>
+ <br>
+		<li style="padding-left: 2px;">Лукієнко О.І., Вакарчук С.Г., Кравченко Д.В.&nbsp; <br>
+ <a id="bxid_629336" href="http://www.geol.univ.kiev.ua/lib/Lukienko_Vakarchuk_Kravchenko.pdf" style="color: #0050d0; text-decoration-line: none;">Структурно-парагенетичний аналіз (на тектонофаціальній основі) – Книга 1. Епізона</a></li>
+ <br>
+		<li style="padding-left: 2px;">Лукієнко О.І., Янченко В.П., Кравченко Д.В. &nbsp; <br>
+ <a id="bxid_414916" href="http://www.geol.univ.kiev.ua/lib/Lukienko_Janchenko_Kravchenko.pdf" style="color: #0050d0; text-decoration-line: none;">Структурно-парагенетичний аналіз (на тектонофаціальній основі) – Книга 2. Мезозона та катазона</a></li>
+ <br>
+		<li style="padding-left: 2px;">Лукієнко О.І., Кравченко Д.В., Сухорада А.В.&nbsp; <br>
+ <a id="bxid_316465" href="http://www.geol.univ.kiev.ua/lib/Lukienko_Dyslokatsiyna_Tectonika.pdf" style="color: #0050d0; text-decoration-line: none;">Дислокаційна тектоніка та тектонофації докембрію Українського щита</a></li>
+	</ul>
+	<p style="text-align: justify; line-height: 15.6px; color: #000000; font-family: Verdana, Tahoma, Arial;">
+ <b>Підручники</b>
+	</p>
+	<ul type="disc" style="padding-right: 25px; padding-left: 25px; color: #000000; font-family: Verdana, Tahoma, Arial; text-align: justify;">
+		<li style="padding-left: 2px;">Киселевич Л.С.&nbsp; <br>
+ <a id="bxid_756767" href="http://www.geol.univ.kiev.ua/lib/comparative_planetology.pdf" style="color: #0050d0; text-decoration-line: none;">"Порівняльна планетологія"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Безродний Д.А.&nbsp; <br>
+ <a id="bxid_839128" href="http://www.geol.univ.kiev.ua/lib/gravimetriya1.pdf" style="color: #0050d0; text-decoration-line: none;">"Гравіметрія". Книга 1. "Теоретичні основи гравіметрії"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Омельчук О.В., Загнітко В.М., Курило М.М.&nbsp; <br>
+ <a id="bxid_424385" href="http://www.geol.univ.kiev.ua/lib/poshuky_ta_rozvidka_RKK.pdf" style="color: #0050d0; text-decoration-line: none;">"Пошуки та розвідка родовищ корисних копалин"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Павлов Г.Г.&nbsp; <br>
+ <a id="bxid_189774" href="http://www.geol.univ.kiev.ua/lib/Petrography.pdf" style="color: #0050d0; text-decoration-line: none;">"Петрографія"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Михайлов В.А., Курило М.М., Дубина О.В.&nbsp; <br>
+ <a id="bxid_925485" href="http://www.geol.univ.kiev.ua/lib/mineragraphy.pdf" style="color: #0050d0; text-decoration-line: none;">Мінераграфія</a></li>
+ <br>
+		<li style="padding-left: 2px;">Корнєєнко С.В.&nbsp; <br>
+ <a id="bxid_784802" href="http://www.geol.univ.kiev.ua/lib/MHGR-2015.pdf" style="color: #0050d0; text-decoration-line: none;">"Методика гідрогеологічних досліджень"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Лукієнко О.І.&nbsp; <br>
+ <a id="bxid_300326" href="http://www.geol.univ.kiev.ua/lib/Lukienko_struct_geology.pdf" style="color: #0050d0; text-decoration-line: none;">"Структурна геологія"</a></li>
+ <br>
+		<li style="padding-left: 2px;">колектив авторів (науковий редактор – проф. Михайлов В.А.)&nbsp; <br>
+ <a id="bxid_839665" href="http://www.geol.univ.kiev.ua/lib/RKK_goryuchi_kk.pdf" style="color: #0050d0; text-decoration-line: none;">"Горючі корисні копалини України"</a></li>
+ <br>
+		<li style="padding-left: 2px;">колектив авторів (науковий редактор – проф. Михайлов В.А.)&nbsp; <br>
+ <a id="bxid_712530" href="http://www.geol.univ.kiev.ua/lib/RKK_metalichni_kk.pdf" style="color: #0050d0; text-decoration-line: none;">"Металічні корисні копалини України"</a></li>
+ <br>
+		<li style="padding-left: 2px;">колектив авторів (науковий редактор – проф. Михайлов В.А.)&nbsp; <br>
+ <a id="bxid_81377" href="http://www.geol.univ.kiev.ua/lib/RKK_nemetalichni_kk.pdf" style="color: #0050d0; text-decoration-line: none;">"Неметалічні корисні копалини України"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Кошляков О.Є.&nbsp; <br>
+ <a id="bxid_320421" href="http://www.geol.univ.kiev.ua/lib/Hidrogeologichne_modreliuvannia.pdf" style="color: #0050d0; text-decoration-line: none;">"Гідрогеологічне моделювання"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Костюченко М.М., Шабатин В.С.&nbsp; <br>
+ <a id="bxid_819144" href="http://www.geol.univ.kiev.ua/lib/hydrogeol_eng-geol.pdf" style="color: #0050d0; text-decoration-line: none;">"Гідрогеологія та інженерна геологія."</a></li>
+ <br>
+		<li style="padding-left: 2px;">Коржнев М.М. та ін.&nbsp; <br>
+ <a id="bxid_822892" href="http://www.geol.univ.kiev.ua/lib/eco_geol.pdf" style="color: #0050d0; text-decoration-line: none;">"Екологічна геологія"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Коржнев М.М.&nbsp; <br>
+ <a id="bxid_945705" href="http://www.geol.univ.kiev.ua/lib/econom_pk.pdf" style="color: #0050d0; text-decoration-line: none;">"Економіка природокористування"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Жуков М.Н.&nbsp; <br>
+ <a id="bxid_354193" href="http://www.geol.univ.kiev.ua/ua/lib/index.php?id=zhukov_m_n#book" style="color: #0050d0; text-decoration-line: none;">"Математична статистика та обробка геолоічних даних"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Коржнев М.М.&nbsp; <br>
+ <a id="bxid_501790" href="http://www.geol.univ.kiev.ua/lib/prostr.pdf" style="color: #0050d0; text-decoration-line: none;">"Природно-ресурсні основи сталого розвитку"</a></li>
+ <br>
+	</ul>
+	<p style="text-align: justify; line-height: 15.6px; color: #000000; font-family: Verdana, Tahoma, Arial;">
+ <b>Навчальні посібники</b>
+	</p>
+	<ul type="disc" style="padding-right: 25px; padding-left: 25px; color: #000000; font-family: Verdana, Tahoma, Arial; text-align: justify;">
+		<li style="padding-left: 2px;">Іванік О.М., Мєнасова А.Ш., Крочак М.Д.&nbsp; <br>
+ <a id="bxid_898303" href="http://www.geol.univ.kiev.ua/lib/General_geology_Ivanik_Menasova_Krochak.pdf" style="color: #0050d0; text-decoration-line: none;">Загальна геологія: навчальний посібник</a></li>
+ <br>
+		<li style="padding-left: 2px;">Шевчук В.В., Кравченко Д.В.&nbsp; <br>
+ <a id="bxid_965227" href="http://www.geol.univ.kiev.ua/lib/Geometr_Osnovy_Geol_Kartuvannja.pdf" style="color: #0050d0; text-decoration-line: none;">Геометричні основи геологічного картування</a></li>
+ <br>
+		<li style="padding-left: 2px;">Диняк О.В.&nbsp; <br>
+ <a id="bxid_306990" href="http://www.geol.univ.kiev.ua/lib/Dyniak_Eng_geol_modeling.pdf" style="color: #0050d0; text-decoration-line: none;">Інженерно-геологічне моделювання</a></li>
+ <br>
+		<li style="padding-left: 2px;">Грінченко О.В.&nbsp; <br>
+ <a id="bxid_425801" href="http://www.geol.univ.kiev.ua/lib/Hrinchenko_2019_Theory_of_ore_formation.pdf" style="color: #0050d0; text-decoration-line: none;">Theory of ore formation (Теорія рудоутворення)</a></li>
+ <br>
+		<li style="padding-left: 2px;">Митрохин О.В.&nbsp; <br>
+ <a id="bxid_437553" href="http://www.geol.univ.kiev.ua/lib/Petrography_technical_stones_Mytrokhyn_2018.pdf" style="color: #0050d0; text-decoration-line: none;">Петрографія технічного каміння</a></li>
+ <br>
+		<li style="padding-left: 2px;">Михайлов В.А.&nbsp; <br>
+ <a id="bxid_596538" href="http://www.geol.univ.kiev.ua/lib/Basic_terms_2018.pdf" style="color: #0050d0; text-decoration-line: none;">Базові терміни і поняття геотектоніки</a></li>
+ <br>
+		<li style="padding-left: 2px;">Павлова О.О., Павлов Г.Г.&nbsp; <br>
+ <a id="bxid_594435" href="http://www.geol.univ.kiev.ua/lib/Dovidkoviy_posibnik_Pavlova.pdf" style="color: #0050d0; text-decoration-line: none;">Довідковий посібник з «Основ літології» для студентів 2 курсу спеціальності «Науки про Землю» «Базові терміни та поняття в літології»</a></li>
+ <br>
+		<li style="padding-left: 2px;">Кошляков О.Є.&nbsp; <br>
+ <a id="bxid_78601" href="http://www.geol.univ.kiev.ua/lib/Hydrogeological_modeling.doc" style="color: #0050d0; text-decoration-line: none;">Практикум з навчальної дисципліни «Гідрогеологічне моделювання»</a></li>
+ <br>
+		<li style="padding-left: 2px;">Кошляков О.Є., Мокієнко В.І.&nbsp; <br>
+ <a id="bxid_590755" href="http://www.geol.univ.kiev.ua/lib/Praktikum_DPV.pdf" style="color: #0050d0; text-decoration-line: none;">Практикум з динаміки підземних вод</a></li>
+ <br>
+		<li style="padding-left: 2px;">Гожик А.П., Байсарович І.М., Зінченко О.В., Шнюков С.Є.&nbsp; <br>
+ <a id="bxid_523474" href="http://www.geol.univ.kiev.ua/lib/Geochemistry_of_hypergenesis.pdf" style="color: #0050d0; text-decoration-line: none;">Геохімія зони гіпергенезу</a></li>
+ <br>
+		<li style="padding-left: 2px;">Шевченко О.Л., Бублясь В.М., Коломієць С.С.&nbsp; <br>
+ <a id="bxid_205817" href="http://www.geol.univ.kiev.ua/lib/moisture_transfer.pdf" style="color: #0050d0; text-decoration-line: none;">Основи переносу вологи в зоні аерації</a></li>
+ <br>
+		<li style="padding-left: 2px;">Карпенко О.М., Крочак М.Д., Байсарович І.М.&nbsp; <br>
+ <a id="bxid_132647" href="http://www.geol.univ.kiev.ua/lib/Actual_problems_of_petroleum_geology_2017.pdf" style="color: #0050d0; text-decoration-line: none;">Актуальні проблеми нафтогазової геології</a></li>
+ <br>
+		<li style="padding-left: 2px;">Огар В.В.&nbsp; <br>
+ <a id="bxid_567189" href="http://www.geol.univ.kiev.ua/lib/REGIONAL_GEOLOGY_Ogar_2017_1.pdf" style="color: #0050d0; text-decoration-line: none;">Регіональна геологія</a></li>
+ <br>
+		<li style="padding-left: 2px;">В.І. Зацерковний, В.К. Демидов, І.В. Віршило, В.І. Онищук, І.В. Тішаєв, П.І. Трофименко&nbsp; <br>
+ <a id="bxid_300004" href="http://www.geol.univ.kiev.ua/lib/Pract_ArcVew__full.pdf" style="color: #0050d0; text-decoration-line: none;">Геоінформатика. Практикум</a></li>
+ <br>
+		<li style="padding-left: 2px;">Павлова О.О.&nbsp; <br>
+ <a id="bxid_471003" href="http://www.geol.univ.kiev.ua/ua/lib/index.php?id=2" style="color: #0050d0; text-decoration-line: none;">Петрографічне вивчення порід-колекторів нафти і газу</a></li>
+ <br>
+		<li style="padding-left: 2px;">Єгорченков О.В., Єгорченкова Н.Ю., Катаєва Є.Ю.&nbsp; <br>
+ <a id="bxid_330099" href="http://www.geol.univ.kiev.ua/lib/ABC_project_management.pdf" style="color: #0050d0; text-decoration-line: none;">Азбука управління проектами. Планування.</a></li>
+ <br>
+		<li style="padding-left: 2px;">Іванік О.М., Мєнасова А.Ш., Огієнко О.С., Тустановська Л.В.&nbsp; <br>
+ <a id="bxid_405262" href="http://www.geol.univ.kiev.ua/lib/method_geol_practic.pdf" style="color: #0050d0; text-decoration-line: none;">Перша навчальна геологічна практика</a></li>
+ <br>
+		<li style="padding-left: 2px;">Павлов Г.Г., Павлова О.О., Білан О.В.&nbsp; <br>
+ <a id="bxid_70490" href="http://www.geol.univ.kiev.ua/lib/Methods_of_investigation_of_rocks.pdf" style="color: #0050d0; text-decoration-line: none;">Мікроскопічні дослідження гірських порід</a></li>
+ <br>
+		<li style="padding-left: 2px;">Павлов Г.Г., Гасанов Ю.Л., Митрохин О.В., Павлова О.О.&nbsp; <br>
+ <a id="bxid_644625" href="http://www.geol.univ.kiev.ua/lib/The_systematics_of_igneous_rocks.pdf" style="color: #0050d0; text-decoration-line: none;">Систематика магматичних порід. Посібник з курсу «Петрографія»</a></li>
+ <br>
+		<li style="padding-left: 2px;">Корнєєнко С.В.&nbsp; <br>
+ <a id="bxid_2025" href="http://www.geol.univ.kiev.ua/lib/soils_properties.pdf" style="color: #0050d0; text-decoration-line: none;">Дослідження складу, фізичних і фізико-хімічних властивостей ґрунтів</a></li>
+ <br>
+		<li style="padding-left: 2px;">Михайлов В.А., Курило М.М.&nbsp; <br>
+ <a id="bxid_966499" href="http://www.geol.univ.kiev.ua/lib/economic_geology_dictionary.pdf" style="color: #0050d0; text-decoration-line: none;">Базові терміни і поняття економічної геології</a></li>
+ <br>
+		<li style="padding-left: 2px;">Безродна І.М.&nbsp; <br>
+ <a id="bxid_497289" href="http://www.geol.univ.kiev.ua/lib/lab_Petrophysics.pdf" style="color: #0050d0; text-decoration-line: none;">"Посібник з лабораторного практикуму з курсу «Петрофізика»"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Лазарєва І.І.&nbsp; <br>
+ <a id="bxid_973727" href="http://www.geol.univ.kiev.ua/lib/applied_mineralogy.pdf" style="color: #0050d0; text-decoration-line: none;">"Прикладна мінералогія"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Лазарєва І.І.&nbsp; <br>
+ <a id="bxid_315101" href="http://www.geol.univ.kiev.ua/lib/Vulkanology.pdf" style="color: #0050d0; text-decoration-line: none;">"Вулканологія"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Остроух В.І.&nbsp; <br>
+ <a id="bxid_686441" href="http://www.geol.univ.kiev.ua/lib/topo_ukrA5-2013.pdf" style="color: #0050d0; text-decoration-line: none;">"Практикум з топографії"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Диняк О.В., Шостак А.В.&nbsp; <br>
+ <a id="bxid_209959" href="http://www.geol.univ.kiev.ua/lib/practicum_eng_geol.pdf" style="color: #0050d0; text-decoration-line: none;">"Практикум з інженерної геології"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Мокієнко В.І.&nbsp; <br>
+ <a id="bxid_937802" href="http://www.geol.univ.kiev.ua/lib/practicum_DFV.pdf" style="color: #0050d0; text-decoration-line: none;">"Практикум з навчальної дисципліни «Дослідно-фільтраційні випробування»"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Костюченко М.М., Мокієнко О.В.&nbsp; <br>
+ <a id="bxid_368121" href="http://www.geol.univ.kiev.ua/lib/soils_phys_properties_lab.pdf" style="color: #0050d0; text-decoration-line: none;">"Лабораторний практикум із визначення фізичних та фізико-хімічних властивостей ґрунтів"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Костюченко М.М.&nbsp; <br>
+ <a id="bxid_471138" href="http://www.geol.univ.kiev.ua/lib/mehanika_gruntiv.pdf" style="color: #0050d0; text-decoration-line: none;">"Механіка грунтів"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Корнєєнко С.В.&nbsp; <br>
+ <a id="bxid_779379" href="http://www.geol.univ.kiev.ua/lib/TB_practics.pdf" style="color: #0050d0; text-decoration-line: none;">"Техніка безпеки під час проходження навчальної практики з гідрогеологічних та інженерно-геологічних методів досліджень"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Корнєєнко С.В.&nbsp; <br>
+ <a id="bxid_170364" href="http://www.geol.univ.kiev.ua/lib/BGD.pdf" style="color: #0050d0; text-decoration-line: none;">"Безпека життєдіяльності"</a></li>
+ <br>
+		<li style="padding-left: 2px;">В.А. Михайлов&nbsp; <br>
+ <a id="bxid_828981" href="http://www.geol.univ.kiev.ua/lib/geotectonics.pdf" style="color: #0050d0; text-decoration-line: none;">"Основи геотектоніки"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Байсарович І.М., Мєнасова А.Ш.&nbsp; <br>
+ <a id="bxid_585559" href="http://www.geol.univ.kiev.ua/lib/Relict_paleocryogenes.doc" style="color: #0050d0; text-decoration-line: none;">"Релікти палеокріогенезу на території України"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Грінченко О.В.&nbsp; <br>
+ <a id="bxid_529017" href="http://www.geol.univ.kiev.ua/lib/business_english.pdf" style="color: #0050d0; text-decoration-line: none;">"Ділова англійська мова"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Курганський В.М., Тішаєв І.В.&nbsp; <br>
+ <a id="bxid_472036" href="http://www.geol.univ.kiev.ua/lib/EEMDS.doc" style="color: #0050d0; text-decoration-line: none;">"Електричні та електромагнітні методи дослідження свердловин"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Шостак А.В.&nbsp; <br>
+ <a id="bxid_24710" href="http://www.geol.univ.kiev.ua/lib/engen_geology.doc" style="color: #0050d0; text-decoration-line: none;">"Інженерна геологія"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Шостак А.В.&nbsp; <br>
+ <a id="bxid_597046" href="http://www.geol.univ.kiev.ua/lib/engen_petrology.doc" style="color: #0050d0; text-decoration-line: none;">"Інженерна петрологія"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Гожик А.П., Байсарович І.М.&nbsp; <br>
+ <a id="bxid_941445" href="http://www.geol.univ.kiev.ua/lib/eco_ocinka.doc" style="color: #0050d0; text-decoration-line: none;">"Екологічна оцінка проектів видобутку корисних копалин"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Байсарович І.М., Коржнев М.М., Шестопалов В.М.&nbsp; <br>
+ <a id="bxid_59940" href="http://www.geol.univ.kiev.ua/lib/base_ecogeol.pdf" style="color: #0050d0; text-decoration-line: none;">"Базові поняття екологічної геології"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Гура К.О., Грищук П.І.&nbsp; <br>
+ <a id="bxid_49597" href="http://www.geol.univ.kiev.ua/lib/int_mag_anoms.zip" style="color: #0050d0; text-decoration-line: none;">"Інтерпретація магнітних аномалій в автоматизованому режимі".</a></li>
+ <br>
+		<li style="padding-left: 2px;">Митрохин О.В., Нестеровський В.А.&nbsp; <br>
+ <a id="bxid_12852" href="http://www.geol.univ.kiev.ua/lib/kropt.doc" style="color: #0050d0; text-decoration-line: none;">"Кристалооптичні методи дослідження мінералів у прозорих шліфах".</a></li>
+ <br>
+		<li style="padding-left: 2px;">Корнєєнко С.В.&nbsp; <br>
+ <a id="bxid_789720" href="http://www.geol.univ.kiev.ua/lib/posibnyk.zip" style="color: #0050d0; text-decoration-line: none;">"Методика гідрогеологічних досліджень. Основні методи і види гідрогеологічних досліджень."</a></li>
+ <br>
+		<li style="padding-left: 2px;">Павлов Г.Г., Гожик А.П.&nbsp; <br>
+ <a id="bxid_301559" href="http://www.geol.univ.kiev.ua/lib/litology.rar" style="color: #0050d0; text-decoration-line: none;">"Основи літології"</a></li>
+ <br>
+	</ul>
+	<p style="text-align: justify; line-height: 15.6px; color: #000000; font-family: Verdana, Tahoma, Arial;">
+ <b>Методичні матеріали</b>
+	</p>
+	<ul type="disc" style="padding-right: 25px; padding-left: 25px; color: #000000; font-family: Verdana, Tahoma, Arial; text-align: justify;">
+		<li style="padding-left: 2px;">С.А. Вижва, В.К. Демидов, В.І. Онищук&nbsp; <br>
+ <a id="bxid_13497" href="http://www.geol.univ.kiev.ua/lib/Guideline_of_Bachelor_work_103_2020_final.pdf" style="color: #0050d0; text-decoration-line: none;">Методичні вказівки з підготовки та оформлення бакалаврських робіт зі спеціальності 103 – Науки про Землю. Рекомендовано до публікації вченою радою ННІ «Інститут геології» протокол № 10 від 29 квітня 2020 р.</a></li>
+ <br>
+		<li style="padding-left: 2px;">Д.В. Кравченко&nbsp; <br>
+ <a id="bxid_829260" href="http://www.geol.univ.kiev.ua/lib/Polozhennja_Practice_Institute_Geology_2020.pdf" style="color: #0050d0; text-decoration-line: none;">Положення про проведення практик студентів ННІ «Інститут геології» Київського національного університету імені Траса Шевченка. Рекомендовано до публікації вченою радою ННІ «Інститут геології» протокол № 09 від 08 квітня 2020 р.</a></li>
+ <br>
+		<li style="padding-left: 2px;">Омельчук О.В.&nbsp; <br>
+ <a id="bxid_859623" href="http://www.geol.univ.kiev.ua/lib/met_vkavivky_Omelchuk.pdf" style="color: #0050d0; text-decoration-line: none;">Методичні вказівки з проведення бурової практики для студентів ІІ курсу ННІ «Інститут геології»</a></li>
+ <br>
+		<li style="padding-left: 2px;">С.А. Вижва, В.І. Зацерковний, В.К. Демидов, В.І. Онищук, І.В. Віршило&nbsp; <br>
+ <a id="bxid_951032" href="http://www.geol.univ.kiev.ua/lib/Guideline_of_Master_work_193_2020.pdf" style="color: #0050d0; text-decoration-line: none;">Методичні вказівки з підготовки та оформлення магістерських робіт зі спеціальності 193 – Геодезія та землеустрій. Рекомендовано до публікації вченою радою ННІ «Інститут геології» протокол № 7 від 27 січня 2020 р.</a></li>
+ <br>
+		<li style="padding-left: 2px;">С.А. Вижва, В.І. Зацерковний, В.К. Демидов, В.І. Онищук&nbsp; <br>
+ <a id="bxid_78381" href="http://www.geol.univ.kiev.ua/lib/Guideline_of_Master_work_103_2019.pdf" style="color: #0050d0; text-decoration-line: none;">Методичні вказівки з підготовки та оформлення магістерських робіт зі спеціальності 103 – Науки про Землю. Рекомендовано до публікації вченою радою ННІ «Інститут геології» протокол № 10 від 12 березня 2019 р.</a></li>
+ <br>
+		<li style="padding-left: 2px;">С.А. Вижва, В.І. Зацерковний, В.К. Демидов, В.І. Онищук&nbsp; <br>
+ <a id="bxid_3895" href="http://www.geol.univ.kiev.ua/lib/Guideline_of_Master_work_103_2019_templates.docx" style="color: #0050d0; text-decoration-line: none;">Шаблони документів до Методичних вказівок з підготовки та оформлення магістерських робіт зі спеціальності 103 – Науки про Землю</a></li>
+ <br>
+		<li style="padding-left: 2px;">Киселевич Л.С.&nbsp; <br>
+ <a id="bxid_858205" href="http://www.geol.univ.kiev.ua/lib/2018_karpatska_practika.pdf" style="color: #0050d0; text-decoration-line: none;">Перша навчальна польова геологічна практика (карпатський маршрутний варіант)</a></li>
+ <br>
+		<li style="padding-left: 2px;">Остроух В.І.&nbsp; <br>
+ <a id="bxid_484449" href="http://www.geol.univ.kiev.ua/lib/topo_ukrA5-2013pdf3.pdf" style="color: #0050d0; text-decoration-line: none;">Практикум з топографії (методичні вказівки до виконання практичних робіт)</a></li>
+ <br>
+		<li style="padding-left: 2px;">Омельчук О.В.&nbsp;&nbsp;<i>Методичні вказівки до виконання курсової роботи з дисципліни «Технологія буріння»</i> <br>
+ <a id="bxid_311499" href="http://www.geol.univ.kiev.ua/lib/met_kursova_Omelchuk.pdf" style="color: #0050d0; text-decoration-line: none;">Буріння розвідувально-експлуатаційної свердловини на воду</a></li>
+ <br>
+		<li style="padding-left: 2px;">Вижва С.А., Курганський В.М.&nbsp; <br>
+ <a id="bxid_893729" href="http://www.geol.univ.kiev.ua/lib/diplom_mag_0709.pdf" style="color: #0050d0; text-decoration-line: none;">Методичні вказівки з виконання та оформлення кваліфікаційної роботи магістра для студентів геологічного факультету за фахом 0709</a></li>
+ <br>
+		<li style="padding-left: 2px;">Вижва С.А., Курганський В.М.&nbsp; <br>
+ <a id="bxid_621363" href="http://www.geol.univ.kiev.ua/lib/diplom_bach_GF.pdf" style="color: #0050d0; text-decoration-line: none;">Методичні вказівки з виконання та оформлення кваліфікаційної роботи бакалавра (для студентів геологічного факультету)</a></li>
+ <br>
+		<li style="padding-left: 2px;">Гузій М.І., Безродний Д.А.&nbsp; <br>
+ <a id="bxid_487812" href="http://www.geol.univ.kiev.ua/lib/dipl_practic_spec_0709.pdf" style="color: #0050d0; text-decoration-line: none;">Методичні вказівки з переддипломної виробничої практики спеціаліста для студентів-геофізиків за фахом 0709</a></li>
+ <br>
+		<li style="padding-left: 2px;">Вижва С.А., Курганський В.М.&nbsp; <br>
+ <a id="bxid_336671" href="http://www.geol.univ.kiev.ua/lib/diplom_spec_0709.pdf" style="color: #0050d0; text-decoration-line: none;">Методичні вказівки з виконання та оформлення кваліфікаційної роботи спеціаліста для студентів геологічного факультету за фахом 0709</a></li>
+ <br>
+		<li style="padding-left: 2px;">Грищук П.І.&nbsp; <br>
+ <a id="bxid_845200" href="http://www.geol.univ.kiev.ua/lib/kursova_GMD.pdf" style="color: #0050d0; text-decoration-line: none;">Методичні вказівки до підготовки курсової роботи з дисципліни «Геофізичні методи досліджень» (для студентів 2-3 курсів спеціалізації «Геофізика»)</a></li>
+ <br>
+		<li style="padding-left: 2px;">Вижва С.А., Рева М.В.&nbsp; <br>
+ <a id="bxid_97570" href="http://www.geol.univ.kiev.ua/lib/kursova_0709.pdf" style="color: #0050d0; text-decoration-line: none;">Методичні вказівки з виконання та оформлення курсової роботи (для студентів геологічного факультету за фахом 0709)</a></li>
+ <br>
+		<li style="padding-left: 2px;">Курило М.М., Плотніков О.В.&nbsp; <br>
+ <a id="bxid_5186" href="http://www.geol.univ.kiev.ua/lib/geol_econ_ocinka.pdf" style="color: #0050d0; text-decoration-line: none;">Геолого-економічна оцінка родовищ корисних копалин</a></li>
+ <br>
+		<li style="padding-left: 2px;">Михайлов В.А., Курило М.М.&nbsp; <br>
+ <a id="bxid_919064" href="http://www.geol.univ.kiev.ua/lib/method_magistr_econ-geol.pdf" style="color: #0050d0; text-decoration-line: none;">Методичні вказівки з підготовки та оформлення магістерських робіт зі спеціальності 103 – Науки про Землю за програмою – «Геологія», спеціалізація «Економічна геологія»</a></li>
+ <br>
+		<li style="padding-left: 2px;">Зацерковний В.І.,Тішаєв І.В., Віршило І.В., Демидов В.К.&nbsp; <br>
+ <a id="bxid_402265" href="http://www.geol.univ.kiev.ua/lib/GuidelineTermPaper_4Course_Bachelor_Iv.doc" style="color: #0050d0; text-decoration-line: none;">Методичні рекомендації щодо виконання та оформлення кваліфікаційної роботи бакалавра (для спеціалізації «Геоінформатика»)</a></li>
+ <br>
+		<li style="padding-left: 2px;"><a id="bxid_171428" href="http://www.geol.univ.kiev.ua/lib/Kursova_struct_Geol_method.pdf" style="color: #0050d0; text-decoration-line: none;">Методичні вказівки до написання курсової роботи з дисципліни "Структурна геологія та геологічне картування"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Кошляков О.Є, Диняк О.В., Чомко Д.Ф.&nbsp; <br>
+ <a id="bxid_484150" href="http://www.geol.univ.kiev.ua/lib/metod_mag_GG.pdf" style="color: #0050d0; text-decoration-line: none;">Методичні рекомендації щодо підготовки та захисту магістерських робіт (для здобувачів вищої освіти за академічною кваліфікацією магістр гідрогеології)</a></li>
+ <br>
+		<li style="padding-left: 2px;">Кошляков О.Є, Диняк О.В., Чомко Д.Ф.&nbsp; <br>
+ <a id="bxid_898699" href="http://www.geol.univ.kiev.ua/lib/Metod_bak_GG.pdf" style="color: #0050d0; text-decoration-line: none;">Методичні рекомендації щодо підготовки та захисту бакалаврських робіт (для спеціалізації «Гідрогеологія»)</a></li>
+ <br>
+		<li style="padding-left: 2px;">Зацерковний В. І., Тішаєв І. В., Онищук В. І., Демидов В. К., Віршило І. В.&nbsp; <br>
+ <a id="bxid_836918" href="http://www.geol.univ.kiev.ua/lib/kurs_info-tech.doc" style="color: #0050d0; text-decoration-line: none;">Методичні вказівки щодо виконання та оформлення курсової роботи з дисципліни «Інформаційні технології»</a></li>
+ <br>
+		<li style="padding-left: 2px;">Курило М.М., Андрєєва О.О.&nbsp; <br>
+ <a id="bxid_650240" href="http://www.geol.univ.kiev.ua/lib/method_econom_geology.pdf" style="color: #0050d0; text-decoration-line: none;">Методичні рекомендації до виконання практичних робіт з курсу "Економічна геологія"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Нестеровський В.А., Огар В.В.&nbsp; <br>
+ <a id="bxid_859265" href="http://www.geol.univ.kiev.ua/lib/method_mag_GNG.pdf" style="color: #0050d0; text-decoration-line: none;">Методичні вказівки з підготовки та оформлення магістерських робіт зі спеціальності 8.04010305 «Геологія нафти і газу»</a></li>
+ <br>
+		<li style="padding-left: 2px;">Огар В.В., Нестеровський В.А.&nbsp; <br>
+ <a id="bxid_811189" href="http://www.geol.univ.kiev.ua/lib/method_bak_GNG.pdf" style="color: #0050d0; text-decoration-line: none;">Методичні вказівки з підготовки та захисту кваліфікаційної роботи бакалавра (для спеціалізації «геологія нафти і газу»)</a></li>
+ <br>
+		<li style="padding-left: 2px;">Загнітко В.М.&nbsp; <br>
+ <a id="bxid_642281" href="http://www.geol.univ.kiev.ua/lib/method_practic_geol.pdf" style="color: #0050d0; text-decoration-line: none;">Методичні рекомендації до проведення навчальної практики з методів польових досліджень, складання та оформлення звіту</a></li>
+ <br>
+		<li style="padding-left: 2px;">Безродна І.М, Безродний Д.А.&nbsp; <br>
+ <a id="bxid_774183" href="http://www.geol.univ.kiev.ua/lib/GMD_lab.doc" style="color: #0050d0; text-decoration-line: none;">Методичні вказівки з лабораторних занять з курсу «Геофізичні методи досліджень»</a></li>
+ <br>
+		<li style="padding-left: 2px;">Демидов В.К.&nbsp; <br>
+ <a id="bxid_180975" href="http://www.geol.univ.kiev.ua/lib/GuidelineTermPaper_Prog.doc" style="color: #0050d0; text-decoration-line: none;">Методичні вказівки з виконання та оформлення курсової роботи з дисципліни «Програмування в геоінформаційних системах»</a></li>
+ <br>
+		<li style="padding-left: 2px;">Тішаєв І.В.&nbsp; <br>
+ <a id="bxid_415376" href="http://www.geol.univ.kiev.ua/lib/GuidelineTermPaper_4Course.doc" style="color: #0050d0; text-decoration-line: none;">Методичні вказівки з виконання та оформлення курсової роботи з дисципліни «Моделювання родовищ корисних копалин»</a></li>
+ <br>
+		<li style="padding-left: 2px;">Курило М.М.&nbsp; <br>
+ <a id="bxid_179513" href="http://www.geol.univ.kiev.ua/lib/OGR.doc" style="color: #0050d0; text-decoration-line: none;">Методичні рекомендації до виконання лабораторних робіт з навчальної дисципліни «Організація геологорозвідувальних робіт»</a></li>
+ <br>
+		<li style="padding-left: 2px;">Молявко В.Г., Павлов Г.Г.&nbsp; <br>
+ <a id="bxid_172038" href="http://www.geol.univ.kiev.ua/lib/ovpm_petrography.pdf" style="color: #0050d0; text-decoration-line: none;">Методичні рекомендації до лабораторного практикуму "оптичні властивості породоутворюючих мінералів" курсу "Петрографія"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Павлова О.О.&nbsp;&nbsp;<i>Методичні вказівки до виконання лабораторних робіт з курсу "Петрографія"</i> <br>
+ <a id="bxid_649817" href="http://www.geol.univ.kiev.ua/lib/petrohraphy_lab.doc" style="color: #0050d0; text-decoration-line: none;">Кристалооптичні дослідження мінералів у шліфах</a></li>
+ <br>
+		<li style="padding-left: 2px;">Гузій М.І., Безродний Д.А.&nbsp; <br>
+ <a id="bxid_344753" href="http://www.geol.univ.kiev.ua/lib/met_magnitometry.doc" style="color: #0050d0; text-decoration-line: none;">Методичні вказівки з лабораторних занять по курсу "Магнітометрія"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Тішаєв І.В.&nbsp; <br>
+ <a id="bxid_408268" href="http://www.geol.univ.kiev.ua/lib/kursova_OM.doc" style="color: #0050d0; text-decoration-line: none;">Методичні вказівки з виконання та оформлення курсової роботи з дисципліни "Обчислювальна математика"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Костюченко М.М.&nbsp; <br>
+ <a id="bxid_578000" href="http://www.geol.univ.kiev.ua/lib/met_hydrogeol.doc" style="color: #0050d0; text-decoration-line: none;">Методичні вказівки до виконання практичних робіт з курсу "Гідрогеологія та інженерна геологія"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Костюченко М.М., Шостак А.В.&nbsp; <br>
+ <a id="bxid_169784" href="http://www.geol.univ.kiev.ua/lib/met_mehan_grunt.doc" style="color: #0050d0; text-decoration-line: none;">Методичні вказівки до виконання практичних робіт з курсу "Механіка ґрунтів"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Курило М.В.&nbsp; <br>
+ <a id="bxid_270636" href="http://www.geol.univ.kiev.ua/lib/metod_kurs_poshuk.doc" style="color: #0050d0; text-decoration-line: none;">Методичні вказівки до написання курсової роботи з дисципліни “Пошуки та розвідка родовищ корисних копалин”</a></li>
+ <br>
+		<li style="padding-left: 2px;">Курило М.В.&nbsp; <br>
+ <a id="bxid_285152" href="http://www.geol.univ.kiev.ua/lib/mineragraphy.doc" style="color: #0050d0; text-decoration-line: none;">Методичні вказівки до лабораторних занять з курсу "Мінераграфія"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Жуков М.Н.&nbsp; <br>
+ <a id="bxid_286243" href="http://www.geol.univ.kiev.ua/ua/lib/index.php?id=zhukov_m_n#method" style="color: #0050d0; text-decoration-line: none;">Методичні рекомендації до навчального курсу "Програмування"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Жуков М.Н.&nbsp; <br>
+ <a id="bxid_585050" href="http://www.geol.univ.kiev.ua/ua/lib/index.php?id=zhukov_m_n#method" style="color: #0050d0; text-decoration-line: none;">Методичні вказівки з курсу "Інформатика"</a></li>
+ <br>
+		<li style="padding-left: 2px;">Шевчук В.В., Кравченко Д.В.&nbsp;&nbsp;<i>Методичні вказівки до навчальної практики з геологічного картування та геофізичних методів</i> <br>
+ <a id="bxid_263465" href="http://www.geol.univ.kiev.ua/lib/Metod_Pract_1.doc" style="color: #0050d0; text-decoration-line: none;">Частина І. Польові геологічні дослідження</a></li>
+ <br>
+		<li style="padding-left: 2px;">Шевчук В.В., Кравченко Д.В.&nbsp;&nbsp;<i>Методичні вказівки до навчальної практики з геологічного картування та геофізичних методів</i> <br>
+ <a id="bxid_139514" href="http://www.geol.univ.kiev.ua/lib/Metod_Pract_2.doc" style="color: #0050d0; text-decoration-line: none;">Частина ІІ. Складання звіту про навчальну практику з геологічного картування та геофізичних методів</a></li>
+ <br>
+		<li style="padding-left: 2px;">Грищук П.І., Курганський В.М.&nbsp; <br>
+ <a id="bxid_691821" href="http://www.geol.univ.kiev.ua/lib/Geophys_pract.zip" style="color: #0050d0; text-decoration-line: none;">"Мeтодичні вказівки з навчальної геофізичної практики".</a></li>
+ <br>
+		<li style="padding-left: 2px;">Павлов Г.Г., Митрохин О.В., Павлова О.О.&nbsp; <br>
+ <a id="bxid_998186" href="http://www.geol.univ.kiev.ua/lib/Metod_bak1.doc" style="color: #0050d0; text-decoration-line: none;">Методичні вказівки з виконання та оформлення кваліфікаційної роботи бакалавра <br>
+		 для студентів геологічного факультету за фахом 070702</a></li>
+ <br>
+		<li style="padding-left: 2px;">Віршило І.В.&nbsp; <br>
+ <a id="bxid_737262" href="http://www.geol.univ.kiev.ua/lib/sacust.zip" style="color: #0050d0; text-decoration-line: none;">"Методичні вказівки з курсу лабораторних робіт 'Сейсмоакустика'".</a></li>
+ <br>
+		<li style="padding-left: 2px;">Віршило І.В.&nbsp; <br>
+ <a id="bxid_992564" href="http://www.geol.univ.kiev.ua/lib/matmod_lab_metvk.zip" style="color: #0050d0; text-decoration-line: none;">"Методичні вказівки з курсу лабораторних робіт 'Моделювання ефективних геофізичних параметрів'".</a></li>
+ <br>
+		<li style="padding-left: 2px;">Шевчук В.В., Кравченко Д.В.&nbsp; <br>
+ <a id="bxid_291119" href="http://www.geol.univ.kiev.ua/lib/Test_Work.doc" style="color: #0050d0; text-decoration-line: none;">"Методичні вказівки до контрольної роботи зі структурної геології та геологічного картування (для студентів заочного відділення)".</a></li>
+ <br>
+		<li style="padding-left: 2px;">&nbsp;&nbsp;<i>Методичні вказівки до навчального курсу "Ділова іноземна мова" (для магістрів спеціальності "Гідрогеологія та інженерна геологія")</i> <br>
+ <a id="bxid_951724" href="http://www.geol.univ.kiev.ua/lib/Loess_f.doc" style="color: #0050d0; text-decoration-line: none;">"Лесові породи. Збірка текстів та глосарій"</a></li>
+ <br>
+		<li style="padding-left: 2px;">&nbsp;&nbsp;<i>Методичні вказівки до навчального курсу "Ділова іноземна мова"</i> <br>
+ <a id="bxid_956960" href="http://www.geol.univ.kiev.ua/lib/posib_5f.doc" style="color: #0050d0; text-decoration-line: none;">"Структура англомовної наукової статті з геології"</a></li>
+ <br>
+	</ul>
+	<p style="text-align: justify; line-height: 15.6px; color: #000000; font-family: Verdana, Tahoma, Arial;">
+ <b>Науково-популярна література</b>
+	</p>
+	<ul type="disc" style="padding-right: 25px; padding-left: 25px; color: #000000; font-family: Verdana, Tahoma, Arial; text-align: justify;">
+		<li style="padding-left: 2px;">Муравейник Ю.А.&nbsp; <br>
+ <a id="bxid_799985" href="http://www.geol.univ.kiev.ua/lib/Muraveinyk_Yu_A.pdf" style="color: #0050d0; text-decoration-line: none;">Глубинное строение Земли и образование углеводородов кайнозойским взрывом в ядре</a></li>
+ <br>
+		<li style="padding-left: 2px;">Єсипович С.М.&nbsp; <br>
+ <a id="bxid_446318" href="http://www.geol.univ.kiev.ua/lib/monogr_Yesypovych.pdf" style="color: #0050d0; text-decoration-line: none;">Історія планети Земля – пульсуючий розвиток під дією космічного пресингу</a></li>
+ <br>
+	</ul>
+	<p style="text-align: justify; line-height: 15.6px; color: #000000; font-family: Verdana, Tahoma, Arial;">
+ <b>Світлини історії (видатні постаті)</b>
+	</p>
+	<ul type="disc" style="padding-right: 25px; padding-left: 25px; color: #000000; font-family: Verdana, Tahoma, Arial; text-align: justify;">
+		<li style="padding-left: 2px;">Володимир Павлишин&nbsp; <br>
+ <a id="bxid_277245" href="http://www.geol.univ.kiev.ua/lib/Pavlyshyn_svitlyny.pdf" style="color: #0050d0; text-decoration-line: none;">Світлини мого життя в Києві й поза ним</a></li>
+ <br>
+		<li style="padding-left: 2px;">Володимир Павлишин, Станіслав Довгий&nbsp; <br>
+ <a id="bxid_265267" href="http://www.geol.univ.kiev.ua/lib/Pulyuy.pdf" style="color: #0050d0; text-decoration-line: none;">Велетень світової й української науки та культури (до 170-річчя від дня народження Івана Пулюя)</a></li>
+ <br>
+	</ul>
+	<p style="text-align: justify; line-height: 15.6px; color: #000000; font-family: Verdana, Tahoma, Arial;">
+ <b>Періодичні видання</b>
+	</p>
+	<ul type="disc" style="padding-right: 25px; padding-left: 25px; color: #000000; font-family: Verdana, Tahoma, Arial; text-align: justify;">
+		<li style="padding-left: 2px;"><a id="bxid_219882" href="http://www.geol.univ.kiev.ua/lib/uwtech_01-2015.pdf" style="color: #0050d0; text-decoration-line: none;">Журнал "Підводні технології", № 01⁄2015</a></li>
+ <br>
+		<li style="padding-left: 2px;"><a id="bxid_300438" href="http://www.geol.univ.kiev.ua/lib/uwtech_02-2015.pdf" style="color: #0050d0; text-decoration-line: none;">Журнал "Підводні технології", № 02⁄2015</a></li>
+ <br>
+	</ul>
+	<p style="text-align: justify; line-height: 15.6px; color: #000000; font-family: Verdana, Tahoma, Arial;">
+ <b>Каталоги</b>
+	</p>
+	<ul type="disc" style="padding-right: 25px; padding-left: 25px; color: #000000; font-family: Verdana, Tahoma, Arial; text-align: justify;">
+		<li style="padding-left: 2px;"><a id="bxid_338093" href="http://www.geol.univ.kiev.ua/lib/maps_catalog.doc" style="color: #0050d0; text-decoration-line: none;">Каталог карт кафедри загальної та історичної геології</a></li>
+ <br>
+	</ul>
+	<p style="text-align: justify; line-height: 15.6px; color: #000000; font-family: Verdana, Tahoma, Arial;">
+	</p>
+	<ul type="disc" style="padding-right: 25px; padding-left: 25px; color: #000000; font-family: Verdana, Tahoma, Arial; text-align: justify;">
+		<li style="padding-left: 2px;"><a id="bxid_707833" href="http://www.geol.univ.kiev.ua/lib/umovni_poznachennja.pdf" style="color: #0050d0; text-decoration-line: none;">Геологічне картографування. Типові умовні позначення (галузевий стандарт України)</a></li>
+	</ul>
+ <span style="font-family: Verdana, Tahoma, Arial;">
+	<h2><br>
+ </h2>
+ <br>
+	<p>
+	</p>
+	<p>
+ <br>
+	</p>
+	<p>
+ <br>
+	</p>
+ <br>
+ </span><br>
+</div>
+ </section><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

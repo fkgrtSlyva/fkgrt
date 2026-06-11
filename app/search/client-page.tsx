@@ -3,18 +3,25 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Search } from "lucide-react";
+import React from "react";
 import { assetPath } from "@/lib/asset-path";
 import { searchDocuments } from "@/lib/search-shared";
 import type { SearchDocument } from "@/lib/search-shared";
 
-type SearchClientPageProps = {
-  documents: SearchDocument[];
-};
-
-export default function SearchClientPage({ documents }: SearchClientPageProps) {
+export default function SearchClientPage() {
   const searchParams = useSearchParams();
-  const query = (searchParams.get("q") || "").trim();
-  const results = searchDocuments(documents, query);
+  const query = (searchParams?.get("q") || "").trim();
+  const [documents, setDocuments] = React.useState<SearchDocument[] | null>(null);
+
+  React.useEffect(() => {
+    fetch(assetPath("/search-index.json"))
+      .then((response) => response.json())
+      .then(setDocuments)
+      .catch(() => setDocuments([]));
+  }, []);
+
+  const results = searchDocuments(documents ?? [], query);
+  const isLoading = documents === null;
 
   return (
     <>
@@ -48,9 +55,11 @@ export default function SearchClientPage({ documents }: SearchClientPageProps) {
         <div className="mx-auto max-w-[980px]">
           {query ? (
             <p className="mb-8 text-slate-600">
-              {results.length > 0
-                ? `Знайдено результатів: ${results.length}`
-                : `Нічого не знайдено за запитом: ${query}`}
+              {isLoading
+                ? "Завантаження..."
+                : results.length > 0
+                  ? `Знайдено результатів: ${results.length}`
+                  : `Нічого не знайдено за запитом: ${query}`}
             </p>
           ) : (
             <p className="mb-8 text-slate-600">

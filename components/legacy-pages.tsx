@@ -1,255 +1,244 @@
-import Link from "next/link";
+import fs from "node:fs";
+import path from "node:path";
+import { Suspense } from "react";
 import { assetPath } from "@/lib/asset-path";
+import { LegacyGallery, type LegacyGalleryItem } from "./legacy-gallery";
 
-const galleryItems = [
-  ["Вишиванка - генетичний код української нації", "/upload/iblock/6b2/%D0%94%D0%921.jpg"],
-  ["Вишиванка - генетичний код української нації", "/upload/iblock/7ae/%D0%94%D0%923.jpg"],
-  ["Вишиванка - генетичний код української нації", "/upload/iblock/dd7/%D0%94%D0%922.jpg"],
-  ["Навчальна демонтажно-монтажна практика у автомобілістів", "/upload/iblock/59f/%D0%90%D0%B2%D1%82%D0%BE5.jpg"],
-  ["Навчальна демонтажно-монтажна практика у автомобілістів", "/upload/iblock/f70/%D0%90%D0%B2%D1%82%D0%BE4.jpg"],
-  ["Навчальна демонтажно-монтажна практика у автомобілістів", "/upload/iblock/7c3/%D0%90%D0%B2%D1%82%D0%BE%203.jpg"],
-  ["Лекційно-практичне заняття на тему картографія та геологія", "/upload/medialibrary/686/photo_2026-05-18_14-16-19.jpg"],
-  ["Лекційно-практичне заняття на тему картографія та геологія", "/upload/medialibrary/9cc/photo_2026-05-18_14-16-14.jpg"],
-  ["Лекційно-практичне заняття на тему картографія та геологія", "/upload/medialibrary/2e4/photo_2026-05-18_14-16-17.jpg"],
-];
-
-const legacyPages: Record<string, { title: string; description: string; links: [string, string][] }> = {
-  about: {
-    title: "Коледж",
-    description: "Історія коледжу, адміністрація, геологічний музей, спеціальності, публічна інформація та випускники.",
-    links: [["Про коледж", "/about"], ["Геологічний музей", "/about/museum"], ["Спеціальності", "/about/spetsialnosti"]],
-  },
-  vstup: {
-    title: "Вступнику",
-    description: "Інформація для абітурієнтів: вступна кампанія, правила прийому, спеціальності, ліцензії та акредитації.",
-    links: [["Вступна кампанія", "/vstup"], ["Правила та умови прийому", "/vstup/pravila"], ["Спеціальності", "/vstup/spicial"]],
-  },
-  osvita: {
-    title: "Освітній процес",
-    description: "Освітні програми, навчальні плани, методичний портал, циклові комісії та електронні ресурси коледжу.",
-    links: [["Освітні програми", "/osvita"], ["Навчальні плани", "/osvita/navchaliniplan"], ["Методичний портал", "/osvita/methodrob2"]],
-  },
-  educational: {
-    title: "Студенту",
-    description: "Розклад занять, графіки освітнього процесу, рейтингові списки, психологічна служба та студентське самоврядування.",
-    links: [["Розклад занять", "/educational/scribble"], ["Рейтингові списки", "/educational/rating"], ["Психологічна служба", "/educational/psychologist"]],
-  },
-  lecturer: {
-    title: "Викладачу",
-    description: "Методичний портал, виховна робота, портал навчальних ресурсів та електронні ресурси для викладачів.",
-    links: [["Методичний портал", "/osvita/methodrob2"], ["Виховна робота", "/lecturer/educationalwork"], ["Електронні ресурси", "/educational/resources"]],
-  },
-  news: {
-    title: "Новини",
-    description: "Останні новини та оголошення фахового коледжу геологорозвідувальних технологій.",
-    links: [["Всі новини", "/posts"], ["Галерея", "/gallery"], ["Контакти", "/contacts"]],
-  },
-  student: {
-    title: "Студенту",
-    description: "Інформація для студентів: розклад, освітні ресурси, рейтинги, моніторинг якості освіти та самоврядування.",
-    links: [["Розклад занять", "/educational/scribble"], ["Електронні ресурси", "/educational/resources"], ["Студентське самоврядування", "/educational/selfmanagement"]],
-  },
-  contacts: {
-    title: "Контакти",
-    description: "Фаховий коледж геологорозвідувальних технологій КНУ імені Тараса Шевченка: вул. Василя Тютюнника, 9, м. Київ, 03150.",
-    links: [["fkgrt@knu.ua", "mailto:fkgrt@knu.ua"], ["Мапа", "https://goo.gl/maps/L3ZsN2dDtXbyokkH7"], ["+38(044)528-53-55", "tel:+380445285355"]],
-  },
+type LegacyPage = {
+  html: string;
+  title: string;
 };
 
-const migratedPageDetails: Record<string, { title: string; description?: string }> = {
-  "about/administratsiya": { title: "Адміністрація" },
-  "about/museum": { title: "Геологічний музей" },
-  "about/nauki_pro_zemliu": { title: "E4 Науки про Землю" },
-  "about/publichna-informatsiya": { title: "Публічна інформація" },
-  "about/spetsialnosti": { title: "Спеціальності" },
-  "about/spivrobitnitstvo": { title: "Співробітництво" },
-  "about/vipuskniki": { title: "Наші випускники" },
-  "educational/akademichna-dobrochesnist": { title: "Академічна доброчесність" },
-  "educational/monitoring": { title: "Моніторинг якості освіти" },
-  "educational/psychologist": { title: "Психологічна служба" },
-  "educational/quality": { title: "Забезпечення якості освіти" },
-  "educational/rating": { title: "Рейтингові списки" },
-  "educational/resources": { title: "Електронні ресурси" },
-  "educational/results_monitor": { title: "Результати моніторингу" },
-  "educational/scribble": { title: "Розклад занять" },
-  "educational/selfmanagement": { title: "Студентське самоврядування" },
-  "educational/stop": { title: "STOP! булінг" },
-  "educational/survey": { title: "Опитування" },
-  "lecturer/educationalwork": { title: "Виховна робота" },
-  "osvita/comision": { title: "Циклові комісії" },
-  "osvita/kabinet": { title: "Кабінети та лабораторії" },
-  "osvita/konzept": { title: "Концепції освітньої діяльності" },
-  "osvita/laborotory": { title: "Лабораторії" },
-  "osvita/links": { title: "Корисні посилання" },
-  "osvita/methodrob": { title: "Методична робота" },
-  "osvita/methodrob2": { title: "Методичний портал" },
-  "osvita/navchaliniplan": { title: "Навчальні плани" },
-  "osvita/portal": { title: "Портал навчальних ресурсів" },
-  "osvita/robota": { title: "Навчальна робота" },
-  "osvita/subjects/components": { title: "Освітні компоненти" },
-  "osvita/subjects/drilling": { title: "Буріння свердловин" },
-  "osvita/subjects/ecology": { title: "Екологія" },
-  "osvita/subjects/geology": { title: "Геологія" },
-  "osvita/subjects/geology_no": { title: "Геологія нафти і газу" },
-  "osvita/subjects/geophysics": { title: "Геофізика" },
-  "osvita/subjects/geotourism": { title: "Геотуризм" },
-  "osvita/subjects/hydrogeological": { title: "Гідрогеологія" },
-  "osvita/subjects/maintenance": { title: "Обслуговування та ремонт" },
-  "osvita/subjects/motorists": { title: "Автомобільний транспорт" },
-  "vstup/doors": { title: "Дні відкритих дверей" },
-  "vstup/info": { title: "Інформативна сторінка" },
-  "vstup/licence": { title: "Ліцензії. Акредитації" },
-  "vstup/pravila": { title: "Правила та умови прийому" },
-  "vstup/spicial": { title: "Спеціальності для вступу" },
-};
-
-export const legacyRoutePaths = [
-  "en",
+const publicDir = path.join(process.cwd(), "public");
+const legacyRoots = [
   "about",
-  "about/administratsiya",
-  "about/museum",
-  "about/nauki_pro_zemliu",
-  "about/publichna-informatsiya",
-  "about/spetsialnosti",
-  "about/spivrobitnitstvo",
-  "about/vipuskniki",
   "contacts",
   "educational",
-  "educational/akademichna-dobrochesnist",
-  "educational/monitoring",
-  "educational/psychologist",
-  "educational/quality",
-  "educational/rating",
-  "educational/resources",
-  "educational/results_monitor",
-  "educational/scribble",
-  "educational/selfmanagement",
-  "educational/stop",
-  "educational/survey",
-  "en/about/administratsiya",
-  "en/about/museum",
-  "en/about/publichna-informatsiya",
-  "en/about/spetsialnosti",
-  "en/about/spivrobitnitstvo",
-  "en/about/vipuskniki",
-  "en/educational",
-  "en/educational/monitoring",
-  "en/educational/psychologist",
-  "en/educational/quality",
-  "en/educational/resources",
-  "en/educational/scribble",
-  "en/educational/selfmanagement",
-  "en/educational/stop",
-  "en/lecturer",
-  "en/lecturer/educationalwork",
-  "en/osvita",
-  "en/osvita/comision",
-  "en/osvita/kabinet",
-  "en/osvita/konzept",
-  "en/osvita/laborotory",
-  "en/osvita/links",
-  "en/osvita/methodrob",
-  "en/osvita/methodrob2",
-  "en/osvita/navchaliniplan",
-  "en/osvita/portal",
-  "en/osvita/robota",
-  "en/osvita/subjects/components",
-  "en/osvita/subjects/drilling",
-  "en/osvita/subjects/ecology",
-  "en/osvita/subjects/geology",
-  "en/osvita/subjects/geophysics",
-  "en/osvita/subjects/geotourism",
-  "en/osvita/subjects/hydrogeological",
-  "en/osvita/subjects/maintenance",
-  "en/osvita/subjects/motorists",
+  "en",
   "gallery",
   "lecturer",
-  "lecturer/educationalwork",
-  "news",
-  "news/det",
   "osvita",
-  "osvita/comision",
-  "osvita/kabinet",
-  "osvita/konzept",
-  "osvita/laborotory",
-  "osvita/links",
-  "osvita/methodrob",
-  "osvita/methodrob2",
-  "osvita/navchaliniplan",
-  "osvita/portal",
-  "osvita/robota",
-  "osvita/subjects/components",
-  "osvita/subjects/drilling",
-  "osvita/subjects/ecology",
-  "osvita/subjects/geology",
-  "osvita/subjects/geology_no",
-  "osvita/subjects/geophysics",
-  "osvita/subjects/geotourism",
-  "osvita/subjects/hydrogeological",
-  "osvita/subjects/maintenance",
-  "osvita/subjects/motorists",
   "student",
   "vstup",
-  "vstup/doors",
-  "vstup/info",
-  "vstup/licence",
-  "vstup/pravila",
-  "vstup/spicial",
 ];
 
-export const knownLegacyRoots = new Set(["en", "gallery", ...Object.keys(legacyPages)]);
+// Root-level single-page legacy files (public/<name>.php) rather than directories.
+const legacyRootPages = ["ecology"];
+
+const migratedPageDetails: Record<string, { title: string }> = {
+  about: { title: "Коледж" },
+  contacts: { title: "Контакти" },
+  educational: { title: "Студенту" },
+  gallery: { title: "Галерея" },
+  lecturer: { title: "Викладачу" },
+  osvita: { title: "Освітній процес" },
+  student: { title: "Студенту" },
+  vstup: { title: "Вступнику" },
+};
+
+export const legacyRoutePaths = collectLegacyRoutePaths();
+export const knownLegacyRoots = new Set([...legacyRoots, ...legacyRootPages]);
+
+function collectLegacyRoutePaths() {
+  const routes = new Set<string>();
+
+  for (const rootPage of legacyRootPages) {
+    if (fs.existsSync(path.join(publicDir, `${rootPage}.php`))) {
+      routes.add(rootPage);
+    }
+  }
+
+  for (const root of legacyRoots) {
+    const directory = path.join(publicDir, root);
+    if (!fs.existsSync(directory)) continue;
+
+    for (const file of walk(directory)) {
+      if (!file.endsWith(".php")) continue;
+      if (file.endsWith(".section.php") || file.endsWith(".access.php")) continue;
+
+      const relative = path.relative(publicDir, file).replaceAll(path.sep, "/");
+      const route = relative.replace(/\.php$/, "").replace(/\/index$/, "");
+      if (route) routes.add(route);
+    }
+  }
+
+  return Array.from(routes).sort();
+}
+
+function walk(directory: string): string[] {
+  const entries = fs.readdirSync(directory, { withFileTypes: true });
+  return entries.flatMap((entry) => {
+    const fullPath = path.join(directory, entry.name);
+    return entry.isDirectory() ? walk(fullPath) : [fullPath];
+  });
+}
+
+function getLegacyFile(filepath: string) {
+  const normalizedPath = filepath.replace(/\.php$/, "").replace(/\/$/, "");
+  const directFile = path.join(publicDir, `${normalizedPath}.php`);
+  const indexFile = path.join(publicDir, normalizedPath, "index.php");
+
+  if (fs.existsSync(directFile)) return directFile;
+  if (fs.existsSync(indexFile)) return indexFile;
+  return null;
+}
+
+function decodeEntities(value: string) {
+  return value
+    .replaceAll("&quot;", '"')
+    .replaceAll("&#039;", "'")
+    .replaceAll("&amp;", "&")
+    .replaceAll("&nbsp;", " ");
+}
+
+function titleFromPhp(source: string, filepath: string) {
+  const titleMatch =
+    source.match(/SetPageProperty\(\s*["']title["']\s*,\s*["']([^"']+)["']\s*\)/) ||
+    source.match(/SetTitle\(\s*["']([^"']+)["']\s*\)/);
+  const normalizedPath = filepath.replace(/\.php$/, "").replace(/\/index$/, "");
+  const pathWithoutLocale = normalizedPath.startsWith("en/") ? normalizedPath.slice(3) : normalizedPath;
+  return decodeEntities(titleMatch?.[1] || migratedPageDetails[pathWithoutLocale]?.title || pathWithoutLocale.split("/").pop() || "КГРТ");
+}
+
+function isExternalUrl(value: string) {
+  return /^(?:[a-z][a-z0-9+.-]*:|#|\/\/)/i.test(value);
+}
+
+function cleanPageHref(href: string) {
+  return href
+    .replace(/\/index\.php(?:$|[?#])/, (match) => match.replace("/index.php", ""))
+    .replace(/\.php(?=$|[?#])/, "");
+}
+
+function rewriteUrl(value: string, baseRoute: string, attribute: string) {
+  if (!value || isExternalUrl(value) || value.startsWith("data:")) return value;
+
+  const [pathPart, suffix = ""] = value.split(/(?=[?#])/);
+  const isRootRelative = pathPart.startsWith("/");
+  const absolutePath = isRootRelative
+    ? pathPart
+    : `/${path.posix.normalize(path.posix.join(baseRoute, pathPart))}`;
+  const cleanPath = attribute === "href" ? cleanPageHref(absolutePath) : absolutePath;
+
+  return `${assetPath(cleanPath)}${suffix}`;
+}
+
+function normalizeLegacyHtml(source: string, file: string) {
+  const baseRoute = `/${path.relative(publicDir, path.dirname(file)).replaceAll(path.sep, "/")}`;
+
+  return source
+    .replace(/^\uFEFF/, "")
+    .replace(/<\?(?:php)?[\s\S]*?\?>/gi, "")
+    .replace(/\s(?:data-type|data-group|data-lightgallery|data-fancybox-group)="[^"]*"/g, "")
+    .replace(/\s(?:onclick|onload|onerror)="[^"]*"/gi, "")
+    .replace(/\b(align|border|cellpadding|cellspacing|width|height)="([^"]*)"/gi, 'data-legacy-$1="$2"')
+    .replace(/\b(src|href|action)=["']([^"']+)["']/gi, (_match, attribute: string, value: string) => {
+      return `${attribute}="${rewriteUrl(value, baseRoute, attribute.toLowerCase())}"`;
+    });
+}
+
+function getLegacyPage(filepath: string): LegacyPage | null {
+  const file = getLegacyFile(filepath);
+  if (!file) return null;
+
+  const source = fs.readFileSync(file, "utf8");
+  return {
+    html: normalizeLegacyHtml(source, file),
+    title: titleFromPhp(source, filepath),
+  };
+}
+
+export type LegacySearchSource = {
+  title: string;
+  href: string;
+  text: string;
+};
+
+export function getLegacySearchSources(): LegacySearchSource[] {
+  return legacyRoutePaths
+    .filter((route) => route !== "gallery" && !route.startsWith("gallery/"))
+    .flatMap((route) => {
+      const page = getLegacyPage(route);
+      if (!page) return [];
+
+      const text = page.html
+        .replace(/<(script|style)[\s\S]*?<\/\1>/gi, " ")
+        .replace(/<[^>]+>/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+
+      return [{ title: page.title, href: `/${route}`, text }];
+    });
+}
+
+function galleryTitleFromPath(imagePath: string) {
+  const filename = decodeURIComponent(path.basename(imagePath, path.extname(imagePath)));
+  return filename
+    .replace(/[_-]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim() || "Галерея";
+}
+
+function getGalleryItems(): LegacyGalleryItem[] {
+  const roots = ["images/gallery", "upload/iblock", "upload/medialibrary"];
+  const imagePattern = /\.(?:avif|gif|jpe?g|png|webp)$/i;
+  const seen = new Set<string>();
+
+  return roots.flatMap((root) => {
+    const directory = path.join(publicDir, root);
+    if (!fs.existsSync(directory)) return [];
+
+    return walk(directory)
+      .filter((file) => imagePattern.test(file))
+      .map((file) => `/${path.relative(publicDir, file).replaceAll(path.sep, "/")}`)
+      .filter((image) => {
+        if (seen.has(image)) return false;
+        seen.add(image);
+        return true;
+      })
+      .map((image) => ({ image, title: galleryTitleFromPath(image) }));
+  });
+}
 
 export function GalleryPageContent() {
+  const items = getGalleryItems();
+
   return (
     <>
-    <section className="legacy-breadcrumb">
-      <h1>Галерея</h1>
-      <p className="mt-8 text-sm">Головна / Галерея</p>
-    </section>
-    <section className="bg-white py-[70px] md:py-[114px]">
-      <div className="mx-auto max-w-[1200px] px-4">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {galleryItems.map(([title, image]) => (
-              <a key={image} href={assetPath(image)} className="group relative block overflow-hidden bg-[#102c57] shadow-lg">
-                <img src={assetPath(image)} alt={title} className="aspect-square w-full object-cover transition duration-500 group-hover:scale-105 group-hover:opacity-55" />
-              <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 p-5 font-serif text-lg font-bold text-white">{title}</span>
-            </a>
-          ))}
+      <section className="legacy-breadcrumb">
+        <h1>Галерея</h1>
+        <p className="mt-8 text-sm">Головна / Галерея</p>
+      </section>
+      <section className="bg-white py-[70px] md:py-[114px]">
+        <div className="mx-auto max-w-[1200px] px-4">
+          <Suspense fallback={<div className="legacy-gallery-loading">Завантаження галереї...</div>}>
+            <LegacyGallery items={items} />
+          </Suspense>
         </div>
-      </div>
-    </section>
+      </section>
     </>
   );
 }
 
 export function LegacyPageContent({ filepath }: { filepath: string }) {
-  const normalizedPath = filepath.replace(/\.php$/, "").replace(/\/index$/, "");
-  const pathWithoutLocale = normalizedPath.startsWith("en/") ? normalizedPath.slice(3) : normalizedPath;
-  const segments = normalizedPath.split("/");
-  const root = segments[0] === "en" ? segments[1] : segments[0];
-  const page = legacyPages[root] || legacyPages.contacts;
-  const details = migratedPageDetails[pathWithoutLocale];
-  const title = details?.title || page.title;
-  const description = details?.description || page.description;
+  const page = getLegacyPage(filepath);
+  const title = page?.title || "КГРТ";
 
   return (
     <>
-    <section className="legacy-breadcrumb">
-      <h1>{title}</h1>
-      <p className="mt-8 text-sm">Головна / {title}</p>
-    </section>
-    <section className="legacy-content bg-white">
-      <div className="mx-auto max-w-[1200px] px-4">
-        <h2 className="font-serif text-3xl font-black md:text-[36px]">{title}</h2>
-        <div className="fk-divider my-7" />
-        <p className="max-w-3xl text-[15px] leading-8 text-[#555]">{description}</p>
-        <div className="mt-10 grid gap-4 sm:grid-cols-3">
-          {page.links.map(([label, href]) => (
-            <Link key={href} href={href} className="legacy-link-card">{label}</Link>
-          ))}
+      <section className="legacy-breadcrumb">
+        <h1>{title}</h1>
+        <p className="mt-8 text-sm">Головна / {title}</p>
+      </section>
+      <section className="legacy-content bg-white">
+        <div className="legacy-html mx-auto max-w-[1200px] px-4">
+          {page ? (
+            <div dangerouslySetInnerHTML={{ __html: page.html }} />
+          ) : (
+            <p>Сторінку збережено у спадковому архіві, але її файл не знайдено у поточній збірці.</p>
+          )}
         </div>
-      </div>
-    </section>
+      </section>
     </>
   );
 }

@@ -223,6 +223,118 @@
     font-weight: 900;
   }
 
+  .legacy-html {
+    overflow-wrap: anywhere;
+  }
+
+  .legacy-html :where(h1, h2, h3, h4) {
+    margin: 1.2em 0 .7em;
+  }
+
+  .legacy-html :where(p, ul, ol, table, iframe, figure, .offset-top-30, .offset-lg-top-60) {
+    margin-block: 1rem;
+  }
+
+  .legacy-html :where(a) {
+    color: #176f9b;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .legacy-html :where(img) {
+    height: auto;
+    margin-inline: auto;
+    max-width: 100%;
+  }
+
+  .legacy-html :where(iframe) {
+    aspect-ratio: 16 / 9;
+    height: auto;
+    max-width: 100%;
+  }
+
+  .legacy-html :where(table) {
+    border-collapse: collapse;
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  .legacy-html :where(td, th) {
+    border: 1px solid #d8dee9;
+    padding: .65rem .8rem;
+    vertical-align: top;
+  }
+
+  .legacy-html :where(.responsive-tabs, .resp-tabs-container, .tabs-lg-collapsed) {
+    max-width: 100%;
+  }
+
+  .legacy-html :where(.resp-tabs-list, .menu, .books, .range) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .legacy-html :where(.menu__item, .resp-tabs-list li) {
+    background: #eef4f8;
+    border-left: 4px solid #3687aa;
+    color: #0f2444;
+    font-weight: 700;
+    padding: .75rem 1rem;
+  }
+
+  .legacy-html :where(.book, .thumbnail, .post, .event) {
+    max-width: 100%;
+  }
+
+  .legacy-html :where(.book) {
+    flex: 1 1 260px;
+  }
+
+  .legacy-html :where([style*="text-align: center"]) {
+    text-align: center;
+  }
+
+  .legacy-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    justify-content: center;
+    margin-top: 3rem;
+  }
+
+  .legacy-pagination a {
+    align-items: center;
+    border: 1px solid #d8dee9;
+    color: #0f2444;
+    display: inline-flex;
+    font-weight: 800;
+    height: 42px;
+    justify-content: center;
+    min-width: 42px;
+    padding: 0 .85rem;
+    text-decoration: none;
+  }
+
+  .legacy-pagination a[aria-current="page"],
+  .legacy-pagination a:hover {
+    background: #3687aa;
+    border-color: #3687aa;
+    color: #fff;
+  }
+
+  .legacy-gallery-loading {
+    color: #555;
+    font-weight: 700;
+    padding: 2rem;
+    text-align: center;
+  }
+
   .legacy-link-card {
     background: #fff;
     border: 1px solid #e5e7eb;

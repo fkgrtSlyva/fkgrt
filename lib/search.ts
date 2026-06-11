@@ -1,5 +1,6 @@
 import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
+import { getLegacySearchSources } from "@/components/legacy-pages";
 import { searchDocuments } from "./search-shared";
 import type { SearchDocument } from "./search-shared";
 
@@ -65,14 +66,24 @@ function getMdxFiles(directory: string): string[] {
   });
 }
 
+function getLegacySearchDocuments(): SearchDocument[] {
+  return getLegacySearchSources().map(({ title, href, text }) => ({
+    title,
+    href,
+    type: "page",
+    excerpt: text.slice(0, 180),
+    searchableText: `${title} ${text}`.toLocaleLowerCase("uk-UA"),
+  }));
+}
+
 export function getSearchDocuments(): SearchDocument[] {
   const files = [
     ...getMdxFiles(path.join(contentRoot, "pages")),
     ...getMdxFiles(path.join(contentRoot, "posts")),
   ];
 
-  return files.map((filePath) => {
-    const type = filePath.includes(`${path.sep}posts${path.sep}`) ? "post" : "page";
+  const contentDocuments = files.map((filePath) => {
+    const type: "page" | "post" = filePath.includes(`${path.sep}posts${path.sep}`) ? "post" : "page";
     const markdown = readFileSync(filePath, "utf8");
     const { frontmatter, body } = parseFrontmatter(markdown);
     const fallbackTitle = path.basename(filePath, ".mdx").replace(/-/g, " ");
@@ -88,6 +99,8 @@ export function getSearchDocuments(): SearchDocument[] {
       searchableText,
     };
   });
+
+  return [...contentDocuments, ...getLegacySearchDocuments()];
 }
 
 export function searchContent(query: string) {

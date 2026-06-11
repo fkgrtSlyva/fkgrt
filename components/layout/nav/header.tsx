@@ -71,14 +71,25 @@ const navGroups = [
   },
 ];
 
-type HeaderProps = {
-  searchDocuments: SearchDocument[];
-};
-
-export const Header = ({ searchDocuments: documents }: HeaderProps) => {
+export const Header = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [searchQuery, setSearchQuery] = React.useState("");
   const [isSearchFocused, setIsSearchFocused] = React.useState(false);
+  const [documents, setDocuments] = React.useState<SearchDocument[]>([]);
+  const documentsRequested = React.useRef(false);
+
+  // The search index covers every legacy page (~700KB), so it is fetched once
+  // on first focus instead of being embedded into each page.
+  const loadSearchDocuments = () => {
+    if (documentsRequested.current) return;
+    documentsRequested.current = true;
+    fetch(assetPath("/search-index.json"))
+      .then((response) => response.json())
+      .then(setDocuments)
+      .catch(() => {
+        documentsRequested.current = false;
+      });
+  };
   const headerSearchResults = searchDocuments(documents, searchQuery).slice(0, 5);
   const showSearchDropdown = isSearchFocused && searchQuery.trim().length > 0;
 
@@ -140,7 +151,10 @@ export const Header = ({ searchDocuments: documents }: HeaderProps) => {
             value={searchQuery}
             onBlur={() => window.setTimeout(() => setIsSearchFocused(false), 150)}
             onChange={(event) => setSearchQuery(event.target.value)}
-            onFocus={() => setIsSearchFocused(true)}
+            onFocus={() => {
+              setIsSearchFocused(true);
+              loadSearchDocuments();
+            }}
             className="min-w-0 flex-1 bg-transparent px-3 py-2.5 text-sm outline-none placeholder:text-slate-400"
           />
           <button
@@ -177,7 +191,9 @@ export const Header = ({ searchDocuments: documents }: HeaderProps) => {
                   </Link>
                 </>
               ) : (
-                <div className="px-4 py-3 text-sm text-slate-500">Нічого не знайдено</div>
+                <div className="px-4 py-3 text-sm text-slate-500">
+                  {documents.length === 0 ? "Завантаження..." : "Нічого не знайдено"}
+                </div>
               )}
             </div>
           )}

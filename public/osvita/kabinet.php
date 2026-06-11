@@ -1,0 +1,388 @@
+<?
+require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+require($_SERVER["DOCUMENT_ROOT"]."/templates/header.php");
+$APPLICATION->SetPageProperty("title", "Лабораторія інформаційного забезпечення та електронного документообігу (навчальна частина)");
+$APPLICATION->SetTitle("Навчально-методичний кабінет");
+?><style>
+.padding-lg {
+	display: block;
+	padding-top: 90px;
+	padding-bottom: 90px;
+}
+.our-cources h2, .our-impotance h2, .how-study h2, .why-choose h2, .news-events h2, .campus-tour h2, .testimonial h2, .about h2, .browse-teacher h2, .how-apply h2, .have-question h2 {
+	display: block;
+	padding-bottom: 44px;
+	font-family: 'texgyreadventorbold', arial;
+	font-size: 36px;
+	text-transform: uppercase;
+	text-align: left;
+}
+.our-cources h2 span, .our-impotance h2 span, .how-study h2 span, .why-choose h2 span, .news-events h2 span, .campus-tour h2 span, .browse-teacher h2 span, .how-apply h2 span {
+	display: block;
+	font-family: 'texgyreadventorregular', arial;
+	font-size: 14px;
+	opacity: 0.8;
+}
+.our-cources {
+	
+}
+
+.our-cources .container {
+	position: relative;
+	z-index: 2;
+}
+.our-cources h2 {
+	color: #fff;
+}
+.our-cources h2 span {
+	color: #d5d4d3;
+}
+.our-cources ul.course-list {
+	display: block;
+	padding-top: 20px;
+}
+.our-cources ul.course-list li {
+	display: block;
+	background: url(http://geophys.knu.ua/images/book-bg.png) no-repeat center top;
+	position: relative;
+}
+.our-cources ul.course-list li:after {
+	width: 1px;
+	height: 100%;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	display: block;
+	background: #fff;
+	content: " ";
+	opacity: 0.3;
+}
+.our-cources ul.course-list li .inner {
+	width: 198px;
+	margin: 0 auto;
+	height: 280px;
+	padding: 54px 0 0 30px;
+	position: relative;
+}
+.our-cources ul.course-list li .inner figure {
+	position: absolute;
+	left: 4px;
+	top: 1px;
+	opacity: 0.3;
+}
+.our-cources ul.course-list li h3 {
+	display: block;
+	padding-bottom: 0px;
+	font-size: 18px;
+	text-transform: uppercase;
+	line-height: 20px;
+	color: #fff;
+	position: relative;
+	text-align: left;
+	font-weight: bold;
+	margin-top: -20px;
+}
+.our-cources ul.course-list li h3 span {
+	display: block;
+}
+.our-cources ul.course-list li p {
+	display: block;
+	padding-bottom: 12px;
+	font-size: 12px;
+	line-height: 18px;
+	color: #fff;
+	opacity: 0.8;
+}
+.our-cources ul.course-list li .fess-box {
+	display: inline-block;
+	padding: 0 12px;
+	background: #ff9600;
+	font-size: 11px;
+	font-weight: 700;
+	color: #fff;
+	position: relative;
+	text-transform: uppercase;
+}
+.our-cources ul.course-list li .fess-box span {
+	font-family: 'texgyreadventorbold', arial;
+	font-size: 16px;
+}
+.our-cources ul.course-list li .bottom-txt {
+	width: 100%;
+	padding: 18px 30px;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+}
+.our-cources ul.course-list li .duration {
+	width: 81%;
+	float: left;
+}
+.our-cources ul.course-list li .duration h4 {
+	display: block;
+	font-family: 'texgyreadventorbold', arial;
+	font-size: 16px;
+	color: #fff;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+.our-cources ul.course-list li .duration span {
+	display: block;
+	font-size: 11px;
+	font-weight: 700;
+	color: #fff;
+	line-height: 16px;
+	text-transform: uppercase;
+	opacity: 0.8;
+}
+.our-cources ul.course-list li a {
+	display: block;
+	position: absolute;
+	right: 18px;
+	top: 22px;
+}
+.our-cources ul.course-list li a .icon-more-icon {
+	font-size: 23px;
+	color: #fff;
+	opacity: 0.5;
+	transition: all 0.3s ease 0s;
+}
+.our-cources ul.course-list li a:hover .icon-more-icon {
+	opacity: 1;
+}
+
+a:hover {
+	color: #0087ab;
+}
+
+</style> <style>
+    .content-item {
+        padding-left: 16px !important;
+    }
+
+	.img-wrap {
+		width: 230px;
+		height: 230px;
+		overflow: hidden;
+		border-radius: 50%;
+	}
+
+	.img-wrap img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+    .main {
+        margin-top: 60px;
+        padding-bottom: 30px;
+    }
+
+    .content {
+        padding: 0 32px;
+    }
+
+    .menu {
+
+    }
+
+    .menu__item {
+        font-size: 16px !important;
+    }
+
+    .person__name {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .person__post {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+	.main {
+		width: 100%;
+		display: flex;
+		padding: 0 36px;
+		padding-bottom: 24px;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.card {
+		width: calc(25% - 16px);
+		min-width: 280px;
+		margin: 8px;
+		margin-top: 0;
+		background-color: #fff;
+		box-shadow: 4px 4px 8px #ddd;
+		border-radius: 8px;
+		overflow: hidden;
+		position: relative;
+	}
+
+	.card:last-child {
+		margin-bottom: 8px;
+	}
+
+	.card__img {
+		width: 100%;
+		position: relative;
+		height: 0;
+		overflow: hidden;
+		padding-top: 56%;
+	}
+
+	.card__img img {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.card__link {
+		font-size: 18px;
+		display: block;
+		margin: 10px auto;
+		font-weight: 700;
+		height: 80px; 
+	}
+
+</style>
+<div class="main" style="text-align: justify;">
+ <b><span style="font-size: 22pt;">Лабораторія інформаційного забезпечення та електронного документообігу (навчальна частина)</span></b><br>
+	<p>
+		 Лабораторія інформаційного забезпечення та електронного документообігу (Навчальна частина) виконує функції з планування та організації освітнього процесу, здійснює облік та звітність, контроль за якістю та ефективністю освітнього процесу.
+	</p>
+	<p>
+ <b>Основні завдання:&nbsp;</b>
+	</p>
+	<ul type="disc" style="text-align: justify;">
+		<li>Розроблення спільно з цикловими комісіями робочих навчальних планів за&nbsp; освітньо-професійними програмами.</li>
+		<li>Складання графіка навчального процесу (теоретичне навчання, семестровий контроль, навчальні і виробничі практики, канікули) доведення до відома відділень, циклових комісій та контроль за його виконанням.</li>
+		<li>Планування кількості груп та ведення обліку студентів по курсах, спеціальностях, відділеннях.</li>
+		<li>Участь у складанні проєкту штатного розпису педагогічних та науково-педагогічних працівників.</li>
+		<li>Планування педагогічного навантаження на навчальний рік педагогічним та науково-педагогічним працівникам коледжу та контроль за його виконанням.</li>
+		<li>Складання розкладу навчальних занять, доведення до відома відділень, викладачів та контроль за його виконанням.</li>
+		<li>Облік погодинної оплати праці викладачів та контроль за звітністю з цього питання.</li>
+		<li>Систематичне інформування про нові положення, інструкції та інші директивні вказівки з організації навчальної роботи.</li>
+		<li>Участь у роботі комісій відповідно до наказів коледжу.</li>
+		<li>Контроль за виконанням робочих навчальних планів згідно освітньо-професійним програмам.</li>
+		<li>Оперативний контроль за виконанням наказів, розпоряджень та заходів, які стосуються організації освітнього процесу.</li>
+		<li>Контроль стану журналів навчальних занять.</li>
+		<li>Облік роботи штатних викладачів та викладачів-сумісників коледжу.</li>
+		<li>Організація&nbsp;та контроль&nbsp;оформлення випускної документації, &nbsp;замовлення дипломів фахових молодших бакалаврів, заповнення &nbsp;додатків до дипломів.</li>
+		<li>Збір, обробка та складання зведених статистичних даних стосовно семестрової та річної успішності студентів за курсами, спеціальностями, освітньо-професійними програмами та відділеннями.</li>
+	</ul>
+	<p>
+	</p>
+	<div class="person range range-xs-center">
+		<div class="cell-sm-4 text-sm-left">
+			<div class="inset-sm-right-30">
+ <img width="340" src="/osvita/images/ivasenko.jpg" height="340" class="img-responsive reveal-inline-block" alt="">
+			</div>
+		</div>
+		<div class="cell-sm-8 text-left">
+			<h2 class="person__name">Івасенко Наталія Михайлівна</h2>
+			<p class="person__post">
+				 завідувач лабораторії, викладач (спеціаліст вищої категорії)
+			</p>
+			<div class="offset-top-15 offset-sm-top-15">
+				<hr class="divider bg-madison hr-left-0">
+			</div>
+			<p class="offset-top-20">
+			</p>
+			<p style="text-align: justify;">
+				 Випускниця Київського геологорозвідувального технікуму (2002) за спеціальністю "Пошук та розвідка родовищ корисних копалин геофізичними методами». У 2013 році закінчила Міжрегіональну академію управління персоналом за спеціальністю «Менеджмент» та отримала кваліфікацію бакалавра з менеджменту. У 2015 році отримала ступінь магістра за напрямом підготовки «Менеджмент організацій» у Міжрегіональній Академії управління персоналом.
+			</p>
+			<p style="text-align: justify;">
+				 З 2002 року працює в коледжі на різних посадах від лаборанта, методиста, завідувачки лабораторії та викладача.
+			</p>
+			<p style="text-align: justify;">
+				 Викладає навчальні дисципліни:&nbsp;
+			</p>
+			<p>
+				 Підвищення кваліфікації: -
+			</p>
+			<p>
+				 - Національна Академія педагогічних наук, ДЗВО "Університет менеджменту освіти", УВУПО, Центральний інститут післядипломної освіти,&nbsp; &nbsp;Освітня ВАТРА перемоги, вебінар "Академічна доброчесність як дієвий механізм забезпечення якості освіти"&nbsp; Сертифікат № 2503/23Д від 04.04.2023.<br>
+			</p>
+			<p>
+				 -НМЦВФПО МОН України, онлайн-майстерня&nbsp; для педагогів "Створюємо електронні освітні ресурси". Сертифікат про участь від 24.05.2023.
+			</p>
+			<p>
+				 -Національна Академія педагогічних наук, ДЗВО "Університет менеджменту освіти", Центральний інститут післядипломної освіти за&nbsp; програмою підвищення кваліфікації "Менеджмент соціально-педагогічного супроводу діяльності закладів фахової передвищої освіти".&nbsp; Свідоцтво про підвищення кваліфікації&nbsp; СП 35830447/0397-23 від 02.06.2023.&nbsp;&nbsp;
+			</p>
+			<p>
+				 -ГО "ІППО" підвищення кваліфікації "Формування економічних знань молоді в закладах освіти". Сертифікат №1767588167218629432 від 23.10.2023.
+			</p>
+			<p>
+				 -Національна Академія педагогічних наук, ДЗВО "Університет менеджменту освіти", Центральний інститут післядипломної освіти за&nbsp; програмою підвищення кваліфікації "Сучасні технології управління професійним розвитком педагогічних та науково-педагогічних працівників закладів освіти".&nbsp; Свідоцтво про підвищення кваліфікації СП 35830447/0241-24 від 11.05.2024.&nbsp;
+			</p>
+			<p>
+			</p>
+			<p class="offset-top-20">
+			</p>
+			<p>
+				 Сфера наукових інтересів: освіта, педагогіка, комп’ютерні науки, економіка, методика викладання економічних дисциплін тощо.
+			</p>
+			<p>
+			</p>
+			<p>
+			</p>
+		</div>
+	</div>
+	<div class="person range range-xs-center">
+		<div class="cell-sm-4 text-sm-left">
+			<div class="inset-sm-right-30">
+ <img width="340" src="/osvita/images/kondrateva.jpg" height="340" class="img-responsive reveal-inline-block" alt="">
+			</div>
+		</div>
+		<div class="cell-sm-8 text-left">
+			<h2 class="person__name">Кондратьєва Галина Григорівна</h2>
+			<p class="person__post">
+				 методист коледжу&nbsp; (спеціаліст вищої категорії)
+			</p>
+			<div class="offset-top-15 offset-sm-top-15">
+				<hr class="divider bg-madison hr-left-0">
+			</div>
+			<p class="offset-top-20">
+			</p>
+			<p style="text-align: justify;">
+				 Випускниця Київського геологорозвідувального технікуму (1993) за спеціальністю «Економіка і планування геологорозвідувальних робіт»&nbsp; та Приватного акціонерного товариство «Вищий навчальний заклад «Міжрегіональна академія управління персоналом» (2008) за спеціальністю «Облік і аудит».
+			</p>
+			<p style="text-align: justify;">
+				 Працює в коледжі з 1989 року на різних посадах від секретаря, завідувача лабораторії, методиста та викладача професійних дисциплін.
+			</p>
+			<p>
+				 Викладає навчальні дисципліни:&nbsp;
+			</p>
+			<p style="text-align: justify;">
+				 Підвищення кваліфікації:&nbsp;
+			</p>
+			<p>
+				 - Національна Академія педагогічних наук, ДЗВО "Університет менеджменту освіти", УВУПО, Центральний інститут післядипломної освіти,&nbsp; &nbsp;Освітня ВАТРА перемоги, вебінар "Академічна доброчесність як дієвий механізм забезпечення якості освіти"&nbsp; Сертифікат № 2530/23Д від 04.04.2023.<br>
+			</p>
+			<p>
+				 -Національна Академія педагогічних наук, ДЗВО "Університет менеджменту освіти", Центральний інститут післядипломної освіти за&nbsp; програмою підвищення кваліфікації "Менеджмент соціально-педагогічного супроводу діяльності закладів фахової передвищої освіти".&nbsp; Свідоцтво про підвищення кваліфікації СП 35830447/0412-23 від 02.06.2023.&nbsp;&nbsp;<br>
+			</p>
+			<p>
+				 -НМЦВФПО МОН України,&nbsp; підвищення кваліфікації методистів закладів фахової передвищої освіти "Методологічні засади організації професійного розвитку педагогічних працівників в умовах оновленого змісту освіти". Сертифікат&nbsp; СС 382829994/4833-23&nbsp; від 25-26.10.2023.<br>
+			</p>
+			<p>
+				 -Національна Академія педагогічних наук, ДЗВО "Університет менеджменту освіти", Центральний інститут післядипломної освіти за&nbsp; програмою підвищення кваліфікації "Сучасні технології управління професійним розвитком педагогічних та науково-педагогічних працівників закладів освіти".&nbsp; Свідоцтво про підвищення кваліфікації СП 35830447/0244-24 від 11.05.2024.&nbsp;
+			</p>
+			<p>
+				 Сфера наукових інтересів: освіта, педагогіка, психологія, туризм.
+			</p>
+			<p>
+			</p>
+		</div>
+	</div>
+</div>
+ <br><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

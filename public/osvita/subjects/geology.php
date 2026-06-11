@@ -1,0 +1,126 @@
+<?
+require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+require($_SERVER["DOCUMENT_ROOT"]."/templates/header.php");
+$APPLICATION->SetPageProperty("title", "Геологічні методи пошуків та розвідки родовищ корисних копалин");
+$APPLICATION->SetTitle("Геологічні методи пошуків та розвідки родовищ корисних копалин");
+?><section class="section-70 section-md-114">
+<p class="shell">
+ <a href="/osvita/docs/doc103-1.pdf">Перелік освітніх компонентів ОПП "Геологічні методи пошуку та розвідки родовищ корисних копалин" (вступ 2022,2023,2024 (ОПП-2022))</a>
+</p>
+<p class="shell">
+ <a href="/osvita/docs/doc%20E4%20Geol%202025.pdf">Перелік освітніх компонентів ОПП "Геологічні методи пошуку та розвідки родовищ корисних копалин" (вступ 2025 (ОПП-2025)) </a><br>
+ <span style="color: #000000;"><b><span style="font-size: 13pt;">Обов'язкові освітні компоненти (<i>загальні компетентності:&nbsp;</i> <a href="https://fkgrt.knu.ua/osvita/subjects/components.php">https://fkgrt.knu.ua/osvita/subjects/components.php</a> ) та:</span></b></span><br>
+ <br>
+	 &nbsp;<a href="/osvita/silabus/Геодезія%20з%20основами%20топографії%20та%20картографії.pdf"><b> Геодезія з основами топографії та картографії</b></a> /Топографія з основами картографії.
+</p>
+<p>
+ <a href="/osvita/silabus/Основи%20геофізики.pdf"><b>Основи геофізики (вступ 2022,2023,2024)</b></a> /Загальний курс геофізичних методів (вступ 2025)
+</p>
+<p>
+ <a href="/osvita/silabus/Загальна%20геологія.pdf"><b><span style="color: #0000ff;">Загальна геологія</span></b></a>
+</p>
+<p>
+ <a href="/osvita/silabus/Основи%20гідрогеології%20та%20інженерної%20геології.pdf"><b>Основи гідрогеології та інженерної геології</b></a>
+</p>
+<p>
+ <span style="font-size: 13pt;"><b><span style="color: #000000;">Обов'язкові освітні компоненти (спеціальні компетентності):</span></b></span><br>
+</p>
+<p>
+ <a href="/osvita/silabus/Структурна%20геологія%20та%20геокартування.pdf"><b>Структурна геологія та геокартування</b></a>
+</p>
+<p>
+ <a href="/osvita/silabus/Кристалографія%20та%20мінералогія.pdf"><b>Кристалографія та мінералогія</b></a>
+</p>
+ <b> </b>
+<p>
+ <a href="/osvita/silabus/Петрографія%20та%20літологія.pdf"><b>Петрографія та літологія</b></a>
+</p>
+<p>
+ <a href="/osvita/silabus/Геоморфологія%20та%20четвертинна%20геологія.pdf"><b>Геоморфологія та четвертинна геологія</b></a>
+</p>
+<p>
+ <a href="/osvita/silabus/Палеонтологія%20та%20історична%20геологія.pdf"><b>Палеонтологія та історична геологія</b></a>
+</p>
+<p>
+ <a href="/osvita/silabus/Геологія%20України.pdf"><b>Геологія України</b></a>
+</p>
+<p>
+ <a href="/osvita/silabus/Методи%20досліджень%20мінеральної%20сировини.pdf"><b>Методи дослідження мінеральної сировини</b></a>
+</p>
+<p>
+ <a href="/osvita/silabus/Геохімія%20та%20геохімічні%20методи%20пошуків.pdf"><b>Геохімія та геохімічні методи пошуку.</b></a>
+</p>
+<p>
+ <a href="/osvita/silabus/Методика%20геологорозвідувальних%20робіт.pdf"><b>Методика геологорозвідувальних робіт</b></a>
+</p>
+<p>
+ <a href="/osvita/silabus/Корисні%20копалини.pdf"><b>Корисні копалини</b></a>
+</p>
+<p>
+ <span style="font-size: 13pt;"><b> </b></span>
+</p>
+<p>
+ <a href="/osvita/silabus/Компютерна%20обробка%20геологічної%20інформації.pdf"><b>Комп'ютерна обробка геологічної інформації</b></a>
+</p>
+<p>
+ <b><span style="font-size: 13pt; color: #000000;">Вибіркові освітні компоненти (спеціальні компетентності) (вступ 2022,2023,2024):</span></b><br>
+ <b><span style="font-size: 13pt; color: #000000;"> </span></b>
+</p>
+ <b><span style="font-size: 13pt; color: #000000;"> </span></b>
+<p>
+ <a href="/osvita/silabus/Економіка%20%20мінеральної%20сировини.pdf"><b>Економіка мінеральної сировини</b></a>
+</p>
+<p>
+ <a href="/osvita/silabus/Дистанційні%20методи%20вивчення%20Землі.pdf"><b>Дистанційні методи вивчення Землі</b></a>
+</p>
+<p>
+ <a href="/osvita/silabus/Основи%20буріння%20та%20гірничої%20справи.pdf"><b>Основи буріння та гірничої справи&nbsp;</b></a>
+</p>
+<p>
+ <a href="/osvita/silabus/Економічна%20геологія.pdf"><b>Економічна геологія.&nbsp;</b></a>
+</p>
+<p>
+ <a href="/osvita/silabus/Дистанційне%20зондування%20Землі.pdf"><b>Дистанційне зондування Землі</b></a>
+</p>
+<p>
+ <a href="/osvita/silabus/Геологорозвідувальна%20справа.pdf"><b>Геологорозвідувальна справа</b></a>
+</p>
+<p>
+ <b>Вибіркові освітні компоненти (спеціальні компетентності) (вступ 2025)</b> :
+</p>
+<p>
+	 Дистанційні методи вивчення Землі
+</p>
+<p>
+	 Економіка мінеральної сировини
+</p>
+<p>
+	 Геологорозвідувальна справа
+</p>
+<p>
+	 Інженерні споруди
+</p>
+<p>
+	 Морська геологія
+</p>
+<p>
+	 Промислова геофізика
+</p>
+<p style="text-align: center; line-height: 15.6px; color: #000000; font-family: Verdana, Tahoma, Arial;">
+ <b><span style="font-size: 13pt; color: #0000ff;"><span style="color: #111111;">Навчально-методичне забезпечення:</span></span></b><b><span style="font-size: 13pt; color: #0000ff;"> </span></b>
+</p>
+ <a href="https://drive.google.com/drive/folders/1hyFnCThiRgKP2FyPPwDFW-xm93v1tyPv?usp=share_link" target="_blank"><b><span style="color: #0000ff;">https://drive.google.com/drive/folders/1hyFnCThiRgKP2FyPPwDFW-xm93v1tyPv?usp=share_link </span></b></a><br>
+ <br>
+ <a href="https://drive.google.com/drive/folders/19AUawkh68OgX5G_d42GvZr5QaPywY70_?usp=share_link" target="_blank"><b><span style="color: #0000ff;">https://drive.google.com/drive/folders/19AUawkh68OgX5G_d42GvZr5QaPywY70_?usp=share_link</span></b></a><br>
+ <b><span style="color: #0000ff;"> </span></b><br>
+ <b><span style="color: #0000ff;"> </span></b><a href="https://drive.google.com/drive/folders/19AUawkh68OgX5G_d42GvZr5QaPywY70_?usp=share_link" target="_blank"></a><br>
+ <br>
+<p style="text-align: center; line-height: 15.6px; font-family: Verdana, Tahoma, Arial;">
+</p>
+<p style="text-align: center; line-height: 15.6px;">
+ <span><br>
+ </span>
+</p>
+<p>
+</p>
+ </section><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
