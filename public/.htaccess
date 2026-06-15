@@ -1,0 +1,47 @@
+# Apache 2.4 config for the static Next.js export (ВСП ФКГРТ КНУ).
+# Placed in public/ so `next build` copies it to the export root (out/.htaccess).
+# The original site ran Apache (mod_rewrite/mod_php), so this matches the host.
+
+Options -Indexes -MultiViews
+DirectoryIndex index.html
+
+# --- Clean (extensionless) URLs ---------------------------------------------
+# Internal links point to /about, /osvita/comision, /en/about ... but the static
+# export writes about.html, osvita/comision.html, en/about.html. When the bare
+# path (with or without a trailing slash) has no real file but a sibling .html
+# exists, serve that .html. The -d check is intentionally omitted: Next emits
+# `<segment>.html` alongside a `<segment>/` directory (never `<segment>/index.html`),
+# so /about and /about/ should both resolve to about.html.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # /admin -> TinaCMS visual editor entry (next.config rewrites() do not apply
+  # to a static export).
+  RewriteRule ^admin/?$ /admin/index.html [L]
+
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+  RewriteRule ^(.+?)/?$ /$1.html [L]
+</IfModule>
+
+# --- Error page -------------------------------------------------------------
+ErrorDocument 404 /404.html
+
+# --- Security headers -------------------------------------------------------
+# These were declared in next.config headers() but headers() has no effect on a
+# static export, so set them at the server instead.
+<IfModule mod_headers.c>
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Content-Security-Policy "frame-ancestors 'self'"
+</IfModule>
+
+# --- Caching ----------------------------------------------------------------
+# Everything under /_next/static is content-hashed, so it is safe to cache
+# forever. Other assets (legacy images, PDFs in /about, /upload, ...) are NOT
+# fingerprinted, so they are left on the server default to avoid serving stale
+# documents after a content update.
+<IfModule mod_headers.c>
+  <If "%{REQUEST_URI} =~ m#^/_next/static/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+</IfModule>
