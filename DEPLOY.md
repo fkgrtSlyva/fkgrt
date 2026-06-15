@@ -87,6 +87,34 @@ make deploy DEPLOY_HOST=user@server DEPLOY_PATH=/var/www/fkgrt
 (`make deploy` runs `build` first, then mirrors `out/` to the server with
 `rsync --delete`.)
 
+### OpenBSD notes
+
+**Build elsewhere, ship `out/`.** The build pulls native modules (better-sqlite3,
+sharp, esbuild) that have no reliable prebuilt OpenBSD binaries and may fail to
+compile there. Build on Linux/macOS (or CI), then `rsync` `out/` to the OpenBSD
+box. The server only serves static files — it needs **no Node, pnpm, or make**.
+
+**Web server:** OpenBSD's default `httpd(8)` has no `.htaccess` and limited
+rewriting, so it does not handle the clean URLs out of the box. Easiest options:
+
+- `pkg_add apache-httpd` — the included `.htaccess` then works as-is (the
+  original site ran Apache).
+- `pkg_add nginx` — use the nginx config above.
+
+If you must use OpenBSD `httpd(8)`, it can only approximate the clean URLs, e.g.:
+
+```
+server "example.com" {
+    listen on * port 80
+    root "/fkgrt"            # the out/ contents
+    request rewrite "/admin" "/admin/index.html"
+    # httpd cannot do per-path .html fallback like try_files; prefer Apache/nginx.
+}
+```
+
+**make:** this `Makefile` works with OpenBSD's BSD `make`. (GNU make is also
+available via `pkg_add gmake` / `gmake` if preferred.)
+
 ## 5. `/admin` (TinaCMS visual editor) — read this
 
 `/admin` is a static SPA built into `out/admin/`. It works on a static server,
