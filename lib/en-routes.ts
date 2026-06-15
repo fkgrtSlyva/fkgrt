@@ -1,49 +1,11 @@
-// The legacy site has a parallel English version under /en that mirrors a
-// subset of the Ukrainian routes (it has no vstup, posts/news, or a few
-// student pages). This is a frozen legacy archive, so the set is static.
-// Used by the header to build a two-way language switch and to keep the nav
-// inside /en — but only for links whose English page actually exists, so we
-// never produce a broken /en/... link.
+// English routes that have a real translation of the CURRENT Ukrainian page
+// (a hand-translated public/en/<path> file). The stale legacy /en archive was
+// removed; this set is grown as each UA page is translated. Used by the header
+// and home so the nav links into /en only where an English page exists, and
+// falls back to the Ukrainian page everywhere else (never a broken /en link).
 export const EN_ROUTES = new Set<string>([
-  "/about",
-  "/about/administratsiya",
-  "/about/museum",
-  "/about/publichna-informatsiya",
-  "/about/spetsialnosti",
-  "/about/spivrobitnitstvo",
-  "/about/vipuskniki",
-  "/contacts",
-  "/educational",
-  "/educational/monitoring",
-  "/educational/psychologist",
-  "/educational/quality",
-  "/educational/resources",
-  "/educational/scribble",
-  "/educational/selfmanagement",
-  "/educational/stop",
-  "/gallery",
-  "/lecturer",
-  "/lecturer/educationalwork",
-  "/osvita",
-  "/osvita/comision",
-  "/osvita/kabinet",
-  "/osvita/konzept",
-  "/osvita/laborotory",
-  "/osvita/links",
-  "/osvita/methodrob",
-  "/osvita/methodrob2",
-  "/osvita/navchaliniplan",
-  "/osvita/portal",
-  "/osvita/robota",
-  "/osvita/subjects/components",
-  "/osvita/subjects/drilling",
-  "/osvita/subjects/ecology",
-  "/osvita/subjects/geology",
-  "/osvita/subjects/geophysics",
-  "/osvita/subjects/geotourism",
-  "/osvita/subjects/hydrogeological",
-  "/osvita/subjects/maintenance",
-  "/osvita/subjects/motorists",
+  // Add a UA path here once its English translation lands in public/en/<path>.
+  // e.g. "/about", "/about/spetsialnosti", "/contacts"
 ]);
 
 // The Ukrainian route for a path, regardless of current locale.

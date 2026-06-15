@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { Suspense } from "react";
 import { assetPath } from "@/lib/asset-path";
+import { ui, type Lang } from "@/lib/i18n";
 import { LegacyGallery, type LegacyGalleryItem } from "./legacy-gallery";
 
 type LegacyPage = {
@@ -225,19 +226,20 @@ export function GalleryPageContent() {
 export function LegacyPageContent({ filepath }: { filepath: string }) {
   const page = getLegacyPage(filepath);
   const title = page?.title || "КГРТ";
+  const lang: Lang = filepath === "en" || filepath.startsWith("en/") ? "en" : "uk";
 
   return (
     <>
       <section className="legacy-breadcrumb">
         <h1>{title}</h1>
-        <p className="mt-8 text-sm">Головна / {title}</p>
+        <p className="mt-8 text-sm">{ui.breadcrumbHome[lang]} / {title}</p>
       </section>
       <section className="legacy-content bg-white">
         <div className="legacy-html mx-auto max-w-[1200px] px-4">
           {page ? (
             <div dangerouslySetInnerHTML={{ __html: page.html }} />
           ) : (
-            <p>Сторінку збережено у спадковому архіві, але її файл не знайдено у поточній збірці.</p>
+            <p>{ui.archivedPage[lang]}</p>
           )}
         </div>
       </section>

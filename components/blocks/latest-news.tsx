@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { format } from "date-fns";
 import { assetPath } from "@/lib/asset-path";
+import type { Lang } from "@/lib/i18n";
 import { Card } from "../ui/card";
 
 export interface NewsPost {
@@ -12,18 +13,25 @@ export interface NewsPost {
   url: string;
 }
 
+const newsText = {
+  heading: { uk: "Останні новини", en: "Latest News" },
+  readMore: { uk: "Детальніше", en: "Read more" },
+  allNews: { uk: "Всі новини", en: "All news" },
+};
+
 interface LatestNewsSectionProps {
   posts: NewsPost[];
+  lang?: Lang;
 }
 
-export function LatestNewsSection({ posts }: LatestNewsSectionProps) {
+export function LatestNewsSection({ posts, lang = "uk" }: LatestNewsSectionProps) {
   if (!posts || posts.length === 0) return null;
 
   return (
     <section className="bg-[#f3f6f9] py-[70px] md:py-[114px]">
       <div className="mx-auto max-w-[1200px] px-4">
         <div className="mb-14 text-center">
-          <h2 className="font-serif text-3xl font-black text-[#0f2444] md:text-[36px]">Останні новини</h2>
+          <h2 className="font-serif text-3xl font-black text-[#0f2444] md:text-[36px]">{newsText.heading[lang]}</h2>
           <div className="fk-divider mx-auto mt-7" />
         </div>
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -68,14 +76,14 @@ export function LatestNewsSection({ posts }: LatestNewsSectionProps) {
                     href={post.url}
                     className="text-sm font-bold uppercase tracking-wide text-[#0f2444] hover:text-[#f0c64a]"
                   >
-                    Детальніше
+                    {newsText.readMore[lang]}
                   </Link>
                 </div>
               </Card>
             );
           })}
         </div>
-        <div className="mt-14 text-center"><Link href="/posts" className="fk-btn-primary inline-block">Всі новини</Link></div>
+        <div className="mt-14 text-center"><Link href="/posts" className="fk-btn-primary inline-block">{newsText.allNews[lang]}</Link></div>
       </div>
     </section>
   );
