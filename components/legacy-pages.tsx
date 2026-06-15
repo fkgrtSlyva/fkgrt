@@ -115,9 +115,11 @@ function rewriteUrl(value: string, baseRoute: string, attribute: string) {
 
   const [pathPart, suffix = ""] = value.split(/(?=[?#])/);
   const isRootRelative = pathPart.startsWith("/");
+  // baseRoute is already rooted (e.g. "/en"), so joining a page-relative path
+  // yields an absolute path — do not prepend another slash or we get "//en/...".
   const absolutePath = isRootRelative
     ? pathPart
-    : `/${path.posix.normalize(path.posix.join(baseRoute, pathPart))}`;
+    : path.posix.normalize(path.posix.join(baseRoute, pathPart));
   const cleanPath = attribute === "href" ? cleanPageHref(absolutePath) : absolutePath;
 
   return `${assetPath(cleanPath)}${suffix}`;

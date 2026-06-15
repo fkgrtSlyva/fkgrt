@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ChevronDown, Mail, MapPin, Menu, Phone, Search, X } from "lucide-react";
 import React from "react";
 import { assetPath } from "@/lib/asset-path";
+import { isEnglishPath, languageToggleTarget, localizeHref } from "@/lib/en-routes";
 import { searchDocuments } from "@/lib/search-shared";
 import type { SearchDocument } from "@/lib/search-shared";
 
@@ -72,6 +74,9 @@ const navGroups = [
 ];
 
 export const Header = () => {
+  const pathname = usePathname() || "/";
+  const inEnglish = isEnglishPath(pathname);
+  const languageToggle = languageToggleTarget(pathname);
   const [isOpen, setIsOpen] = React.useState(false);
   const [searchQuery, setSearchQuery] = React.useState("");
   const [isSearchFocused, setIsSearchFocused] = React.useState(false);
@@ -102,12 +107,12 @@ export const Header = () => {
           <a className="flex items-center gap-3 hover:text-[#3687aa]" href="https://goo.gl/maps/L3ZsN2dDtXbyokkH7"><MapPin size={18} className="text-white/35" />вул. Василя Тютюнника, 9 (колишня Анрі Барбюса), м. Київ, 03150</a>
           <a className="flex items-center gap-3 hover:text-[#3687aa]" href="mailto:fkgrt@knu.ua"><Mail size={18} className="text-white/35" />fkgrt@knu.ua</a>
           <a className="hover:text-[#3687aa]" href="/about/docs/%D0%9F%D1%81%D0%B8%D1%85%D0%BE%D0%BB%D0%BE%D0%B3%20%D0%BA%D0%BE%D1%80%D0%B8%D1%81%D0%BD%D1%96%20%D0%BF%D0%BE%D1%81%D0%B8%D0%BB%D0%B0%D0%BD%D0%BD%D1%8F%20%D1%81%D0%BA%D1%80%D0%B8%D0%BD%D1%8C%D0%BA%D0%B0%20%D0%B4%D0%BE%D0%B2%D1%96%D1%80%D0%B8.pdf">Скринька довіри</a>
-          <a className="ml-auto font-bold uppercase hover:text-[#3687aa]" href="/en">EN</a>
+          <Link className="ml-auto font-bold uppercase hover:text-[#3687aa]" href={languageToggle.href}>{languageToggle.label}</Link>
         </div>
       </div>
 
       <div className="mx-auto flex max-w-[1200px] items-start justify-center px-4 pb-[24px] pt-[28px] text-center">
-        <Link href="/" className="min-w-0">
+        <Link href={inEnglish ? "/en" : "/"} className="min-w-0">
           <span className="mb-[18px] flex justify-center gap-3 md:gap-4">
             <img src={assetPath("/images/kgrt.png")} alt="КГРТ" className="h-[88px] w-[88px] object-contain md:h-[102px] md:w-[102px]" />
             <img src={assetPath("/about/gerb.jpg")} alt="КНУ" className="h-[88px] w-[88px] object-contain md:h-[102px] md:w-[102px]" />
@@ -128,15 +133,15 @@ export const Header = () => {
       <div className="mx-auto flex max-w-[1200px] flex-col lg:flex-row lg:items-center lg:justify-center">
         {navGroups.map((group) => (
           <div key={group.label} className="group relative">
-            <Link href={group.href} className="flex items-center gap-1 whitespace-nowrap px-4 py-[17px] font-serif text-[18px] font-black hover:text-[#3687aa] xl:px-5 xl:text-[19px]">{group.label}<ChevronDown size={13} strokeWidth={3} /></Link>
+            <Link href={localizeHref(group.href, inEnglish)} className="flex items-center gap-1 whitespace-nowrap px-4 py-[17px] font-serif text-[18px] font-black hover:text-[#3687aa] xl:px-5 xl:text-[19px]">{group.label}<ChevronDown size={13} strokeWidth={3} /></Link>
             <div className="static hidden min-w-72 bg-white shadow-[0_12px_35px_rgba(10,28,68,0.18)] group-hover:block lg:absolute lg:left-0 lg:top-full">
               {group.items.map(([label, href]) => (
-                <Link key={href} href={href} className="block border-b border-slate-100 px-5 py-3 text-sm text-slate-700 hover:bg-[#f0c64a] hover:text-[#102c57]">{label}</Link>
+                <Link key={href} href={localizeHref(href, inEnglish)} className="block border-b border-slate-100 px-5 py-3 text-sm text-slate-700 hover:bg-[#f0c64a] hover:text-[#102c57]">{label}</Link>
               ))}
             </div>
           </div>
         ))}
-        <Link href="/gallery" className="block whitespace-nowrap px-4 py-[17px] font-serif text-[18px] font-black hover:text-[#3687aa] xl:px-5 xl:text-[19px]">Галерея</Link>
+        <Link href={localizeHref("/gallery", inEnglish)} className="block whitespace-nowrap px-4 py-[17px] font-serif text-[18px] font-black hover:text-[#3687aa] xl:px-5 xl:text-[19px]">Галерея</Link>
         <Link href="/posts" className="block whitespace-nowrap px-4 py-[17px] font-serif text-[18px] font-black hover:text-[#3687aa] xl:px-5 xl:text-[19px]">Новини</Link>
         <form action={assetPath("/search")} className="relative mx-4 mb-4 flex items-center rounded-xl border border-slate-200 bg-slate-50 pl-4 shadow-inner lg:mx-0 lg:mb-0 lg:ml-4 lg:w-[240px]">
           <label className="sr-only" htmlFor="site-search-header">
