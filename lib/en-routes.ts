@@ -5,7 +5,10 @@
 // falls back to the Ukrainian page everywhere else (never a broken /en link).
 export const EN_ROUTES = new Set<string>([
   // Add a UA path here once its English translation lands in public/en/<path>.
-  // e.g. "/about", "/about/spetsialnosti", "/contacts"
+  "/contacts",
+  "/osvita",
+  "/vstup",
+  "/about/spetsialnosti",
 ]);
 
 // The Ukrainian route for a path, regardless of current locale.
