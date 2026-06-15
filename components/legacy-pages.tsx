@@ -22,7 +22,7 @@ const legacyRoots = [
   "vstup",
 ];
 
-// Root-level single-page legacy files (public/<name>.php) rather than directories.
+// Root-level single-page legacy files (public/<name>.html) rather than directories.
 const legacyRootPages = ["ecology"];
 
 const migratedPageDetails: Record<string, { title: string }> = {
@@ -43,7 +43,7 @@ function collectLegacyRoutePaths() {
   const routes = new Set<string>();
 
   for (const rootPage of legacyRootPages) {
-    if (fs.existsSync(path.join(publicDir, `${rootPage}.php`))) {
+    if (fs.existsSync(path.join(publicDir, `${rootPage}.html`))) {
       routes.add(rootPage);
     }
   }
@@ -53,11 +53,10 @@ function collectLegacyRoutePaths() {
     if (!fs.existsSync(directory)) continue;
 
     for (const file of walk(directory)) {
-      if (!file.endsWith(".php")) continue;
-      if (file.endsWith(".section.php") || file.endsWith(".access.php")) continue;
+      if (!file.endsWith(".html")) continue;
 
       const relative = path.relative(publicDir, file).replaceAll(path.sep, "/");
-      const route = relative.replace(/\.php$/, "").replace(/\/index$/, "");
+      const route = relative.replace(/\.html$/, "").replace(/\/index$/, "");
       if (route) routes.add(route);
     }
   }
@@ -74,9 +73,9 @@ function walk(directory: string): string[] {
 }
 
 function getLegacyFile(filepath: string) {
-  const normalizedPath = filepath.replace(/\.php$/, "").replace(/\/$/, "");
-  const directFile = path.join(publicDir, `${normalizedPath}.php`);
-  const indexFile = path.join(publicDir, normalizedPath, "index.php");
+  const normalizedPath = filepath.replace(/\.html$/, "").replace(/\/$/, "");
+  const directFile = path.join(publicDir, `${normalizedPath}.html`);
+  const indexFile = path.join(publicDir, normalizedPath, "index.html");
 
   if (fs.existsSync(directFile)) return directFile;
   if (fs.existsSync(indexFile)) return indexFile;
@@ -91,11 +90,11 @@ function decodeEntities(value: string) {
     .replaceAll("&nbsp;", " ");
 }
 
-function titleFromPhp(source: string, filepath: string) {
-  const titleMatch =
-    source.match(/SetPageProperty\(\s*["']title["']\s*,\s*["']([^"']+)["']\s*\)/) ||
-    source.match(/SetTitle\(\s*["']([^"']+)["']\s*\)/);
-  const normalizedPath = filepath.replace(/\.php$/, "").replace(/\/index$/, "");
+function titleFromHtml(source: string, filepath: string) {
+  // Titles were carried over from the original SetTitle() into a leading
+  // <!--title:...--> comment when the pages were converted from PHP to HTML.
+  const titleMatch = source.match(/<!--title:([\s\S]*?)-->/);
+  const normalizedPath = filepath.replace(/\.html$/, "").replace(/\/index$/, "");
   const pathWithoutLocale = normalizedPath.startsWith("en/") ? normalizedPath.slice(3) : normalizedPath;
   return decodeEntities(titleMatch?.[1] || migratedPageDetails[pathWithoutLocale]?.title || pathWithoutLocale.split("/").pop() || "КГРТ");
 }
@@ -130,6 +129,7 @@ function normalizeLegacyHtml(source: string, file: string) {
 
   return source
     .replace(/^\uFEFF/, "")
+    .replace(/<!--title:[\s\S]*?-->/, "")
     .replace(/<\?(?:php)?[\s\S]*?\?>/gi, "")
     .replace(/\s(?:data-type|data-group|data-lightgallery|data-fancybox-group)="[^"]*"/g, "")
     .replace(/\s(?:onclick|onload|onerror)="[^"]*"/gi, "")
@@ -146,7 +146,7 @@ function getLegacyPage(filepath: string): LegacyPage | null {
   const source = fs.readFileSync(file, "utf8");
   return {
     html: normalizeLegacyHtml(source, file),
-    title: titleFromPhp(source, filepath),
+    title: titleFromHtml(source, filepath),
   };
 }
 

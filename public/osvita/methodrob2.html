@@ -1,0 +1,127 @@
+<!--title:Методичний портал-->
+<style>
+    .content-item {
+        padding-left: 16px !important;
+    }
+
+	.img-wrap {
+		width: 230px;
+		height: 230px;
+		overflow: hidden;
+		border-radius: 50%;
+	}
+
+	.img-wrap img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+    .main {
+        margin-top: 60px;
+        padding-bottom: 30px;
+    }
+
+    .content {
+        padding: 0 32px;
+    }
+
+    .menu {
+
+    }
+
+    .menu__item {
+        font-size: 16px !important;
+    }
+
+    .person__name {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .person__post {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+	.main {
+		width: 100%;
+		display: flex;
+		padding: 0 36px;
+		padding-bottom: 24px;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.card {
+		width: calc(25% - 16px);
+		min-width: 280px;
+		margin: 8px;
+		margin-top: 0;
+		background-color: #fff;
+		box-shadow: 4px 4px 8px #ddd;
+		border-radius: 8px;
+		overflow: hidden;
+		position: relative;
+	}
+
+	.card:last-child {
+		margin-bottom: 8px;
+	}
+
+	.card__img {
+		width: 100%;
+		position: relative;
+		height: 0;
+		overflow: hidden;
+		padding-top: 56%;
+	}
+
+	.card__img img {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.card__link {
+		font-size: 18px;
+		display: block;
+		margin: 10px auto;
+		font-weight: 700;
+		height: 80px; 
+	}
+
+</style>
+<div class="main">
+	<div class="card">
+		<div class="card__img">
+ <img src="/osvita/work.jpg">
+		</div>
+ <a class="card__link" href="/osvita/robota.php">Методична робота</a>
+	</div>
+	<div class="card">
+		<div class="card__img">
+ <img src="/osvita/atestats.jpg">
+		</div>
+ <a class="card__link" href="/osvita/links.php">Атестація, підвищення кваліфікації</a>
+	</div>
+	<div class="card">
+		<div class="card__img">
+ <img src="/osvita/lab.png">
+		</div>
+ <a class="card__link" href="/osvita/laborotory.php">Навчально-методичні лабораторія та кабінет</a>
+	</div>
+	<div class="card">
+		<div class="card__img">
+ <img src="/osvita/kabinet.jpg">
+		</div>
+ <a class="card__link" href="/osvita/kabinet.php">Лабораторія інформаційного забезпечення та електронного документообігу (Навчальна частина)</a>&nbsp;
+	</div>
+</div>
+ <br>

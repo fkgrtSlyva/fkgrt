@@ -1,0 +1,367 @@
+<!--title:Навчальнi плани-->
+<style>
+.padding-lg {
+	display: block;
+	padding-top: 90px;
+	padding-bottom: 90px;
+}
+/*.our-cources h2, .our-impotance h2, .how-study h2, .why-choose h2, .news-events h2, .campus-tour h2, .testimonial h2, .about h2, .browse-teacher h2, .how-apply h2, .have-question h2 {
+	display: block;
+	padding-bottom: 44px;
+	font-family: 'texgyreadventorbold', arial;
+	font-size: 36px;
+	text-transform: uppercase;
+	text-align: center;
+}
+.our-cources h2 span, .our-impotance h2 span, .how-study h2 span, .why-choose h2 span, .news-events h2 span, .campus-tour h2 span, .browse-teacher h2 span, .how-apply h2 span {
+	display: block;
+	font-family: 'texgyreadventorregular', arial;
+	font-size: 14px;
+	opacity: 0.8;
+}
+*/
+.our-cources {
+	display: block;
+    background: url(http://geophys.knu.ua/images/cources-bg.jpeg) no-repeat center top / cover;
+	position: relative;
+}
+.our-cources:after {
+	width: 100%;
+	height: 100%;
+	display: block;
+	position: absolute;
+	top: 0px;
+	z-index: 1;
+	content: "";
+	background: #383838;
+	opacity: 0.8;
+}
+.our-cources .container {
+	position: relative;
+	z-index: 2;
+}
+/*
+.our-cources h2 {
+	color: #fff;
+}
+.our-cources h2 span {
+	color: #d5d4d3;
+}
+.our-cources ul.course-list {
+	display: block;
+	padding-top: 20px;
+}
+.our-cources ul.course-list li {
+	display: block;
+	background: url(http://geophys.knu.ua/images/book-bg.png) no-repeat center top;
+	position: relative;
+}
+.our-cources ul.course-list li:after {
+	width: 1px;
+	height: 100%;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	display: block;
+	background: #fff;
+	content: " ";
+	opacity: 0.3;
+}
+.our-cources ul.course-list li .inner {
+	width: 198px;
+	margin: 0 auto;
+	height: 280px;
+	padding: 54px 0 0 30px;
+	position: relative;
+}
+.our-cources ul.course-list li .inner figure {
+	position: absolute;
+	left: 4px;
+	top: 1px;
+	opacity: 0.3;
+}
+.our-cources ul.course-list li h3 {
+	display: block;
+	padding-bottom: 0px;
+	font-size: 18px;
+	text-transform: uppercase;
+	line-height: 20px;
+	color: #fff;
+	position: relative;
+	text-align: left;
+	font-weight: bold;
+	margin-top: -20px;
+}
+.our-cources ul.course-list li h3 span {
+	display: block;
+}
+.our-cources ul.course-list li p {
+	display: block;
+	padding-bottom: 12px;
+	font-size: 12px;
+	line-height: 18px;
+	color: #fff;
+	opacity: 0.8;
+}
+.our-cources ul.course-list li .fess-box {
+	display: inline-block;
+	padding: 0 12px;
+	background: #ff9600;
+	font-size: 11px;
+	font-weight: 700;
+	color: #fff;
+	position: relative;
+	text-transform: uppercase;
+}
+.our-cources ul.course-list li .fess-box span {
+	font-family: 'texgyreadventorbold', arial;
+	font-size: 16px;
+}
+.our-cources ul.course-list li .bottom-txt {
+	width: 100%;
+	padding: 18px 30px;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+}
+.our-cources ul.course-list li .duration {
+	width: 81%;
+	float: left;
+}
+.our-cources ul.course-list li .duration h4 {
+	display: block;
+	font-family: 'texgyreadventorbold', arial;
+	font-size: 16px;
+	color: #fff;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+.our-cources ul.course-list li .duration span {
+	display: block;
+	font-size: 11px;
+	font-weight: 700;
+	color: #fff;
+	line-height: 16px;
+	text-transform: uppercase;
+	opacity: 0.8;
+}
+.our-cources ul.course-list li a {
+	display: block;
+	position: absolute;
+	right: 18px;
+	top: 22px;
+}
+.our-cources ul.course-list li a .icon-more-icon {
+	font-size: 23px;
+	color: #fff;
+	opacity: 0.5;
+	transition: all 0.3s ease 0s;
+}
+.our-cources ul.course-list li a:hover .icon-more-icon {
+	opacity: 1;
+}*/
+
+</style> <!-- Styles of books --> <style>
+
+.books {
+	display: flex;
+    flex-wrap: wrap;
+}
+
+.book {
+	
+	margin: 18px;
+	padding-bottom: 24px;
+
+	height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.book__top {
+	background-color: #00426a;
+	padding: 16px;
+	min-height: 280px;
+	display: flex;
+	flex-direction: column;
+
+	height: 100%;
+}
+
+.book__title {
+	color: #fff;
+	text-align: left;
+	font-size: 18px;
+	text-transform: uppercase;
+	line-height: 20px;
+	font-weight: bold;
+}
+
+.book__info {
+	margin-top: auto;
+	color: #fff;
+	text-align: left;
+}
+
+.book__botom {
+	display: flex;
+	align-items: center;
+	background-color: #17a43b;
+	padding-left: 5px
+}
+
+.book__time {
+	display: block;
+	color: #FFFFFE;
+	margin: 0 auto;
+	font-size: 12px;
+	text-transform: uppercase;
+	font-weight: bold;
+
+}
+
+.book__link {
+	background-color: #159335;
+	display: block;
+	color: #FFFFFE;
+	padding: 8px 16px;
+	border-bottom: 1px solid #17a43b;
+}
+
+.book__link:hover {
+	color: #FFFFFE;
+}
+
+.novisable {
+	background-color: #00426a;
+}
+
+.novisable * {
+	opacity: 0;
+}
+
+</style> <!-- Start Cources Section --> <section class="our-cources sub padding-lg">
+<div class="container">
+	<ul class="row course-list inner books">
+		<li class="col-xs-6 col-sm-4 col-md-3">
+		<div class="book">
+			<div class="book__top">
+				<h5 class="book__title">Прикладна екологія</h5>
+				<div class="book__info">
+					 Е2 Екологія <br>
+					 Е Природничі науки, математика та статистика
+				</div>
+			</div>
+			<div class="book__botom">
+ <span class="book__time">Завантажити:</span> <a href="https://drive.google.com/drive/folders/1TAqKWRlvgXidmDvSYn0ceLdnrGMHwRFa" class="book__link"> <span class="icon fa-download"></span> </a>
+			</div>
+		</div>
+ </li>
+		<li class="col-xs-6 col-sm-4 col-md-3">
+		<div class="book">
+			<div class="book__top">
+				<h5 class="book__title">Геологічні методи пошуків та розвідки родовищ корисних копалин </h5>
+				<div class="book__info">
+					 Е4 Науки про Землю <br>
+					 Е Природничі науки, математика та статистика
+				</div>
+			</div>
+			<div class="book__botom">
+			<span class="book__time">Завантажити:</span> <a href="https://drive.google.com/drive/folders/14VaFF5J3j9kUloABJaTfqZZ4-wlbsSqz" class="book__link"> <span class="icon fa-download"></span> </a>
+			</div>
+		</div>
+ </li>
+		 <!--li class="col-xs-6 col-sm-4 col-md-3">
+		<div class="book">
+			<div class="book__top">
+				<h5 class="book__title">Геотуризм </h5>
+				<div class="book__info">
+					 103 Науки про Землю <br>
+					 10 Природничі науки
+				</div>
+			</div>
+			<div class="book__botom">
+ <br>
+			</div>
+			<div class="book__botom">
+ <span class="book__time"><a href="/osvita/plans/Geoturizm%20NP%20PZSO%2011%20kl.%20denna.pdf">3 Роки ПЗСО (2022, 2023, 2024)</a></span>
+			</div>
+			<div class="book__botom">
+ <span class="book__time"><a href="/osvita/plans/Geoturizm%20NP%20BZSO%209%20%20kl.denna.pdf">4 Роки БЗСО (2022, 2023, 2024)</a></span>
+			</div>
+		</div>
+ </li-->
+		<li class="col-xs-6 col-sm-4 col-md-3">
+		<div class="book">
+			<div class="book__top">
+				<h5 class="book__title">Розвідувальна геофізика та комп’ютерна обробка геофізичної інформації </h5>
+				<div class="book__info">
+					 Е4 Науки про Землю <br>
+					 Е Природничі науки, математика та статистика
+				</div>
+			</div>
+			<div class="book__botom">
+ 			<span class="book__time">Завантажити:</span> <a href="https://drive.google.com/drive/folders/1GF1bURVgfPkatFZJ07Ns9_gBV7zq6f24" class="book__link"> <span class="icon fa-download"></span> </a>
+			</div>
+		</div>
+ </li>
+		<li class="col-xs-6 col-sm-4 col-md-3">
+		<div class="book">
+			<div class="book__top">
+				<h5 class="book__title">Гідрогеологічні та інженерно геологічні дослідження дkя водопосточання і будівництва </h5>
+				<div class="book__info">
+					 Е4 Науки про Землю <br>
+					 Е Природничі науки, математика та статистика
+				</div>
+			</div>
+			<div class="book__botom">
+		 			<span class="book__time">Завантажити:</span> <a href="https://drive.google.com/drive/folders/1En7GazJHZ0XD0emZa-LAuZpHHXZ0PGRn" class="book__link"> <span class="icon fa-download"></span> </a>
+			</div>
+		</div>
+ </li>
+		<li class="col-xs-6 col-sm-4 col-md-3">
+		<div class="book">
+			<div class="book__top">
+				<h5 class="book__title">Технічне обслуговування та ремонт геофізичної, радіоелектронної апаратури та комп`ютерної техніки </h5>
+				<div class="book__info">
+					 G11 Машинобудування (G11.03. Технологічні машини та обладнання) <br>
+					 G Інженерія, виробництво та будівництво
+				</div>
+			</div>
+			<div class="book__botom">
+				<span class="book__time">Завантажити:</span> <a href="https://drive.google.com/drive/folders/1hx02Acuz5lt-BDBoUs9vfutdZGeME5eP" class="book__link"> <span class="icon fa-download"></span> </a>
+			</div>
+		</div>
+ </li>
+		<li class="col-xs-6 col-sm-4 col-md-3">
+		<div class="book">
+			<div class="book__top">
+				<h5 class="book__title">Буріння свердловин на тверді корисні копалини і воду </h5>
+				<div class="book__info">
+					 G16 Гірництво та нафтогазові технології <br>
+					 G Інженерія, виробництво та будівництво
+				</div>
+			</div>
+			<div class="book__botom">
+				<span class="book__time">Завантажити:</span> <a href="https://drive.google.com/drive/folders/1GQSYr1PDP6HyEn9ycfm0W1CV5e33ECoF" class="book__link"> <span class="icon fa-download"></span> </a>
+			</div>
+		</div>
+ </li>
+		<li class="col-xs-6 col-sm-4 col-md-3">
+		<div class="book">
+			<div class="book__top">
+				<h5 class="book__title">Обслуговування та ремонт автомобілів та двигунів </h5>
+				<div class="book__info">
+					 J8 Автомобільний транспорт <br>
+					 J Транспорт та послуги
+				</div>
+			</div>
+			<div class="book__botom">
+				<span class="book__time">Завантажити:</span> <a href="https://drive.google.com/drive/folders/1eJmeGsC5opZN38A7PTSiCWJ-hvVCYDd_" class="book__link"> <span class="icon fa-download"></span> </a>
+			</div>
+		</div>
+ </li>
+	</ul>
+</div>
+ </section>
+        <!-- End Cources Section -->
