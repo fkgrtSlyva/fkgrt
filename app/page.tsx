@@ -4,8 +4,6 @@ import Layout from "@/components/layout/layout";
 import HomeClientPage from "./home-client-page";
 import { NewsPost } from "@/components/blocks/latest-news";
 
-export const revalidate = 300;
-
 export default async function Home() {
   const pageData = await client.queries.page({
     relativePath: `home.mdx`,

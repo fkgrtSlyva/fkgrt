@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { assetPath } from "@/lib/asset-path";
 import { ui, type Lang } from "@/lib/i18n";
 import { LegacyGallery, type LegacyGalleryItem } from "./legacy-gallery";
+import { LegacyTabsEnhancer } from "./legacy-html";
 
 type LegacyPage = {
   html: string;
@@ -39,6 +40,13 @@ const migratedPageDetails: Record<string, { title: string }> = {
 
 export const legacyRoutePaths = collectLegacyRoutePaths();
 export const knownLegacyRoots = new Set([...legacyRoots, ...legacyRootPages]);
+
+// Ukrainian paths that have a hand-translated English page under public/en/<path>.
+// Derived from the files on disk so the nav and language switcher pick up a new
+// translation the moment its file is added — no manual list to keep in sync.
+export const englishRoutePaths = legacyRoutePaths
+  .filter((route) => route.startsWith("en/"))
+  .map((route) => `/${route.slice("en/".length)}`);
 
 function collectLegacyRoutePaths() {
   const routes = new Set<string>();
@@ -131,6 +139,11 @@ function normalizeLegacyHtml(source: string, file: string) {
   return source
     .replace(/^\uFEFF/, "")
     .replace(/<!--title:[\s\S]*?-->/, "")
+    // Upgrade insecure college-host asset URLs to https. These appear in inline
+    // <style> url(...) (e.g. the card-section background) where the attribute
+    // rewrite below never reaches them, so on the HTTPS site they would be
+    // blocked as mixed content. Both hosts serve valid https.
+    .replace(/http:\/\/(geophys\.knu\.ua|fkgrt\.knu\.ua)/gi, "https://$1")
     .replace(/<\?(?:php)?[\s\S]*?\?>/gi, "")
     .replace(/\s(?:data-type|data-group|data-lightgallery|data-fancybox-group)="[^"]*"/g, "")
     .replace(/\s(?:onclick|onload|onerror)="[^"]*"/gi, "")
@@ -151,6 +164,24 @@ function getLegacyPage(filepath: string): LegacyPage | null {
   };
 }
 
+function plainText(html: string) {
+  return html
+    .replace(/<(script|style)[\s\S]*?<\/\1>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+// Title + a short description for <head> metadata of a legacy page.
+export function getLegacyMeta(filepath: string): { title: string; description: string } | null {
+  const page = getLegacyPage(filepath);
+  if (!page) return null;
+
+  const text = plainText(page.html).slice(0, 300);
+  const description = text.length > 160 ? `${text.slice(0, 157).trimEnd()}…` : text;
+  return { title: page.title, description };
+}
+
 export type LegacySearchSource = {
   title: string;
   href: string;
@@ -164,13 +195,7 @@ export function getLegacySearchSources(): LegacySearchSource[] {
       const page = getLegacyPage(route);
       if (!page) return [];
 
-      const text = page.html
-        .replace(/<(script|style)[\s\S]*?<\/\1>/gi, " ")
-        .replace(/<[^>]+>/g, " ")
-        .replace(/\s+/g, " ")
-        .trim();
-
-      return [{ title: page.title, href: `/${route}`, text }];
+      return [{ title: page.title, href: `/${route}`, text: plainText(page.html) }];
     });
 }
 
@@ -237,7 +262,10 @@ export function LegacyPageContent({ filepath }: { filepath: string }) {
       <section className="legacy-content bg-white">
         <div className="legacy-html mx-auto max-w-[1200px] px-4">
           {page ? (
-            <div dangerouslySetInnerHTML={{ __html: page.html }} />
+            <>
+              <div dangerouslySetInnerHTML={{ __html: page.html }} />
+              <LegacyTabsEnhancer routeKey={filepath} />
+            </>
           ) : (
             <p>{ui.archivedPage[lang]}</p>
           )}

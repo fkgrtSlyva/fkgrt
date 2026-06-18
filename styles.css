@@ -272,7 +272,7 @@
     max-width: 100%;
   }
 
-  .legacy-html :where(.resp-tabs-list, .menu, .books, .range) {
+  .legacy-html :where(.books, .range) {
     display: flex;
     flex-wrap: wrap;
     gap: .75rem;
@@ -280,12 +280,137 @@
     padding-left: 0;
   }
 
-  .legacy-html :where(.menu__item, .resp-tabs-list li) {
-    background: #eef4f8;
-    border-left: 4px solid #3687aa;
+  .legacy-html .responsive-tabs {
+    margin-block: clamp(1.5rem, 4vw, 3.75rem);
+  }
+
+  .legacy-html .responsive-tabs.vertical {
+    align-items: start;
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
+  }
+
+  .legacy-html .responsive-tabs > .resp-tabs-list {
+    background: #f7fafc;
+    border: 1px solid #dbe5ed;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .legacy-html .responsive-tabs.vertical > .resp-tabs-list {
+    flex-direction: column;
+    position: sticky;
+    top: 24px;
+  }
+
+  .legacy-html .responsive-tabs.horizontal > .resp-tabs-list {
+    background: transparent;
+    border: 0;
+    gap: .7rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .legacy-html .responsive-tabs > .resp-tabs-list > li {
+    align-items: center;
+    background: #f7fafc;
+    border: 0;
+    border-bottom: 1px solid #dbe5ed;
+    border-left: 4px solid transparent;
     color: #0f2444;
+    cursor: pointer;
+    display: flex;
     font-weight: 700;
-    padding: .75rem 1rem;
+    justify-content: flex-start;
+    line-height: 1.45;
+    min-height: 54px;
+    outline: 0;
+    padding: .85rem 1rem;
+    text-align: left;
+    transition: background-color .2s ease, border-color .2s ease, color .2s ease;
+  }
+
+  .legacy-html .responsive-tabs.horizontal > .resp-tabs-list > li {
+    border: 1px solid #dbe5ed;
+    min-height: 46px;
+  }
+
+  .legacy-html .responsive-tabs > .resp-tabs-list > li:last-child {
+    border-bottom: 0;
+  }
+
+  .legacy-html .responsive-tabs:not(.legacy-tabs-ready) > .resp-tabs-list > li:first-child,
+  .legacy-html .responsive-tabs > .resp-tabs-list > li:hover,
+  .legacy-html .responsive-tabs > .resp-tabs-list > li:focus-visible,
+  .legacy-html .responsive-tabs > .resp-tabs-list > li.resp-tab-active {
+    background: #0f2444;
+    border-left-color: #f0c64a;
+    color: #fff;
+  }
+
+  .legacy-html .responsive-tabs.horizontal:not(.legacy-tabs-ready) > .resp-tabs-list > li:first-child,
+  .legacy-html .responsive-tabs.horizontal > .resp-tabs-list > li:hover,
+  .legacy-html .responsive-tabs.horizontal > .resp-tabs-list > li:focus-visible,
+  .legacy-html .responsive-tabs.horizontal > .resp-tabs-list > li.resp-tab-active {
+    border-color: #0f2444;
+  }
+
+  .legacy-html .responsive-tabs > .resp-tabs-container {
+    min-width: 0;
+    padding: 0;
+  }
+
+  .legacy-html .responsive-tabs.vertical > .resp-tabs-container {
+    border-left: 1px solid #e6edf3;
+    padding-left: clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .legacy-html .responsive-tabs:not(.legacy-tabs-ready) > .resp-tabs-container > :not(:first-child),
+  .legacy-html .responsive-tabs > .resp-tabs-container > [hidden] {
+    display: none !important;
+  }
+
+  .legacy-html .responsive-tabs > .resp-tabs-container > .resp-tab-content-active {
+    animation: legacyFadeUp .24s ease both;
+  }
+
+  .legacy-html .person.range {
+    align-items: flex-start;
+    border-bottom: 1px solid #e6edf3;
+    gap: clamp(1.25rem, 3vw, 2rem);
+    margin: 0;
+    padding: 2rem 0;
+  }
+
+  .legacy-html .person.range:first-child {
+    padding-top: 0;
+  }
+
+  .legacy-html .person.range:last-child {
+    border-bottom: 0;
+  }
+
+  .legacy-html .person .cell-sm-4 {
+    flex: 0 0 240px;
+    max-width: 240px;
+  }
+
+  .legacy-html .person .cell-sm-8 {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .legacy-html .person img {
+    aspect-ratio: 1;
+    border: 1px solid #dbe5ed;
+    display: block;
+    height: 240px;
+    object-fit: cover;
+    width: 240px;
   }
 
   .legacy-html :where(.book, .thumbnail, .post, .event) {
@@ -294,6 +419,60 @@
 
   .legacy-html :where(.book) {
     flex: 1 1 260px;
+  }
+
+  /* Legacy Bootstrap-style grid (.row + .col-*) used by the program-card pages
+     (osvita, konzept, navchaliniplan, nauki_pro_zemliu). Bootstrap is no longer
+     loaded, so without this the columns collapse to full-width stacked cards. */
+  .legacy-html .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+  }
+
+  .legacy-html [class*="col-xs-"],
+  .legacy-html [class*="col-sm-"],
+  .legacy-html [class*="col-md-"],
+  .legacy-html [class*="col-lg-"] {
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .legacy-html .col-xs-6 {
+    width: 50%;
+  }
+
+  /* The .book child carries its own margin (gutter), so it should fill its column. */
+  .legacy-html .row .book {
+    flex: 1 1 auto;
+    height: calc(100% - 36px);
+  }
+
+  @media (min-width: 576px) {
+    .legacy-html .col-sm-4 {
+      width: 33.3333%;
+    }
+
+    .legacy-html .col-sm-6 {
+      width: 50%;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .legacy-html .col-md-3 {
+      width: 25%;
+    }
+
+    .legacy-html .col-md-4 {
+      width: 33.3333%;
+    }
+
+    .legacy-html .col-md-6 {
+      width: 50%;
+    }
   }
 
   .legacy-html :where([style*="text-align: center"]) {
@@ -351,6 +530,62 @@
     background: #3687aa;
     border-color: #3687aa;
     color: #fff;
+  }
+
+  @media (max-width: 900px) {
+    .legacy-html .responsive-tabs.vertical {
+      display: block;
+    }
+
+    .legacy-html .responsive-tabs.vertical > .resp-tabs-list {
+      background: transparent;
+      border: 0;
+      flex-direction: row;
+      gap: .7rem;
+      margin-bottom: 1.5rem;
+      position: static;
+    }
+
+    .legacy-html .responsive-tabs.vertical > .resp-tabs-list > li {
+      border: 1px solid #dbe5ed;
+      min-height: 46px;
+    }
+
+    .legacy-html .responsive-tabs.vertical:not(.legacy-tabs-ready) > .resp-tabs-list > li:first-child,
+    .legacy-html .responsive-tabs.vertical > .resp-tabs-list > li:hover,
+    .legacy-html .responsive-tabs.vertical > .resp-tabs-list > li:focus-visible,
+    .legacy-html .responsive-tabs.vertical > .resp-tabs-list > li.resp-tab-active {
+      border-color: #0f2444;
+    }
+
+    .legacy-html .responsive-tabs.vertical > .resp-tabs-container {
+      border-left: 0;
+      padding-left: 0;
+    }
+
+    .legacy-html .person.range {
+      flex-direction: column;
+    }
+
+    .legacy-html .person .cell-sm-4 {
+      flex: 0 0 auto;
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 540px) {
+    .legacy-content {
+      padding: 48px 0 72px;
+    }
+
+    .legacy-html .responsive-tabs > .resp-tabs-list > li {
+      flex: 1 1 100%;
+    }
+
+    .legacy-html .person img {
+      height: 220px;
+      width: min(100%, 220px);
+    }
   }
 }
 

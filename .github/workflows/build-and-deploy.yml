@@ -99,13 +99,30 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
 
-      - name: Build with Next.js
-        run: ${{ steps.detect-package-manager.outputs.runner }} build
+      # Tokenless build: no Tina Cloud token required. We generate the Tina
+      # GraphQL client and index local content, run a local Tina GraphQL server,
+      # then statically export. The /admin editor is NOT wired to Tina Cloud
+      # here (intentionally skipped for now); the public site builds fully.
+      - name: Build (tokenless Tina + Next.js)
+        run: |
+          set -e
+          # Generate tina/__generated__/client + index local content (no cloud)
+          npx tinacms build --local --skip-cloud-checks
+          # Start the local Tina GraphQL server that `next build` queries
+          npx tinacms dev --noTelemetry --noWatch &
+          echo "$!" > /tmp/tina.pid
+          # Wait for the GraphQL server to accept connections
+          for i in $(seq 1 90); do
+            curl -sf http://localhost:4001/graphql -o /dev/null && { echo "Tina up after ${i}s"; break; }
+            sleep 1
+          done
+          # Static export (basePath/assetPrefix injected via GITHUB_* env)
+          npx next build
+          kill "$(cat /tmp/tina.pid)" 2>/dev/null || true
         env:
+          NODE_OPTIONS: '--no-experimental-webstorage --max-old-space-size=4096'
           NEXT_PUBLIC_TINA_CLIENT_ID: ${{ vars.NEXT_PUBLIC_TINA_CLIENT_ID }}
           NEXT_PUBLIC_TINA_BRANCH: ${{ github.ref_name }}
-          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
-          TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

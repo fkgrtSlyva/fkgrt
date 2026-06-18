@@ -1,112 +1,80 @@
-# Tina Starter 🦙
+# ФКГРТ КНУ — website
 
-![tina-nextjs-starter-demo](https://user-images.githubusercontent.com/103008/130587027-995ccc45-a852-4f90-b658-13e8e0517339.gif)
+Website of the **Professional College of Geological Prospecting Technologies**
+(Фаховий коледж геологорозвідувальних технологій) of Taras Shevchenko National
+University of Kyiv.
 
-This Next.js starter is powered by [TinaCMS](https://app.tina.io) for you and your team to visually live edit the structured content of your website. ✨
+A **Next.js 15** static-export rebuild of the college's old Bitrix/PHP site,
+with **TinaCMS** for the editable news and homepage content. The build produces
+a folder of plain static files (`out/`) — there is no Node.js process at runtime.
 
-The content is managed through Markdown and JSON files stored in your GitHub repository, and queried through Tina GraphQL API.
+## Stack
 
-### Features
+- **Next.js 15** (App Router, `output: 'export'`)
+- **TinaCMS** — `/admin` visual editor; news + homepage content live as MDX in `content/`
+- **Tailwind CSS v4**
+- **Biome** for lint/format
 
-- [Tina Headless CMS](https://app.tina.io) for authentication, content modeling, visual editing and team management.
-- [Vercel](https://vercel.com) deployment to visually edit your site from the `/admin` route.
-- Local development workflow from the filesystem with a local GraqhQL server.
+## Project layout
 
-## Requirements
+| Path | What it is |
+| --- | --- |
+| `app/` | Routes. `app/[...urlSegments]` is the catch-all that serves migrated legacy pages, Tina pages and the English home. |
+| `content/` | Tina-managed MDX (posts, homepage) + global settings. |
+| `public/` | Migrated legacy HTML (`about/`, `vstup/`, `osvita/`, …, plus `en/` translations) and all static assets. |
+| `components/legacy-pages.tsx` | Reads the legacy `.html` files at build time, normalizes URLs and renders them. Also derives the route and English-translation lists from the filesystem. |
+| `lib/i18n.ts` | Bilingual UI strings + the navigation menu. |
+| `lib/en-routes.ts` | Locale helpers for the bilingual shell. |
 
-- Git, [Node.js Active LTS](https://nodejs.org/en/about/releases/), pnpm installed for local development.
-- A [TinaCMS](https://app.tina.io) account for live editing.
+The legacy migration details (which sections were skipped, how `/news` redirects
+to `/posts`, the search index, etc.) are documented inline in
+`components/legacy-pages.tsx`.
 
-## Local Development
+## Local development
 
-Install the project's dependencies:
-
-> [!NOTE]  
-> [Do you know the best package manager for Node.js?](https://www.ssw.com.au/rules/best-package-manager-for-node/) Using the right package manager can greatly enhance your development workflow. We recommend using pnpm for its speed and efficient handling of dependencies. Learn more about why pnpm might be the best choice for your projects by checking out this rule from SSW.
-
-
-```
+```bash
+nvm use            # Node 22 (see .nvmrc)
+corepack enable    # provides pnpm
 pnpm install
+pnpm dev           # Tina dev server + next dev
 ```
 
-Run the project locally:
+### Environment
 
+Copy `.env.example` to `.env.local`. For local work without the `/admin` editor
+you can leave the Tina credentials blank. To produce a build with a working
+`/admin`, fill in the values from <https://app.tina.io>. `NEXT_PUBLIC_SITE_URL`
+controls the absolute URLs used in metadata and the sitemap.
+
+## Build
+
+```bash
+pnpm build          # Tina Cloud build (needs TINA_TOKEN) -> out/
+pnpm build-local    # no Tina Cloud / credentials, but /admin won't work
 ```
-pnpm dev
-```
 
-### Local URLs
-
-- http://localhost:3000 : browse the website
-- http://localhost:3000/admin : connect to Tina Cloud and go in edit mode
-- http://localhost:3000/exit-admin : log out of Tina Cloud
-- http://localhost:4001/altair/ : GraphQL playground to test queries and browse the API documentation
+> **Verifying a build locally** can be fragile because `next build` needs the
+> Tina GraphQL server running. The reliable sequence is to run them as two
+> separate processes: start `npx tinacms dev --noTelemetry --noWatch`, wait for
+> `http://localhost:4001/graphql`, then run `npx next build` separately.
 
 ## Deployment
 
-### GitHub Pages
+The output is the static `out/` directory; serve it with any static web server.
+See **[DEPLOY.md](./DEPLOY.md)** for the full guide (Apache/nginx config,
+`/admin` rebuild pipeline, GitHub Pages and OpenBSD notes). Pushes to `main`
+build and deploy to GitHub Pages via `.github/workflows`.
 
-This starter can be deployed to GitHub Pages. A GitHub Actions workflow is included that handles the build and deployment process. 
+## Adding pages
 
-To deploy to GitHub Pages:
+- **New page:** drop the HTML under `public/<path>/index.html` with a
+  `<!--title:Назва-->` comment. The route, `<title>`, metadata and sitemap entry
+  are picked up automatically on the next build. To add it to the menu, edit
+  `navGroups` in `lib/i18n.ts` (labels are `{ uk, en }`).
+- **English version:** drop the translation under `public/en/<path>/index.html`.
+  Nothing else to wire up — the navigation and language switcher detect the
+  translation from the filesystem and link to it automatically.
 
-1. In your repository settings, ensure GitHub Pages is enabled and set to deploy from the `gh-pages` branch
-2. Push changes to your main branch - the workflow will automatically build and deploy the site
-
-> [!NOTE]
-> When deploying to GitHub Pages, you'll need to update your secrets in Settings | Secrets and variables | Actions to include:
-> - `NEXT_PUBLIC_TINA_CLIENT_ID`
-> - `TINA_TOKEN`
->
-> You get these from your TinaCloud project - [read the docs](https://tina.io/docs/tina-cloud/deployment-options/github-pages)
-
-> [!IMPORTANT]
-> GitHub Pages does not support server side code, so this will run as a static site. If you don't want to deploy to GitHub pages, just delete `.github/workflows/build-and-deploy.yml`
-
-### Building the Starter Locally (Using the hosted content API)
-
-Replace the `.env.example`, with `.env`
-
-```
-NEXT_PUBLIC_TINA_CLIENT_ID=<get this from the project you create at app.tina.io>
-TINA_TOKEN=<get this from the project you create at app.tina.io>
-NEXT_PUBLIC_TINA_BRANCH=<Specify the branch with Tina configured>
-```
-
-Build the project:
-
-```bash
-pnpm build
-```
-
-## Getting Help
-
-To get help with any TinaCMS challenges you may have:
-
-- Visit the [documentation](https://tina.io/docs/) to learn about Tina.
-- [Join our Discord](https://discord.gg/zumN63Ybpf) to share feedback.
-- Visit the [community forum](https://community.tinacms.org/) to ask questions.
-- Get support through the chat widget on the TinaCMS Dashboard
-- [Email us](mailto:support@tina.io) to schedule a call with our team and share more about your context and what you're trying to achieve.
-- [Search or open an issue](https://github.com/tinacms/tinacms/issues) if something is not working.
-- Reach out on Twitter at [@tina_cms](https://twitter.com/tina_cms).
-
-## Development tips
-
-### Visual Studio Code GraphQL extension
-
-[Install the GraphQL extension](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql) to benefit from type auto-completion.
-
-### Typescript
-
-A good way to ensure your components match the shape of your data is to leverage the auto-generated TypeScript types.
-These are rebuilt when your `tina` config changes.
-
-## LICENSE
+## License
 
 Licensed under the [Apache 2.0 license](./LICENSE).
-
-
-# Repository cleaned of LFS content
-# Repository cleaned of LFS content - Wed Sep 17 15:00:42 AEST 2025
-

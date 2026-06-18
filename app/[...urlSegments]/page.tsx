@@ -1,16 +1,15 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import client from '@/tina/__generated__/client';
 import Layout from '@/components/layout/layout';
 import { Section } from '@/components/layout/section';
-import { GalleryPageContent, LegacyPageContent, knownLegacyRoots, legacyRoutePaths } from '@/components/legacy-pages';
+import { GalleryPageContent, LegacyPageContent, getLegacyMeta, knownLegacyRoots, legacyRoutePaths } from '@/components/legacy-pages';
 import type { NewsPost } from '@/components/blocks/latest-news';
 import { assetPath } from '@/lib/asset-path';
 import ClientPage from './client-page';
 import EnglishHome from './en-home';
-
-export const revalidate = 300;
 
 // The legacy /news section was a Bitrix database-driven component with no file
 // content to migrate; news now lives in /posts.
@@ -49,6 +48,59 @@ function NewsRedirect() {
       </Section>
     </Layout>
   );
+}
+
+// Pull a human title out of a Tina blocks page (no dedicated title field).
+function tinaPageTitle(data: any): string | null {
+  const blocks = data?.data?.page?.blocks || [];
+  for (const block of blocks) {
+    const candidate = block?.headline || block?.title;
+    if (typeof candidate === 'string' && candidate.trim()) return candidate.trim();
+  }
+  return null;
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ urlSegments: string[] }>;
+}): Promise<Metadata> {
+  const resolvedParams = await params;
+  const filepath = resolvedParams.urlSegments.join('/');
+  const root = resolvedParams.urlSegments[0];
+
+  if (root === 'news') {
+    return { title: 'Новини', description: 'Новини Фахового коледжу геологорозвідувальних технологій КНУ.' };
+  }
+
+  if (filepath === 'en') {
+    return {
+      title: 'Professional College of Geological Prospecting Technologies',
+      description: 'Professional College of Geological Prospecting Technologies of Taras Shevchenko National University of Kyiv.',
+    };
+  }
+
+  if (root === 'gallery') {
+    return { title: 'Галерея', description: 'Фотогалерея Фахового коледжу геологорозвідувальних технологій КНУ.' };
+  }
+
+  if (knownLegacyRoots.has(root)) {
+    const meta = getLegacyMeta(filepath);
+    if (!meta) return {};
+    return {
+      title: meta.title,
+      description: meta.description || undefined,
+      openGraph: { title: meta.title, description: meta.description || undefined },
+    };
+  }
+
+  try {
+    const data = await client.queries.page({ relativePath: `${filepath}.mdx` });
+    const title = tinaPageTitle(data);
+    return title ? { title, openGraph: { title } } : {};
+  } catch {
+    return {};
+  }
 }
 
 export default async function Page({

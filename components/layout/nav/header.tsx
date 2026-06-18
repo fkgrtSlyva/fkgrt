@@ -7,6 +7,7 @@ import React from "react";
 import { assetPath } from "@/lib/asset-path";
 import { isEnglishPath, languageToggleTarget, localizeHref } from "@/lib/en-routes";
 import { footer, langFromPath, navGroups, ui } from "@/lib/i18n";
+import { useLayout } from "@/components/layout/layout-context";
 import { searchDocuments } from "@/lib/search-shared";
 import type { SearchDocument } from "@/lib/search-shared";
 
@@ -14,9 +15,22 @@ export const Header = () => {
   const pathname = usePathname() || "/";
   const inEnglish = isEnglishPath(pathname);
   const lang = langFromPath(pathname);
-  const languageToggle = languageToggleTarget(pathname);
+  const { enRoutes } = useLayout();
+  const enRouteSet = React.useMemo(() => new Set(enRoutes), [enRoutes]);
+  const localize = (href: string) => localizeHref(href, inEnglish, enRouteSet);
+  const languageToggle = languageToggleTarget(pathname, enRouteSet);
   const [isOpen, setIsOpen] = React.useState(false);
+  const [openGroup, setOpenGroup] = React.useState<string | null>(null);
   const [searchQuery, setSearchQuery] = React.useState("");
+
+  // On touch devices there is no hover, so submenus expand on tap (accordion).
+  // Closing the mobile menu also collapses any open submenu.
+  const closeMenu = () => {
+    setIsOpen(false);
+    setOpenGroup(null);
+  };
+  const toggleGroup = (href: string) =>
+    setOpenGroup((current) => (current === href ? null : href));
   const [isSearchFocused, setIsSearchFocused] = React.useState(false);
   const [documents, setDocuments] = React.useState<SearchDocument[]>([]);
   const documentsRequested = React.useRef(false);
@@ -39,17 +53,17 @@ export const Header = () => {
   return (
     <>
     <header className="relative z-50 bg-white text-[#333] shadow-[0_1px_0_rgba(0,0,0,0.06)]">
-      <div className="bg-[#071a44] text-[14px] leading-5 text-white">
-        <div className="mx-auto flex max-w-[1860px] flex-wrap items-center gap-x-8 gap-y-2 px-[30px] py-[18px]">
-          <a className="flex items-center gap-3 hover:text-[#3687aa]" href="tel:+380445285355"><Phone size={18} className="text-white/35" />+38(044)528-53-55, +38(044)528-16-91, +38(044)529-04-94</a>
-          <a className="flex items-center gap-3 hover:text-[#3687aa]" href="https://goo.gl/maps/L3ZsN2dDtXbyokkH7"><MapPin size={18} className="text-white/35" />{footer.address[lang]}</a>
-          <a className="flex items-center gap-3 hover:text-[#3687aa]" href="mailto:fkgrt@knu.ua"><Mail size={18} className="text-white/35" />fkgrt@knu.ua</a>
+      <div className="bg-[#071a44] text-[13px] leading-5 text-white lg:text-[14px]">
+        <div className="relative mx-auto flex max-w-[1860px] flex-col gap-y-1.5 px-5 py-3 pr-12 lg:flex-row lg:flex-wrap lg:items-center lg:gap-x-8 lg:gap-y-2 lg:px-[30px] lg:py-[18px] lg:pr-[30px]">
+          <a className="flex items-center gap-3 hover:text-[#3687aa]" href="tel:+380445285355"><Phone size={18} className="shrink-0 text-white/35" />+38(044)528-53-55, +38(044)528-16-91, +38(044)529-04-94</a>
+          <a className="flex items-center gap-3 hover:text-[#3687aa]" href="https://goo.gl/maps/L3ZsN2dDtXbyokkH7"><MapPin size={18} className="shrink-0 text-white/35" />{footer.address[lang]}</a>
+          <a className="flex items-center gap-3 hover:text-[#3687aa]" href="mailto:fkgrt@knu.ua"><Mail size={18} className="shrink-0 text-white/35" />fkgrt@knu.ua</a>
           <a className="hover:text-[#3687aa]" href={ui.trustBoxHref[lang]}>{ui.trustBox[lang]}</a>
-          <Link className="ml-auto font-bold uppercase hover:text-[#3687aa]" href={languageToggle.href}>{languageToggle.label}</Link>
+          <Link className="absolute right-5 top-3 font-bold uppercase hover:text-[#3687aa] lg:static lg:ml-auto" href={languageToggle.href}>{languageToggle.label}</Link>
         </div>
       </div>
 
-      <div className="mx-auto flex max-w-[1200px] items-start justify-center px-4 pb-[24px] pt-[28px] text-center">
+      <div className="relative mx-auto flex max-w-[1200px] items-start justify-center px-4 pb-[24px] pt-[28px] text-center">
         <Link href={inEnglish ? "/en" : "/"} className="min-w-0">
           <span className="mb-[18px] flex justify-center gap-3 md:gap-4">
             <img src={assetPath("/images/kgrt.png")} alt="КГРТ" className="h-[88px] w-[88px] object-contain md:h-[102px] md:w-[102px]" />
@@ -61,7 +75,7 @@ export const Header = () => {
             <span className="block font-serif text-sm italic text-[#9a9a9a] md:text-base">{ui.universityName[lang]}</span>
           </span>
         </Link>
-        <button type="button" className="absolute right-4 top-24 rounded border border-[#071a44] p-2 lg:hidden" onClick={() => setIsOpen((value) => !value)} aria-label={ui.menu[lang]}>
+        <button type="button" className="absolute right-4 top-1/2 -translate-y-1/2 rounded border border-[#071a44] p-2 lg:hidden" onClick={() => (isOpen ? closeMenu() : setIsOpen(true))} aria-expanded={isOpen} aria-label={ui.menu[lang]}>
           {isOpen ? <X /> : <Menu />}
         </button>
       </div>
@@ -70,17 +84,22 @@ export const Header = () => {
     <nav className={`${isOpen ? "block" : "hidden"} sticky top-0 z-50 border-t border-slate-100 bg-white text-[#2f2f2f] shadow-[0_3px_12px_rgba(0,0,0,0.12)] lg:block`}>
       <div className="mx-auto flex max-w-[1200px] flex-col lg:flex-row lg:items-center lg:justify-center">
         {navGroups.map((group) => (
-          <div key={group.href} className="group relative">
-            <Link href={localizeHref(group.href, inEnglish)} className="flex items-center gap-1 whitespace-nowrap px-4 py-[17px] font-serif text-[18px] font-black hover:text-[#3687aa] xl:px-5 xl:text-[19px]">{group.label[lang]}<ChevronDown size={13} strokeWidth={3} /></Link>
-            <div className="static hidden min-w-72 bg-white shadow-[0_12px_35px_rgba(10,28,68,0.18)] group-hover:block lg:absolute lg:left-0 lg:top-full">
+          <div key={group.href} className="group relative border-b border-slate-100 lg:border-b-0">
+            <div className="flex items-center justify-between">
+              <Link href={localize(group.href)} onClick={closeMenu} className="flex items-center gap-1 whitespace-nowrap px-4 py-[17px] font-serif text-[18px] font-black hover:text-[#3687aa] xl:px-5 xl:text-[19px]">{group.label[lang]}<ChevronDown size={13} strokeWidth={3} className="hidden lg:inline" /></Link>
+              <button type="button" onClick={() => toggleGroup(group.href)} aria-expanded={openGroup === group.href} aria-label={`${group.label[lang]} — ${ui.menu[lang]}`} className="px-4 py-[17px] lg:hidden">
+                <ChevronDown size={20} strokeWidth={3} className={`transition-transform ${openGroup === group.href ? "rotate-180" : ""}`} />
+              </button>
+            </div>
+            <div className={`${openGroup === group.href ? "block" : "hidden"} static min-w-72 bg-slate-50 shadow-[0_12px_35px_rgba(10,28,68,0.18)] lg:absolute lg:left-0 lg:top-full lg:bg-white lg:group-hover:block`}>
               {group.items.map((item) => (
-                <Link key={item.href} href={localizeHref(item.href, inEnglish)} className="block border-b border-slate-100 px-5 py-3 text-sm text-slate-700 hover:bg-[#f0c64a] hover:text-[#102c57]">{item.label[lang]}</Link>
+                <Link key={item.href} href={localize(item.href)} onClick={closeMenu} className="block border-b border-slate-100 px-5 py-3 text-sm text-slate-700 hover:bg-[#f0c64a] hover:text-[#102c57]">{item.label[lang]}</Link>
               ))}
             </div>
           </div>
         ))}
-        <Link href={localizeHref("/gallery", inEnglish)} className="block whitespace-nowrap px-4 py-[17px] font-serif text-[18px] font-black hover:text-[#3687aa] xl:px-5 xl:text-[19px]">{ui.gallery[lang]}</Link>
-        <Link href="/posts" className="block whitespace-nowrap px-4 py-[17px] font-serif text-[18px] font-black hover:text-[#3687aa] xl:px-5 xl:text-[19px]">{ui.news[lang]}</Link>
+        <Link href={localize("/gallery")} onClick={closeMenu} className="block whitespace-nowrap border-b border-slate-100 px-4 py-[17px] font-serif text-[18px] font-black hover:text-[#3687aa] lg:border-b-0 xl:px-5 xl:text-[19px]">{ui.gallery[lang]}</Link>
+        <Link href="/posts" onClick={closeMenu} className="block whitespace-nowrap border-b border-slate-100 px-4 py-[17px] font-serif text-[18px] font-black hover:text-[#3687aa] lg:border-b-0 xl:px-5 xl:text-[19px]">{ui.news[lang]}</Link>
         <form action={assetPath("/search")} className="relative mx-4 mb-4 flex items-center rounded-xl border border-slate-200 bg-slate-50 pl-4 shadow-inner lg:mx-0 lg:mb-0 lg:ml-4 lg:w-[240px]">
           <label className="sr-only" htmlFor="site-search-header">
             {ui.searchLabel[lang]}

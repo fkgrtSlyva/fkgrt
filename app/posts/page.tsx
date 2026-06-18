@@ -1,8 +1,12 @@
+import type { Metadata } from 'next';
 import Layout from '@/components/layout/layout';
 import client from '@/tina/__generated__/client';
 import PostsClientPage from './client-page';
 
-export const revalidate = 300;
+export const metadata: Metadata = {
+  title: 'Новини',
+  description: 'Новини та події Фахового коледжу геологорозвідувальних технологій КНУ.',
+};
 
 export default async function PostsPage() {
   let posts = await client.queries.postConnection({

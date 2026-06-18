@@ -10,6 +10,8 @@ interface LayoutState {
   pageData: {};
   setPageData: React.Dispatch<React.SetStateAction<{}>>;
   theme: GlobalQuery["global"]["theme"];
+  // Ukrainian paths that have an English translation (built from public/en).
+  enRoutes: string[];
 }
 
 const LayoutContext = React.createContext<LayoutState | undefined>(undefined);
@@ -24,6 +26,7 @@ export const useLayout = () => {
       },
       globalSettings: undefined,
       pageData: undefined,
+      enRoutes: [],
     }
   );
 };
@@ -32,12 +35,14 @@ interface LayoutProviderProps {
   children: React.ReactNode;
   globalSettings: GlobalQuery["global"];
   pageData: {};
+  enRoutes: string[];
 }
 
 export const LayoutProvider: React.FC<LayoutProviderProps> = ({
   children,
   globalSettings: initialGlobalSettings,
   pageData: initialPageData,
+  enRoutes,
 }) => {
   const [globalSettings, setGlobalSettings] = useState<GlobalQuery["global"]>(
     initialGlobalSettings
@@ -54,6 +59,7 @@ export const LayoutProvider: React.FC<LayoutProviderProps> = ({
         pageData,
         setPageData,
         theme,
+        enRoutes,
       }}
     >
       {children}

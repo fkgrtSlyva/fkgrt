@@ -5,6 +5,7 @@ import React from "react";
 import { assetPath } from "@/lib/asset-path";
 import type { Lang } from "@/lib/i18n";
 import { localizeHref } from "@/lib/en-routes";
+import { useLayout } from "@/components/layout/layout-context";
 import { LatestNewsSection, type NewsPost } from "./blocks/latest-news";
 
 type Slide = {
@@ -101,7 +102,9 @@ const t = {
 export function FkgrtHome({ latestPosts, lang = "uk" }: { latestPosts: NewsPost[]; lang?: Lang }) {
   const [activeSlide, setActiveSlide] = React.useState(1);
   const inEnglish = lang === "en";
-  const link = (href: string) => localizeHref(href, inEnglish);
+  const { enRoutes } = useLayout();
+  const enRouteSet = React.useMemo(() => new Set(enRoutes), [enRoutes]);
+  const link = (href: string) => localizeHref(href, inEnglish, enRouteSet);
 
   React.useEffect(() => {
     const interval = window.setInterval(() => {

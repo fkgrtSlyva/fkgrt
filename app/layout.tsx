@@ -5,9 +5,11 @@ import { cn } from "@/lib/utils";
 import { VideoDialogProvider } from "@/components/ui/VideoDialogContext";
 import VideoDialog from "@/components/ui/VideoDialog";
 import { assetPath } from "@/lib/asset-path";
+import { siteUrl } from "@/lib/site";
 
 import "@/styles.css";
 import { TailwindIndicator } from "@/components/ui/breakpoint-indicator";
+import { HtmlLangSync } from "@/components/html-lang-sync";
 
 const openSans = Open_Sans({
   subsets: ["latin", "cyrillic"],
@@ -21,9 +23,18 @@ const merriweather = Merriweather({
 });
 
 export const metadata: Metadata = {
-  title: "КГРТ КНУ — Фаховий коледж геологорозвідувальних технологій",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "КГРТ КНУ — Фаховий коледж геологорозвідувальних технологій",
+    template: "%s — КГРТ КНУ",
+  },
   description:
     "Фаховий коледж геологорозвідувальних технологій Київського національного університету імені Тараса Шевченка",
+  openGraph: {
+    type: "website",
+    siteName: "КГРТ КНУ",
+    locale: "uk_UA",
+  },
 };
 
 export default function RootLayout({
@@ -40,6 +51,7 @@ export default function RootLayout({
         className="min-h-screen bg-background font-sans antialiased"
         style={{ "--legacy-breadcrumb-bg": `linear-gradient(rgba(7, 26, 68, .75), rgba(7, 26, 68, .75)), url(${assetPath("/images/bg-07-1920x660.jpg")}) center/cover` } as React.CSSProperties}
       >
+        <HtmlLangSync />
         <VideoDialogProvider>
           {children}
           <VideoDialog />

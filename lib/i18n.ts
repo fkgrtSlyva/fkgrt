@@ -97,6 +97,12 @@ export const ui = {
   universityName: { uk: "Київського національного університету імені Тараса Шевченка", en: "Taras Shevchenko National University of Kyiv" },
   trustBoxHref: { uk: "/about/docs/%D0%9F%D1%81%D0%B8%D1%85%D0%BE%D0%BB%D0%BE%D0%B3%20%D0%BA%D0%BE%D1%80%D0%B8%D1%81%D0%BD%D1%96%20%D0%BF%D0%BE%D1%81%D0%B8%D0%BB%D0%B0%D0%BD%D0%BD%D1%8F%20%D1%81%D0%BA%D1%80%D0%B8%D0%BD%D1%8C%D0%BA%D0%B0%20%D0%B4%D0%BE%D0%B2%D1%96%D1%80%D0%B8.pdf", en: "/about/docs/%D0%9F%D1%81%D0%B8%D1%85%D0%BE%D0%BB%D0%BE%D0%B3%20%D0%BA%D0%BE%D1%80%D0%B8%D1%81%D0%BD%D1%96%20%D0%BF%D0%BE%D1%81%D0%B8%D0%BB%D0%B0%D0%BD%D0%BD%D1%8F%20%D1%81%D0%BA%D1%80%D0%B8%D0%BD%D1%8C%D0%BA%D0%B0%20%D0%B4%D0%BE%D0%B2%D1%96%D1%80%D0%B8.pdf" },
   breadcrumbHome: { uk: "Головна", en: "Home" },
+  notFoundTitle: { uk: "Сторінку не знайдено", en: "Page not found" },
+  notFoundText: {
+    uk: "На жаль, такої сторінки не існує або її було переміщено.",
+    en: "Sorry, this page does not exist or has been moved.",
+  },
+  notFoundHome: { uk: "На головну", en: "Back to home" },
   galleryLoading: { uk: "Завантаження галереї...", en: "Loading gallery..." },
   archivedPage: {
     uk: "Сторінку збережено у спадковому архіві, але її файл не знайдено у поточній збірці.",
