@@ -34,7 +34,6 @@ jobs:
       NEXT_PUBLIC_SITE_URL: https://fkgrt.knu.ua/test-new
       NEXT_PUBLIC_TINA_BRANCH: main
       NEXT_PUBLIC_TINA_CLIENT_ID: ${{ vars.NEXT_PUBLIC_TINA_CLIENT_ID }}
-      TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
 
     steps:
       - name: Checkout
@@ -63,19 +62,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Validate production build configuration
-        if: github.event_name != 'pull_request'
-        run: |
-          test -n "$NEXT_PUBLIC_TINA_CLIENT_ID"
-          test -n "$TINA_TOKEN"
-
-      - name: Build static export for pull request
-        if: github.event_name == 'pull_request'
+      - name: Build tokenless static export
         run: pnpm build
-
-      - name: Build static export with Tina Cloud
-        if: github.event_name != 'pull_request'
-        run: pnpm build:cloud
 
       - name: Verify isolated preview export
         run: |
@@ -84,10 +72,6 @@ jobs:
           test -f out/admin/index.html
           grep -q '/test-new/_next/' out/index.html
           grep -q 'ErrorDocument 404 /test-new/404.html' out/.htaccess
-
-      - name: Verify production Tina admin
-        if: github.event_name != 'pull_request'
-        run: '! grep -R -q "localhost:4001" out/admin/index.html'
 
       - name: Store static-site artifact
         uses: actions/upload-artifact@v4
@@ -128,6 +112,11 @@ jobs:
           server-dir: /www/test-new/
           state-name: .ftp-deploy-sync-state-test-new.json
           dry-run: true
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            admin/**
 
       - name: Publish isolated preview directory
         if: >-
@@ -144,3 +133,8 @@ jobs:
           local-dir: ./out/
           server-dir: /www/test-new/
           state-name: .ftp-deploy-sync-state-test-new.json
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            admin/**

@@ -22,8 +22,8 @@ NEXT_PUBLIC_SITE_URL=https://fkgrt.knu.ua/test-new \
 pnpm build
 ```
 
-`pnpm build` is a tokenless validation build. `pnpm build:cloud` uses Tina
-Cloud credentials and creates the production `/test-new/admin` editor.
+The preview workflow uses the tokenless build. Tina `/admin` is excluded from
+FTP until a real `TINA_TOKEN` is supplied and the cloud build is enabled.
 
 ## GitHub configuration
 
@@ -31,7 +31,6 @@ The workflow uses a GitHub environment named `production`.
 
 Environment secrets:
 
-- `TINA_TOKEN`
 - `FTP_SERVER`
 - `FTP_USERNAME`
 - `FTP_PASSWORD`
@@ -67,7 +66,6 @@ isolated preview directory, but not from its parent.
 - `https://fkgrt.knu.ua/test-new/`
 - `https://fkgrt.knu.ua/test-new/about`
 - `https://fkgrt.knu.ua/test-new/posts`
-- `https://fkgrt.knu.ua/test-new/admin`
 - an unknown path below `/test-new/`, which should show its static 404 page
 
 ## Moving to the domain root later

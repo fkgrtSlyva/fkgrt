@@ -66,12 +66,12 @@ The preview deployment pipeline is:
 TinaCMS /admin or git push -> main -> GitHub Actions -> out/ -> /www/test-new/
 ```
 
-Pull requests run the tokenless static build and never receive production
-credentials. Pushes to `main` build the production TinaCMS admin, retain
-`out/` as a seven-day artifact and incrementally synchronize it only to the
-isolated `/www/test-new/` directory. The existing site in `/www/` is not a
-deployment target. Deployment remains disabled until the repository variable
-`FTP_DEPLOY_ENABLED` is explicitly set to `true`.
+All events run the tokenless static build. Pushes to `main` retain `out/` as a
+seven-day artifact and incrementally synchronize it only to the isolated
+`/www/test-new/` directory. The development-only Tina admin is excluded from
+FTP. The existing site in `/www/` is not a deployment target. Deployment
+remains disabled until the repository variable `FTP_DEPLOY_ENABLED` is
+explicitly set to `true`.
 
 See **[DEPLOY.md](./DEPLOY.md)** for the required GitHub environment values,
 guarded rollout, recovery procedure, FTP security warning and preview URLs.
