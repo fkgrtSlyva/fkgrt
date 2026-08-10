@@ -43,11 +43,13 @@ Repository variable:
 
 - `FTP_DEPLOY_ENABLED` — keep `false` until a successful dry run
 
-The FTP server does not support FTPS. SFTP is available, but the current
-preview pipeline uses the hosting account's FTP endpoint on port 21.
+The preview pipeline uses the hosting account's SFTP endpoint on port 22 with
+the server's ED25519 host key pinned in the workflow. Transfers run in parallel.
 
 The unreferenced legacy Bitrix thumbnail cache at `upload/resize_cache/` and
 the development-only Tina `admin/` directory are excluded from the preview.
+Export file mtimes are derived from their content hashes, allowing SFTP mirror
+runs to skip unchanged files despite GitHub checkout timestamps changing.
 
 ## Safe rollout
 

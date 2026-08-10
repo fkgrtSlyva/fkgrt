@@ -82,7 +82,7 @@ jobs:
           include-hidden-files: true
           retention-days: 7
 
-      - name: Validate FTP configuration
+      - name: Validate SFTP configuration
         if: >-
           github.event_name != 'pull_request' &&
           vars.FTP_DEPLOY_ENABLED == 'true' &&
@@ -96,47 +96,54 @@ jobs:
           test -n "$FTP_USERNAME"
           test -n "$FTP_PASSWORD"
 
-      - name: Dry-run FTP synchronization to isolated preview directory
+      - name: Install SFTP mirror client
+        if: >-
+          github.event_name != 'pull_request' &&
+          vars.FTP_DEPLOY_ENABLED == 'true' &&
+          (github.event_name == 'push' || inputs.deployment == 'dry-run' || inputs.deployment == 'publish')
+        run: sudo apt-get update && sudo apt-get install --yes lftp
+
+      - name: Pin preview server SSH host key
+        if: >-
+          github.event_name != 'pull_request' &&
+          vars.FTP_DEPLOY_ENABLED == 'true' &&
+          (github.event_name == 'push' || inputs.deployment == 'dry-run' || inputs.deployment == 'publish')
+        run: echo 'fkgrt.knu.ua ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAPwIhexWRR2CWXLzDQZ6Z2mvw27fPnkz6akoQqORJP+' > "$RUNNER_TEMP/fkgrt-known-hosts"
+
+      - name: Dry-run SFTP synchronization to isolated preview directory
         if: >-
           github.event_name == 'workflow_dispatch' &&
           inputs.deployment == 'dry-run' &&
           vars.FTP_DEPLOY_ENABLED == 'true'
-        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftp
-          port: 21
-          local-dir: ./out/
-          server-dir: /www/test-new/
-          state-name: .ftp-deploy-sync-state-test-new.json
-          dry-run: true
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            admin/**
-            upload/resize_cache/**
+        env:
+          LFTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          SFTP_SERVER: ${{ secrets.FTP_SERVER }}
+          SFTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+        run: |
+          lftp <<LFTP
+          set sftp:connect-program "ssh -a -x -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$RUNNER_TEMP/fkgrt-known-hosts"
+          set net:timeout 30
+          set net:max-retries 2
+          open --user "$SFTP_USERNAME" --env-password "sftp://$SFTP_SERVER:22"
+          mirror --reverse --delete --parallel=4 --no-perms --verbose=1 --dry-run --exclude-glob admin/** --exclude-glob upload/resize_cache/** ./out/ /www/test-new/
+          bye
+          LFTP
 
       - name: Publish isolated preview directory
         if: >-
           vars.FTP_DEPLOY_ENABLED == 'true' &&
           (github.event_name == 'push' ||
           (github.event_name == 'workflow_dispatch' && inputs.deployment == 'publish'))
-        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftp
-          port: 21
-          local-dir: ./out/
-          server-dir: /www/test-new/
-          state-name: .ftp-deploy-sync-state-test-new.json
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            admin/**
-            upload/resize_cache/**
+        env:
+          LFTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          SFTP_SERVER: ${{ secrets.FTP_SERVER }}
+          SFTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+        run: |
+          lftp <<LFTP
+          set sftp:connect-program "ssh -a -x -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$RUNNER_TEMP/fkgrt-known-hosts"
+          set net:timeout 30
+          set net:max-retries 2
+          open --user "$SFTP_USERNAME" --env-password "sftp://$SFTP_SERVER:22"
+          mirror --reverse --delete --parallel=4 --no-perms --verbose=1 --exclude-glob admin/** --exclude-glob upload/resize_cache/** ./out/ /www/test-new/
+          bye
+          LFTP

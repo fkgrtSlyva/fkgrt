@@ -7,10 +7,4 @@ export NODE_OPTIONS="${NODE_OPTIONS:---no-experimental-webstorage --max-old-spac
 
 pnpm exec tinacms build
 pnpm exec next build
-
-base_path="${NEXT_PUBLIC_BASE_PATH:-}"
-base_path="/${base_path#/}"
-base_path="${base_path%/}"
-[ "$base_path" = "/" ] && base_path=""
-sed -i.bak "s#__BASE_PATH__#${base_path}#g" out/.htaccess
-rm out/.htaccess.bak
+python3 scripts/prepare-static-export.py
