@@ -27,7 +27,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 180
     environment: ${{ github.event_name != 'pull_request' && 'production' || null }}
     env:
       NEXT_PUBLIC_BASE_PATH: /test-new
@@ -117,6 +117,7 @@ jobs:
             **/.git*/**
             **/node_modules/**
             admin/**
+            upload/resize_cache/**
 
       - name: Publish isolated preview directory
         if: >-
@@ -138,3 +139,4 @@ jobs:
             **/.git*/**
             **/node_modules/**
             admin/**
+            upload/resize_cache/**

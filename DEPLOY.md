@@ -46,6 +46,9 @@ Repository variable:
 The FTP server does not support FTPS. SFTP is available, but the current
 preview pipeline uses the hosting account's FTP endpoint on port 21.
 
+The unreferenced legacy Bitrix thumbnail cache at `upload/resize_cache/` and
+the development-only Tina `admin/` directory are excluded from the preview.
+
 ## Safe rollout
 
 1. Push the workflow with `FTP_DEPLOY_ENABLED=false` and confirm the build.
