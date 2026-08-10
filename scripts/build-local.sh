@@ -29,10 +29,4 @@ for attempt in $(seq 1 90); do
 done
 
 pnpm exec next build
-
-base_path="${NEXT_PUBLIC_BASE_PATH:-}"
-base_path="/${base_path#/}"
-base_path="${base_path%/}"
-[ "$base_path" = "/" ] && base_path=""
-sed -i.bak "s#__BASE_PATH__#${base_path}#g" out/.htaccess
-rm out/.htaccess.bak
+python3 scripts/prepare-static-export.py
