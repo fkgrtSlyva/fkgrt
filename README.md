@@ -49,8 +49,8 @@ controls the absolute URLs used in metadata and the sitemap.
 ## Build
 
 ```bash
-pnpm build          # Tina Cloud build (needs TINA_TOKEN) -> out/
-pnpm build-local    # no Tina Cloud / credentials, but /admin won't work
+pnpm build          # local, tokenless static build -> out/
+pnpm build:cloud    # Tina Cloud build (needs credentials; enables /admin)
 ```
 
 > **Verifying a build locally** can be fragile because `next build` needs the
@@ -60,10 +60,21 @@ pnpm build-local    # no Tina Cloud / credentials, but /admin won't work
 
 ## Deployment
 
-The output is the static `out/` directory; serve it with any static web server.
-See **[DEPLOY.md](./DEPLOY.md)** for the full guide (Apache/nginx config,
-`/admin` rebuild pipeline, GitHub Pages and OpenBSD notes). Pushes to `main`
-build and deploy to GitHub Pages via `.github/workflows`.
+The preview deployment pipeline is:
+
+```text
+TinaCMS /admin or git push -> main -> GitHub Actions -> out/ -> /www/test-new/
+```
+
+Pull requests run the tokenless static build and never receive production
+credentials. Pushes to `main` build the production TinaCMS admin, retain
+`out/` as a seven-day artifact and incrementally synchronize it only to the
+isolated `/www/test-new/` directory. The existing site in `/www/` is not a
+deployment target. Deployment remains disabled until the repository variable
+`FTP_DEPLOY_ENABLED` is explicitly set to `true`.
+
+See **[DEPLOY.md](./DEPLOY.md)** for the required GitHub environment values,
+guarded rollout, recovery procedure, FTP security warning and preview URLs.
 
 ## Adding pages
 
