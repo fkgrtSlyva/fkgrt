@@ -1,13 +1,17 @@
 import type { NextConfig } from 'next'
 
-const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1]
-const isGithubPages = process.env.GITHUB_ACTIONS === 'true' && repoName
+const configuredBasePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const basePath = configuredBasePath
+  ? `/${configuredBasePath.replace(/^\/+|\/+$/g, '')}`
+  : ''
 
 const nextConfig: NextConfig = {
-  basePath: isGithubPages ? `/${repoName}` : '',
-  assetPrefix: isGithubPages ? `/${repoName}/` : '',
+  // Preview builds live below /test-new; the eventual production build can
+  // return to the domain root by leaving NEXT_PUBLIC_BASE_PATH empty.
+  basePath,
+  assetPrefix: basePath || '',
   env: {
-    NEXT_PUBLIC_BASE_PATH: isGithubPages ? `/${repoName}` : '',
+    NEXT_PUBLIC_BASE_PATH: basePath,
   },
   output: 'export',
   images: {
@@ -27,36 +31,9 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'fkgrt.knu.ua',
         port: '',
-      }
+      },
     ],
   },
-  async headers() {
-    // these are also defined in the root layout since github pages doesn't support headers
-    const headers = [
-      {
-        key: 'X-Frame-Options',
-        value: 'SAMEORIGIN',
-      },
-      {
-        key: 'Content-Security-Policy',
-        value: "frame-ancestors 'self'",
-      },
-    ];
-    return [
-      {
-        source: '/(.*)',
-        headers,
-      },
-    ];
-  },
-  async rewrites() {
-    return [
-      {
-        source: '/admin',
-        destination: '/admin/index.html',
-      },
-    ];
-  },
-};
+}
 
 export default nextConfig

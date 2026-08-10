@@ -17,15 +17,15 @@ DirectoryIndex index.html
 
   # /admin -> TinaCMS visual editor entry (next.config rewrites() do not apply
   # to a static export).
-  RewriteRule ^admin/?$ /admin/index.html [L]
+  RewriteRule ^admin/?$ admin/index.html [L]
 
   RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
-  RewriteRule ^(.+?)/?$ /$1.html [L]
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^(.+?)/?$ $1.html [L]
 </IfModule>
 
 # --- Error page -------------------------------------------------------------
-ErrorDocument 404 /404.html
+ErrorDocument 404 __BASE_PATH__/404.html
 
 # --- Security headers -------------------------------------------------------
 # These were declared in next.config headers() but headers() has no effect on a
@@ -41,7 +41,7 @@ ErrorDocument 404 /404.html
 # fingerprinted, so they are left on the server default to avoid serving stale
 # documents after a content update.
 <IfModule mod_headers.c>
-  <If "%{REQUEST_URI} =~ m#^/_next/static/#">
+  <If "%{REQUEST_URI} =~ m#__BASE_PATH__/_next/static/#">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </If>
 </IfModule>

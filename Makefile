@@ -7,13 +7,14 @@
 DEPLOY_HOST ?= user@server.example.com
 DEPLOY_PATH ?= /var/www/fkgrt
 
-.PHONY: help install build build-local preview deploy clean
+.PHONY: help install build build-local build-cloud preview deploy clean
 
 help:
 	@echo "Targets:"
 	@echo "  install      Install dependencies (Node 22 + pnpm)"
-	@echo "  build        Build with Tina Cloud -> out/ (needs .env.local creds; enables /admin)"
-	@echo "  build-local  Build without Tina Cloud -> out/ (no creds; /admin won't work)"
+	@echo "  build        Build locally -> out/ (no Tina credentials; /admin won't work)"
+	@echo "  build-local  Alias for build"
+	@echo "  build-cloud  Build with Tina Cloud -> out/ (needs .env.local creds; enables /admin)"
 	@echo "  preview      Serve the built out/ locally at http://localhost:3000"
 	@echo "  deploy       Build, then mirror out/ to the server (DEPLOY_HOST, DEPLOY_PATH)"
 	@echo "  clean        Remove build artifacts"
@@ -26,6 +27,9 @@ build:
 
 build-local:
 	pnpm build-local
+
+build-cloud:
+	pnpm build:cloud
 
 preview:
 	npx serve out -l 3000

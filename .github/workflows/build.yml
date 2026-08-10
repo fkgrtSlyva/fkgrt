@@ -1,4 +1,4 @@
-name: Build static site
+name: Build and deploy static site preview
 
 on:
   push:
@@ -6,14 +6,35 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      deployment:
+        description: FTP operation for /www/test-new only
+        required: true
+        default: build-only
+        type: choice
+        options:
+          - build-only
+          - dry-run
+          - publish
 
 permissions:
   contents: read
 
+concurrency:
+  group: test-new-${{ github.event_name == 'pull_request' && github.event.pull_request.number || 'production' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
+    environment: ${{ github.event_name != 'pull_request' && 'production' || null }}
+    env:
+      NEXT_PUBLIC_BASE_PATH: /test-new
+      NEXT_PUBLIC_SITE_URL: https://fkgrt.knu.ua/test-new
+      NEXT_PUBLIC_TINA_BRANCH: main
+      NEXT_PUBLIC_TINA_CLIENT_ID: ${{ vars.NEXT_PUBLIC_TINA_CLIENT_ID }}
+      TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
 
     steps:
       - name: Checkout
@@ -35,49 +56,91 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .next/cache
-          key: next-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-${{ hashFiles('app/**', 'components/**', 'content/**', 'lib/**', 'next.config.ts', 'styles.css', 'tina/**') }}
+          key: next-test-new-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-${{ hashFiles('app/**', 'components/**', 'content/**', 'lib/**', 'next.config.ts', 'styles.css', 'tina/**') }}
           restore-keys: |
-            next-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-
+            next-test-new-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build static export
-        env:
-          NODE_OPTIONS: --no-experimental-webstorage --max-old-space-size=4096
+      - name: Validate production build configuration
+        if: github.event_name != 'pull_request'
         run: |
-          pnpm exec tinacms dev --noTelemetry --noWatch > /tmp/tina-build.log 2>&1 &
-          tina_pid=$!
+          test -n "$NEXT_PUBLIC_TINA_CLIENT_ID"
+          test -n "$TINA_TOKEN"
 
-          cleanup() {
-            kill "$tina_pid" 2>/dev/null || true
-            wait "$tina_pid" 2>/dev/null || true
-          }
-          trap cleanup EXIT INT TERM
+      - name: Build static export for pull request
+        if: github.event_name == 'pull_request'
+        run: pnpm build
 
-          for attempt in $(seq 1 90); do
-            if curl --fail --silent http://localhost:4001/graphql --output /dev/null; then
-              break
-            fi
+      - name: Build static export with Tina Cloud
+        if: github.event_name != 'pull_request'
+        run: pnpm build:cloud
 
-            if [ "$attempt" = 90 ]; then
-              cat /tmp/tina-build.log
-              exit 1
-            fi
+      - name: Verify isolated preview export
+        run: |
+          test -f out/index.html
+          test -f out/.htaccess
+          test -f out/admin/index.html
+          grep -q '/test-new/_next/' out/index.html
+          grep -q 'ErrorDocument 404 /test-new/404.html' out/.htaccess
 
-            sleep 1
-          done
-
-          pnpm exec next build
-
-      - name: Verify static export
-        run: test -d out
+      - name: Verify production Tina admin
+        if: github.event_name != 'pull_request'
+        run: '! grep -R -q "localhost:4001" out/admin/index.html'
 
       - name: Store static-site artifact
         uses: actions/upload-artifact@v4
         with:
-          name: static-site-${{ github.sha }}
+          name: static-site-test-new-${{ github.sha }}
           path: out/
           if-no-files-found: error
           include-hidden-files: true
           retention-days: 7
+
+      - name: Validate FTP configuration
+        if: >-
+          github.event_name != 'pull_request' &&
+          vars.FTP_DEPLOY_ENABLED == 'true' &&
+          (github.event_name == 'push' || inputs.deployment == 'dry-run' || inputs.deployment == 'publish')
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          test -n "$FTP_SERVER"
+          test -n "$FTP_USERNAME"
+          test -n "$FTP_PASSWORD"
+
+      - name: Dry-run FTP synchronization to isolated preview directory
+        if: >-
+          github.event_name == 'workflow_dispatch' &&
+          inputs.deployment == 'dry-run' &&
+          vars.FTP_DEPLOY_ENABLED == 'true'
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftp
+          port: 21
+          local-dir: ./out/
+          server-dir: /www/test-new/
+          state-name: .ftp-deploy-sync-state-test-new.json
+          dry-run: true
+
+      - name: Publish isolated preview directory
+        if: >-
+          vars.FTP_DEPLOY_ENABLED == 'true' &&
+          (github.event_name == 'push' ||
+          (github.event_name == 'workflow_dispatch' && inputs.deployment == 'publish'))
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftp
+          port: 21
+          local-dir: ./out/
+          server-dir: /www/test-new/
+          state-name: .ftp-deploy-sync-state-test-new.json

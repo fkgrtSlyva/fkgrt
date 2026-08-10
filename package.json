@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "NODE_OPTIONS='--no-experimental-webstorage --max-old-space-size=4096' tinacms dev -c \"next dev --turbopack\"",
-    "build": "tinacms build && NODE_OPTIONS='--no-experimental-webstorage --max-old-space-size=4096' tinacms build && next build",
-    "build-local": "NODE_OPTIONS='--no-experimental-webstorage --max-old-space-size=4096' tinacms build --local --skip-indexing --skip-cloud-checks && next build",
+    "build": "./scripts/build-local.sh",
+    "build-local": "pnpm build",
+    "build:cloud": "./scripts/build-cloud.sh",
     "start": "NODE_OPTIONS='--no-experimental-webstorage --max-old-space-size=4096' tinacms build && next start",
     "export": "npm run build && next export",
     "lint": "biome lint",
