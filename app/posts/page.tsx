@@ -11,25 +11,30 @@ export const metadata: Metadata = {
 export default async function PostsPage() {
   let posts = await client.queries.postConnection({
     sort: 'date',
-    last: 1
+    last: 50,
   });
   const allPosts = posts;
 
   if (!allPosts.data.postConnection.edges) {
-    return [];
+    return (
+      <Layout rawPageData={allPosts.data}>
+        <PostsClientPage {...allPosts} />
+      </Layout>
+    );
   }
 
   while (posts.data?.postConnection.pageInfo.hasPreviousPage) {
     posts = await client.queries.postConnection({
       sort: 'date',
       before: posts.data.postConnection.pageInfo.endCursor,
+      last: 50,
     });
 
     if (!posts.data.postConnection.edges) {
       break;
     }
 
-    allPosts.data.postConnection.edges.push(...posts.data.postConnection.edges.reverse());
+    allPosts.data.postConnection.edges.push(...posts.data.postConnection.edges);
   }
 
   return (

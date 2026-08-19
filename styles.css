@@ -487,7 +487,8 @@
     margin-top: 3rem;
   }
 
-  .legacy-pagination a {
+  .legacy-pagination a,
+  .legacy-pagination button {
     align-items: center;
     border: 1px solid #d8dee9;
     color: #0f2444;
@@ -498,13 +499,23 @@
     min-width: 42px;
     padding: 0 .85rem;
     text-decoration: none;
+    background: #fff;
+    cursor: pointer;
+    transition: .2s ease;
   }
 
   .legacy-pagination a[aria-current="page"],
-  .legacy-pagination a:hover {
+  .legacy-pagination button[aria-current="page"],
+  .legacy-pagination a:hover,
+  .legacy-pagination button:not(:disabled):hover {
     background: #3687aa;
     border-color: #3687aa;
     color: #fff;
+  }
+
+  .legacy-pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 
   .legacy-gallery-loading {
