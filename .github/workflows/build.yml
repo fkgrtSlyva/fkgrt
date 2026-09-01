@@ -125,7 +125,7 @@ jobs:
           set net:timeout 30
           set net:max-retries 2
           open --user "$SFTP_USERNAME" --env-password "sftp://$SFTP_SERVER:22"
-          mirror --reverse --delete --parallel=4 --no-perms --verbose=1 --dry-run --exclude-glob admin/** --exclude-glob upload/resize_cache/** ./out/ /www/test-new/
+          mirror --reverse --delete --upload-older --parallel=4 --no-perms --verbose=1 --dry-run --exclude-glob admin/** --exclude-glob upload/resize_cache/** ./out/ /www/test-new/
           bye
           LFTP
 
@@ -144,6 +144,41 @@ jobs:
           set net:timeout 30
           set net:max-retries 2
           open --user "$SFTP_USERNAME" --env-password "sftp://$SFTP_SERVER:22"
-          mirror --reverse --delete --parallel=4 --no-perms --verbose=1 --exclude-glob admin/** --exclude-glob upload/resize_cache/** ./out/ /www/test-new/
+          mirror --reverse --delete --upload-older --parallel=4 --no-perms --verbose=1 --exclude-glob admin/** --exclude-glob upload/resize_cache/** ./out/ /www/test-new/
           bye
           LFTP
+
+      - name: Verify deployed Next.js assets
+        if: >-
+          vars.FTP_DEPLOY_ENABLED == 'true' &&
+          (github.event_name == 'push' ||
+          (github.event_name == 'workflow_dispatch' && inputs.deployment == 'publish'))
+        run: |
+          python3 - <<'PYTHON'
+          import html.parser
+          import urllib.request
+
+          site_url = "https://fkgrt.knu.ua/test-new/"
+
+          class AssetParser(html.parser.HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.assets = set()
+
+              def handle_starttag(self, tag, attrs):
+                  attributes = dict(attrs)
+                  asset = attributes.get("src") or attributes.get("href")
+                  if asset and "/test-new/_next/" in asset:
+                      self.assets.add(asset)
+
+          parser = AssetParser()
+          with urllib.request.urlopen(site_url) as response:
+              parser.feed(response.read().decode())
+
+          for asset in sorted(parser.assets):
+              with urllib.request.urlopen(f"https://fkgrt.knu.ua{asset}") as response:
+                  if response.status != 200:
+                      raise RuntimeError(f"{asset} returned HTTP {response.status}")
+
+          print(f"Verified {len(parser.assets)} deployed Next.js assets")
+          PYTHON

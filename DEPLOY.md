@@ -49,7 +49,10 @@ the server's ED25519 host key pinned in the workflow. Transfers run in parallel.
 The unreferenced legacy Bitrix thumbnail cache at `upload/resize_cache/` and
 the development-only Tina `admin/` directory are excluded from the preview.
 Export file mtimes are derived from their content hashes, allowing SFTP mirror
-runs to skip unchanged files despite GitHub checkout timestamps changing.
+runs to skip unchanged files despite GitHub checkout timestamps changing. The
+mirror also uploads changed files whose derived mtime is older than the remote
+copy. This keeps HTML and its hashed Next.js assets from different builds from
+being mixed.
 
 ## Safe rollout
 
