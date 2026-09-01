@@ -50,9 +50,9 @@ The unreferenced legacy Bitrix thumbnail cache at `upload/resize_cache/` and
 the development-only Tina `admin/` directory are excluded from the preview.
 Export file mtimes are derived from their content hashes, allowing SFTP mirror
 runs to skip unchanged files despite GitHub checkout timestamps changing. The
-mirror also uploads changed files whose derived mtime is older than the remote
-copy. This keeps HTML and its hashed Next.js assets from different builds from
-being mixed.
+mirror always uploads mutable HTML and data files because the SFTP server does
+not preserve the source mtime. This keeps HTML and its hashed Next.js assets
+from different builds from being mixed without uploading unchanged media.
 
 ## Safe rollout
 

@@ -125,7 +125,8 @@ jobs:
           set net:timeout 30
           set net:max-retries 2
           open --user "$SFTP_USERNAME" --env-password "sftp://$SFTP_SERVER:22"
-          mirror --reverse --delete --upload-older --parallel=4 --no-perms --verbose=1 --dry-run --exclude-glob admin/** --exclude-glob upload/resize_cache/** ./out/ /www/test-new/
+          mirror --reverse --delete --parallel=4 --no-perms --verbose=1 --dry-run --exclude-glob admin/** --exclude-glob upload/resize_cache/** ./out/ /www/test-new/
+          mirror --reverse --transfer-all --parallel=4 --no-perms --verbose=1 --dry-run --include='\.(html|txt|json)$' --exclude-glob admin/** --exclude-glob upload/resize_cache/** ./out/ /www/test-new/
           bye
           LFTP
 
@@ -144,7 +145,8 @@ jobs:
           set net:timeout 30
           set net:max-retries 2
           open --user "$SFTP_USERNAME" --env-password "sftp://$SFTP_SERVER:22"
-          mirror --reverse --delete --upload-older --parallel=4 --no-perms --verbose=1 --exclude-glob admin/** --exclude-glob upload/resize_cache/** ./out/ /www/test-new/
+          mirror --reverse --delete --parallel=4 --no-perms --verbose=1 --exclude-glob admin/** --exclude-glob upload/resize_cache/** ./out/ /www/test-new/
+          mirror --reverse --transfer-all --parallel=4 --no-perms --verbose=1 --include='\.(html|txt|json)$' --exclude-glob admin/** --exclude-glob upload/resize_cache/** ./out/ /www/test-new/
           bye
           LFTP
 
