@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { Suspense } from "react";
+import galleryItems from "@/content/gallery.json";
 import { assetPath } from "@/lib/asset-path";
 import { ui, type Lang } from "@/lib/i18n";
 import { LegacyGallery, type LegacyGalleryItem } from "./legacy-gallery";
@@ -199,33 +200,8 @@ export function getLegacySearchSources(): LegacySearchSource[] {
     });
 }
 
-function galleryTitleFromPath(imagePath: string) {
-  const filename = decodeURIComponent(path.basename(imagePath, path.extname(imagePath)));
-  return filename
-    .replace(/[_-]+/g, " ")
-    .replace(/\s+/g, " ")
-    .trim() || "Галерея";
-}
-
 function getGalleryItems(): LegacyGalleryItem[] {
-  const roots = ["images/gallery", "upload/iblock", "upload/medialibrary"];
-  const imagePattern = /\.(?:avif|gif|jpe?g|png|webp)$/i;
-  const seen = new Set<string>();
-
-  return roots.flatMap((root) => {
-    const directory = path.join(publicDir, root);
-    if (!fs.existsSync(directory)) return [];
-
-    return walk(directory)
-      .filter((file) => imagePattern.test(file))
-      .map((file) => `/${path.relative(publicDir, file).replaceAll(path.sep, "/")}`)
-      .filter((image) => {
-        if (seen.has(image)) return false;
-        seen.add(image);
-        return true;
-      })
-      .map((image) => ({ image, title: galleryTitleFromPath(image) }));
-  });
+  return galleryItems;
 }
 
 export function GalleryPageContent() {

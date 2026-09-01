@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import React from "react";
+import galleryItems from "@/content/gallery.json";
 import { assetPath } from "@/lib/asset-path";
 import type { Lang } from "@/lib/i18n";
 import { localizeHref } from "@/lib/en-routes";
@@ -61,11 +62,7 @@ const specialties: { title: Record<Lang, string>; href: string; image: string }[
   { title: { uk: "J8 Автомобільний транспорт", en: "J8 Automobile Transport" }, href: "/files/auto.pdf", image: "/images/special4.jpg" },
 ];
 
-const gallery: { title: Record<Lang, string>; image: string }[] = [
-  { title: { uk: "Вишиванка - генетичний код української нації", en: "Vyshyvanka — the genetic code of the Ukrainian nation" }, image: "/upload/iblock/6b2/%D0%94%D0%921.jpg" },
-  { title: { uk: "Навчальна практика у автомобілістів", en: "Practical training for automobile students" }, image: "/upload/iblock/59f/%D0%90%D0%B2%D1%82%D0%BE5.jpg" },
-  { title: { uk: "Лекційно-практичне заняття з картографії та геології", en: "Lecture and practical class in cartography and geology" }, image: "/upload/medialibrary/686/photo_2026-05-18_14-16-19.jpg" },
-];
+const gallery = galleryItems.slice(0, 3);
 
 const t = {
   aboutHeading: {
@@ -215,8 +212,8 @@ export function FkgrtHome({ latestPosts, lang = "uk" }: { latestPosts: NewsPost[
           <div className="grid gap-6 md:grid-cols-3">
             {gallery.map((g) => (
               <a key={g.image} href={assetPath(g.image)} className="group relative block overflow-hidden bg-[#102c57]">
-                <img src={assetPath(g.image)} alt={g.title[lang]} className="aspect-square w-full object-cover transition duration-500 group-hover:scale-105 group-hover:opacity-55" />
-                <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 p-5 font-serif text-lg font-bold text-white">{g.title[lang]}</span>
+                <img src={assetPath(g.image)} alt={g.title} className="aspect-square w-full object-cover transition duration-500 group-hover:scale-105 group-hover:opacity-55" />
+                <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 p-5 font-serif text-lg font-bold text-white">{g.title}</span>
               </a>
             ))}
           </div>
