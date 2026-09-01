@@ -53,7 +53,7 @@ export const Header = () => {
   return (
     <>
     <header className="relative z-50 bg-white text-[#333] shadow-[0_1px_0_rgba(0,0,0,0.06)]">
-      <div className="bg-[#071a44] text-[13px] leading-5 text-white lg:text-[14px]">
+      <div className="hidden bg-[#071a44] text-[13px] leading-5 text-white lg:block lg:text-[14px]">
         <div className="relative mx-auto flex max-w-[1860px] flex-col gap-y-1.5 px-5 py-3 pr-12 lg:flex-row lg:flex-wrap lg:items-center lg:gap-x-8 lg:gap-y-2 lg:px-[30px] lg:py-[18px] lg:pr-[30px]">
           <a className="flex items-center gap-3 hover:text-[#3687aa]" href="tel:+380445285355"><Phone size={18} className="shrink-0 text-white/35" />+38(044)528-53-55, +38(044)528-16-91, +38(044)529-04-94</a>
           <a className="flex items-center gap-3 hover:text-[#3687aa]" href="https://goo.gl/maps/L3ZsN2dDtXbyokkH7"><MapPin size={18} className="shrink-0 text-white/35" />{footer.address[lang]}</a>
@@ -64,6 +64,7 @@ export const Header = () => {
       </div>
 
       <div className="relative mx-auto flex max-w-[1200px] items-start justify-center px-4 pb-[24px] pt-[28px] text-center">
+        <Link className="absolute left-4 top-4 font-bold uppercase text-[#071a44] hover:text-[#3687aa] lg:hidden" href={languageToggle.href}>{languageToggle.label}</Link>
         <Link href={inEnglish ? "/en" : "/"} className="min-w-0">
           <span className="mb-[18px] flex justify-center gap-3 md:gap-4">
             <img src={assetPath("/images/kgrt.png")} alt="КГРТ" className="h-[88px] w-[88px] object-contain md:h-[102px] md:w-[102px]" />

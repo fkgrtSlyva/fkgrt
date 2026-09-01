@@ -193,10 +193,17 @@ export function FkgrtHome({ latestPosts, lang = "uk" }: { latestPosts: NewsPost[
         </div>
       </section>
 
-      <section className="bg-cover bg-center py-[100px] text-center text-white md:py-[160px]" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),url(${assetPath("/video/bg-video-1-lg.jpg")})` }}>
-        <h2 className="font-serif text-3xl font-black md:text-[42px]">{t.trustedHeading[lang]}</h2>
-        <p className="mx-auto mt-7 max-w-2xl text-lg text-white/90">{t.trustedText[lang]}</p>
-        <Link href={link("/vstup")} className="fk-btn-primary mt-12 inline-block">{t.getStarted[lang]}</Link>
+      <section className="relative overflow-hidden bg-cover bg-center py-[100px] text-center text-white md:py-[160px]" style={{ backgroundImage: `url(${assetPath("/video/bg-video-1-lg.jpg")})` }}>
+        {/* Keep mobile data use low; larger screens get the motion from the old site. */}
+        <video className="absolute inset-0 hidden h-full w-full object-cover sm:block" autoPlay loop muted playsInline aria-hidden="true">
+          <source src={assetPath("/video/bg-video-2-lg.mp4")} type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-black/45" />
+        <div className="relative">
+          <h2 className="font-serif text-3xl font-black md:text-[42px]">{t.trustedHeading[lang]}</h2>
+          <p className="mx-auto mt-7 max-w-2xl text-lg text-white/90">{t.trustedText[lang]}</p>
+          <Link href={link("/vstup")} className="fk-btn-primary mt-12 inline-block">{t.getStarted[lang]}</Link>
+        </div>
       </section>
 
       <LatestNewsSection posts={latestPosts} lang={lang} />
