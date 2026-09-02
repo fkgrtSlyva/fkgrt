@@ -62,6 +62,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # Tina reads posts from the repository during the build. A restored
+      # Next.js fetch cache can otherwise keep deleted or changed posts.
+      - name: Clear cached content queries
+        run: test ! -d .next/cache/fetch-cache || find .next/cache/fetch-cache -delete
+
       - name: Build tokenless static export
         run: pnpm build
 
